@@ -1,0 +1,40 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"fegn-main","layout":{"type":"default"}} -->
+<main id="fegn-main" class="wp-block-group fegn-main">
+	<!-- wp:group {"className":"fegn-page-header","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--60)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-page-header has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
+		<!-- wp:heading {"level":1,"className":"alignwide"} -->
+		<h1 class="wp-block-heading alignwide">Search results</h1>
+		<!-- /wp:heading -->
+		<!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search the site…","buttonText":"Search","className":"alignwide fegn-search-form"} /-->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--80)">
+		<!-- wp:query {"queryId":0,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"layout":{"type":"constrained"}} -->
+		<div class="wp-block-query">
+			<!-- wp:post-template -->
+				<!-- wp:post-title {"isLink":true,"level":2,"fontSize":"x-large"} /-->
+				<!-- wp:post-date {"fontSize":"small"} /-->
+				<!-- wp:post-excerpt /-->
+			<!-- /wp:post-template -->
+			<!-- wp:query-no-results -->
+				<!-- wp:paragraph -->
+				<p>Nothing matched your search. Try different keywords, or <a href="/contact/">contact us</a> directly.</p>
+				<!-- /wp:paragraph -->
+			<!-- /wp:query-no-results -->
+			<!-- wp:query-pagination {"className":"fegn-pagination"} -->
+				<!-- wp:query-pagination-previous /-->
+				<!-- wp:query-pagination-numbers /-->
+				<!-- wp:query-pagination-next /-->
+			<!-- /wp:query-pagination -->
+		</div>
+		<!-- /wp:query -->
+	</div>
+	<!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

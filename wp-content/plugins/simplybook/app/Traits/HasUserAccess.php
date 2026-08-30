@@ -1,0 +1,48 @@
+<?php
+
+namespace SimplyBook\Traits;
+
+trait HasUserAccess
+{
+    /**
+     * Return the first name of the current user
+     */
+    protected function getCurrentUserFirstName(): string
+    {
+        $found = false;
+        $cacheName = 'simplybook_current_user_first_name';
+        $cacheGroup = 'simplybook_has_user_access';
+        $cacheValue = wp_cache_get($cacheName, $cacheGroup, false, $found);
+
+        if ($found && !empty($cacheValue) && is_string($cacheValue)) {
+            return $cacheValue;
+        }
+
+        $firstName = '';
+        $user = wp_get_current_user();
+
+        if (!empty($user->first_name)) {
+            $firstName = ucfirst($user->first_name);
+        }
+
+        if (empty($firstName) && !empty($user->user_nicename)) {
+            $firstName = ucfirst($user->user_nicename);
+        }
+
+        if (empty($firstName) && !empty($user->display_name)) {
+            $firstName = ucfirst($user->display_name);
+        }
+
+        wp_cache_set($cacheName, $firstName, $cacheGroup, (5 * MINUTE_IN_SECONDS));
+        return $firstName;
+    }
+
+    /**
+     * Return the email of the current user
+     */
+    protected function getCurrentUserEmail(): string
+    {
+        $user = wp_get_current_user();
+        return sanitize_email($user->user_email ?? '');
+    }
+}

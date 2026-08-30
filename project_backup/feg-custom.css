@@ -1,0 +1,1372 @@
+/* ============================================================
+   FEG TechNova - Custom Redesign Stylesheet
+   Color Palette:
+   - Background:    #0B0F19 to #000000
+   - Primary Blue:  #0046B8 / #0B5ED7
+   - Accent Cyan:   #00D2FF / #00E5FF
+   - Text White:    #FFFFFF
+   - Text Muted:    #A0AEC0
+   ============================================================ */
+
+:root {
+  --feg-bg: #0a192f;
+  --feg-bg-dark: #060d1a;
+  --feg-primary: #0B5ED7;
+  --feg-primary-deep: #0046B8;
+  --feg-cyan: #00D2FF;
+  --feg-cyan-glow: #00E5FF;
+  --feg-white: #FFFFFF;
+  --feg-muted: #A0AEC0;
+  --feg-card-bg: rgba(11, 15, 25, 0.7);
+  --feg-border: rgba(0, 210, 255, 0.15);
+  --feg-glow: 0 0 30px rgba(0, 210, 255, 0.3);
+}
+
+/* ---- GLOBAL RESETS ---- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body.feg-redesign {
+  margin: 0;
+  padding: 0;
+  background: var(--feg-bg);
+  color: var(--feg-white);
+  font-family: 'Inter', 'Hind', sans-serif;
+  overflow-x: hidden;
+}
+
+.feg-redesign a { color: var(--feg-cyan); text-decoration: none; transition: color 0.3s; }
+.feg-redesign a:hover { color: var(--feg-white); }
+
+/* ============================================================
+   HEADER / NAVIGATION
+   ============================================================ */
+.feg-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(5, 8, 16, 0.72);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(0, 229, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  padding: 0 2rem;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.feg-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 72px;
+}
+
+.feg-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.feg-logo img {
+  height: 44px;
+  width: auto;
+}
+
+.feg-logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--feg-white);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.feg-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+}
+
+.feg-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 16px;
+  background: rgba(45, 55, 75, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.feg-nav-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.feg-nav-link:hover {
+  color: var(--feg-white);
+  background: rgba(0, 210, 255, 0.15);
+  border-color: #00D2FF;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.feg-nav-link:hover .feg-nav-icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.feg-nav-link.active {
+  color: var(--feg-white);
+  background: rgba(0, 210, 255, 0.15);
+  border-color: #00D2FF;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.4), inset 0 0 6px rgba(0, 210, 255, 0.15);
+}
+
+.feg-nav-link.active .feg-nav-icon {
+  opacity: 1;
+}
+
+.feg-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  margin-left: auto;
+}
+
+.feg-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.feg-theme-toggle {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  background: rgba(0, 229, 255, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  flex-shrink: 0;
+}
+
+.feg-theme-toggle:hover {
+  border-color: var(--feg-cyan);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+}
+
+.feg-theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--feg-cyan), #00E5FF);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.feg-theme-toggle .feg-theme-icon-sun,
+.feg-theme-toggle .feg-theme-icon-moon {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--feg-muted);
+  z-index: 1;
+}
+
+body.feg-light-theme .feg-theme-toggle::before {
+  transform: translateX(20px);
+}
+
+body.feg-light-theme .feg-theme-toggle .feg-theme-icon-sun {
+  color: #FFD54F;
+}
+
+.feg-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.feg-hamburger span {
+  width: 26px;
+  height: 2px;
+  background: var(--feg-white);
+  transition: 0.3s;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.feg-hero {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 72px 2rem 72px;
+  background: linear-gradient(135deg, #0a192f 0%, #112240 60%, #1a365d 100%);
+}
+
+.feg-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 70, 184, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+.feg-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heroGlow 6s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes heroGlow {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  100% { transform: translate(40px, -30px) scale(1.1); opacity: 0.8; }
+}
+
+.feg-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.feg-hero-content {
+  max-width: 600px;
+}
+
+.feg-hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  border-radius: 50px;
+  color: var(--feg-cyan);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.feg-hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: var(--feg-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.feg-hero-title .highlight {
+  background: linear-gradient(135deg, var(--feg-cyan), var(--feg-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.feg-hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--feg-muted);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+.feg-hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.feg-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--feg-primary), var(--feg-primary-deep));
+  color: var(--feg-white) !important;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(11, 94, 215, 0.4);
+  text-decoration: none;
+}
+
+.feg-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(11, 94, 215, 0.6);
+}
+
+.feg-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--feg-cyan) !important;
+  border: 1px solid var(--feg-cyan);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.feg-btn-outline:hover {
+  background: rgba(0, 210, 255, 0.1);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+}
+
+.feg-hero-globe {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feg-hero-globe::before {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(0, 229, 255, 0.14) 0%,
+    rgba(0, 70, 184, 0.07) 35%,
+    transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.feg-globe-canvas {
+  position: relative;
+  z-index: 1;
+  width: 500px;
+  height: 500px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* ============================================================
+   TEAM SECTION
+   ============================================================ */
+.feg-team-section {
+  position: relative;
+  padding: 100px 2rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.feg-team-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+}
+
+.feg-section-header {
+  max-width: 1280px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.feg-section-tag {
+  padding: 6px 16px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: 4px;
+  color: var(--feg-cyan);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+
+.feg-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 1rem;
+  color: var(--feg-white);
+  line-height: 1.1;
+}
+
+.feg-section-desc {
+  color: var(--feg-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 500px;
+}
+
+/* ---- Light-section overrides (Team, Countdown) ---- */
+.feg-team-section .feg-section-title,
+.feg-countdown-section .feg-countdown-title {
+  color: #0f172a;
+}
+
+.feg-team-section .feg-section-desc,
+.feg-countdown-section .feg-countdown-subtitle {
+  color: #475569;
+}
+
+.feg-team-section .feg-section-tag,
+.feg-countdown-section .feg-countdown-label {
+  background: rgba(11, 94, 215, 0.08);
+  border-color: rgba(11, 94, 215, 0.2);
+  color: #0b5ed7;
+}
+
+.feg-team-section .feg-team-quote {
+  color: #64748b;
+  border-top-color: #e2e8f0;
+}
+
+.feg-team-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.feg-team-card {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+  border-radius: 16px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.feg-team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--feg-primary), var(--feg-cyan));
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+
+.feg-team-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(0, 210, 255, 0.45);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4), 0 0 30px rgba(0, 210, 255, 0.12);
+  background: linear-gradient(160deg, #1e3a5f 0%, #0f172a 100%);
+}
+
+.feg-team-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feg-team-avatar {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  border: 3px solid var(--feg-cyan);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+}
+
+.feg-team-avatar svg,
+.feg-team-avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.feg-team-avatar img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.feg-team-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--feg-white);
+  margin: 0 0 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.feg-team-role {
+  font-size: 0.8rem;
+  color: var(--feg-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.feg-team-quote {
+  font-size: 0.95rem;
+  color: var(--feg-muted);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--feg-border);
+}
+
+.feg-team-tagline {
+  max-width: 1280px;
+  margin: 4rem auto 0;
+  text-align: center;
+}
+
+.feg-team-tagline h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #0f172a, #0b5ed7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+/* ============================================================
+   TECH SOLUTIONS GRID
+   ============================================================ */
+.feg-solutions-section {
+  position: relative;
+  padding: 100px 2rem;
+  background: linear-gradient(135deg, #0a192f 0%, #112240 60%, #1a365d 100%);
+}
+
+.feg-solutions-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feg-solution-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+}
+
+.feg-solution-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(0, 210, 255, 0.45);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 210, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.feg-solution-header {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.feg-solution-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+/* ============================================================
+   >>> SOLUTION CARD IMAGES — CHANGE PATHS BELOW <<<
+   Place your files in: wp-content/uploads/feg-images/
+   Edit the url() on each line to swap that card's image.
+   ============================================================ */
+.feg-solution-header--1::before { background-image: url('/wp-content/uploads/feg-images/solution-1.jpg'); }
+.feg-solution-header--2::before { background-image: url('/wp-content/uploads/feg-images/solution-2.jpg'); }
+.feg-solution-header--3::before { background-image: url('/wp-content/uploads/feg-images/solution-3.jpg'); }
+
+.feg-solution-card:hover .feg-solution-header::before {
+  transform: scale(1.1);
+}
+
+.feg-solution-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, rgba(9, 27, 54, 0.95));
+  pointer-events: none;
+}
+
+.feg-solution-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(5, 8, 16, 0.95) 0%, rgba(5, 8, 16, 0.3) 50%, rgba(5, 8, 16, 0.1) 100%);
+}
+
+.feg-solution-content {
+  position: relative;
+  padding: 1.5rem 2rem 2rem;
+  flex-grow: 1;
+}
+
+.feg-solution-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.feg-solution-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--feg-cyan);
+}
+
+.feg-solution-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--feg-white);
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.feg-solution-desc {
+  font-size: 0.9rem;
+  color: var(--feg-muted);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.feg-solution-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  border-radius: 50px;
+  color: var(--feg-cyan);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+
+.feg-solution-card:hover .feg-solution-pill {
+  background: var(--feg-cyan);
+  color: #0f172a;
+}
+
+/* ============================================================
+   COUNTDOWN SECTION
+   ============================================================ */
+.feg-countdown-section {
+  position: relative;
+  padding: 100px 2rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  overflow: hidden;
+}
+
+.feg-countdown-section::before,
+.feg-countdown-section::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(11, 94, 215, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.feg-countdown-section::before {
+  top: 10%;
+  left: 5%;
+  animation: countdownStar 4s ease-in-out infinite alternate;
+}
+
+.feg-countdown-section::after {
+  bottom: 10%;
+  right: 5%;
+  animation: countdownStar 5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes countdownStar {
+  0% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+  100% { transform: scale(1.3) rotate(180deg); opacity: 0.7; }
+}
+
+.feg-countdown-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.feg-countdown-label {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: 4px;
+  color: var(--feg-cyan);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.feg-countdown-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 0.5rem;
+  color: var(--feg-white);
+}
+
+.feg-countdown-subtitle {
+  font-size: 1rem;
+  color: var(--feg-muted);
+  margin: 0 0 3rem;
+}
+
+.feg-countdown-subtitle strong {
+  color: #0b5ed7;
+}
+
+.feg-countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.feg-countdown-block {
+  width: 130px;
+  padding: 2rem 1rem;
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.feg-countdown-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--feg-primary), var(--feg-cyan));
+}
+
+.feg-countdown-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--feg-white);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.feg-countdown-unit {
+  font-size: 0.75rem;
+  color: var(--feg-cyan);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.feg-countdown-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.feg-countdown-location svg {
+  width: 16px;
+  height: 16px;
+  fill: #0b5ed7;
+}
+
+/* ============================================================
+   VR BANNER SECTION
+   ============================================================ */
+.feg-vr-section {
+  position: relative;
+  padding: 100px 2rem;
+  background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #1a365d 100%);
+  overflow: hidden;
+}
+
+.feg-vr-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.feg-vr-content h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 1rem;
+  color: var(--feg-white);
+  line-height: 1.1;
+}
+
+.feg-vr-content p {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+.feg-vr-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+}
+
+.feg-vr-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.6rem 0;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.feg-vr-features li svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--feg-cyan);
+  flex-shrink: 0;
+}
+
+.feg-vr-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.feg-vr-visual-inner {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.08) 0%, rgba(0, 70, 184, 0.04) 50%, transparent 70%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: vrPulse 4s ease-in-out infinite;
+}
+
+@keyframes vrPulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(0, 70, 184, 0.1); }
+  50% { box-shadow: 0 0 80px rgba(0, 210, 255, 0.2); }
+}
+
+.feg-vr-visual-inner svg {
+  width: 120px;
+  height: 120px;
+  fill: var(--feg-cyan);
+  opacity: 0.6;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.feg-footer {
+  position: relative;
+  padding: 60px 2rem 0;
+  background: #0a192f;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.feg-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.feg-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--feg-border);
+  margin-bottom: 3rem;
+}
+
+.feg-footer-top img {
+  height: 48px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.feg-footer-columns {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--feg-border);
+  margin-bottom: 2rem;
+}
+
+.feg-footer-col-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--feg-white);
+  margin: 0 0 1.5rem;
+}
+
+.feg-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feg-footer-col li {
+  padding: 0.4rem 0;
+}
+
+.feg-footer-col a {
+  color: var(--feg-muted);
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.feg-footer-col a:hover {
+  color: var(--feg-cyan);
+}
+
+.feg-footer-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0.6rem 0;
+}
+
+.feg-footer-location svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--feg-cyan);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.feg-footer-location span {
+  color: var(--feg-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.feg-footer-social {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.feg-footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--feg-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.feg-footer-social a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--feg-muted);
+  transition: fill 0.3s;
+}
+
+.feg-footer-social a:hover {
+  border-color: var(--feg-cyan);
+  background: rgba(0, 210, 255, 0.1);
+}
+
+.feg-footer-social a:hover svg {
+  fill: var(--feg-cyan);
+}
+
+.feg-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feg-footer-copy {
+  color: var(--feg-muted);
+  font-size: 0.8rem;
+}
+
+.feg-footer-bottom-nav {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feg-footer-bottom-nav a {
+  color: var(--feg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.feg-footer-bottom-nav a:hover {
+  color: var(--feg-cyan);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .feg-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .feg-hero-content { max-width: 100%; }
+  .feg-hero-buttons { justify-content: center; }
+
+  .feg-hero-globe { order: -1; }
+  .feg-globe-canvas { width: 350px; height: 350px; }
+
+  .feg-team-grid { grid-template-columns: repeat(2, 1fr); }
+  .feg-solutions-grid { grid-template-columns: repeat(2, 1fr); }
+  .feg-vr-inner { grid-template-columns: 1fr; }
+  .feg-vr-visual { order: -1; }
+  .feg-footer-columns { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .feg-nav { display: none; }
+  .feg-hamburger { display: flex; }
+
+  .feg-nav.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 72px; left: 0; right: 0; bottom: 0;
+    background: rgba(5, 8, 16, 0.98);
+    padding: 2rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 3rem;
+    z-index: 999;
+  }
+
+  .feg-nav.active .feg-nav-link {
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    padding: 12px 20px;
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .feg-nav.active .feg-nav-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .feg-globe-canvas { width: 280px; height: 280px; }
+  .feg-team-grid { grid-template-columns: 1fr; }
+  .feg-solutions-grid { grid-template-columns: 1fr; }
+  .feg-countdown-timer { gap: 0.8rem; }
+  .feg-countdown-block { width: 100px; padding: 1.5rem 0.8rem; }
+  .feg-countdown-number { font-size: 2rem; }
+  .feg-footer-columns { grid-template-columns: 1fr; }
+  .feg-footer-bottom { flex-direction: column; text-align: center; }
+  .feg-footer-bottom-nav { justify-content: center; }
+  .feg-section-header { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .feg-hero { padding: 80px 1rem 56px; }
+  .feg-globe-canvas { width: 220px; height: 220px; }
+  .feg-countdown-timer { gap: 0.5rem; }
+  .feg-countdown-block { width: 75px; padding: 1rem 0.5rem; }
+  .feg-countdown-number { font-size: 1.6rem; }
+}
+
+/* ============================================================
+   INNER PAGES (Services, About, Contact, etc.)
+   Applies the dark theme to pages using the feg-header/footer
+   and the page-with-title / page templates.
+   ============================================================ */
+body.wp-singular .feg-header {
+  position: fixed;
+}
+
+body.wp-singular .wp-block-template-part + main,
+body.wp-singular main.wp-block-group {
+  padding-top: 72px;
+}
+
+.feg-inner-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--feg-white) 0%, var(--feg-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.wp-block-post-content {
+  color: var(--feg-muted);
+  line-height: 1.7;
+}
+
+.wp-block-post-content h1,
+.wp-block-post-content h2,
+.wp-block-post-content h3,
+.wp-block-post-content h4,
+.wp-block-post-content h5,
+.wp-block-post-content h6 {
+  color: var(--feg-white);
+}
+
+.wp-block-post-content a:not(.wp-block-button__link) {
+  color: var(--feg-cyan);
+}
+
+.wp-block-post-content a:not(.wp-block-button__link):hover {
+  color: var(--feg-white);
+}
+
+.wp-block-post-content .has-background-background-color {
+  background-color: var(--feg-bg) !important;
+}
+
+.wp-block-post-content .has-tertiary-background-color {
+  background-color: var(--feg-bg-dark) !important;
+}
+
+.wp-block-post-content .has-foreground-color,
+.wp-block-post-content .has-foreground-background-color {
+  color: var(--feg-white) !important;
+}
+
+.wp-block-post-content .has-primary-color {
+  color: var(--feg-primary) !important;
+}
+
+.wp-block-post-content .wp-block-button__link {
+  background: var(--feg-primary);
+  color: var(--feg-white);
+}
+
+.wp-block-post-content .wp-block-button__link:hover {
+  background: var(--feg-cyan);
+  color: var(--feg-bg-dark);
+}
+
+/* ============================================================
+   UTILITY & ANIMATION CLASSES
+   ============================================================ */
+.feg-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feg-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fallback: show elements if JS never loads */
+@media (scripting: none) {
+  .feg-fade-in { opacity: 1; transform: none; }
+}
+
+/* Particle canvas overlay */
+.feg-particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   DARK / LIGHT THEME SWITCHER
+   body.feg-light-theme overrides the dark palette
+   ============================================================ */
+body.feg-light-theme {
+  --feg-bg: #F4F7FB;
+  --feg-bg-dark: #E8EEF7;
+  --feg-white: #0E1F32;
+  --feg-muted: #44566E;
+  --feg-card-bg: rgba(255, 255, 255, 0.85);
+  --feg-border: rgba(11, 94, 215, 0.18);
+  --feg-primary: #0B5ED7;
+  --feg-primary-deep: #0046B8;
+  --feg-cyan: #00A8CC;
+  --feg-cyan-glow: #00B8DC;
+}
+
+body.feg-light-theme .feg-header {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(11, 94, 215, 0.15);
+}
+
+body.feg-light-theme .feg-nav {
+  background: rgba(11, 94, 215, 0.04);
+  border-color: rgba(11, 94, 215, 0.08);
+}
+
+body.feg-light-theme .feg-nav-link {
+  background: rgba(45, 55, 75, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+body.feg-light-theme .feg-nav-link:hover {
+  color: #FFFFFF;
+  background: rgba(0, 168, 204, 0.25);
+  border-color: #00D2FF;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+}
+
+body.feg-light-theme .feg-nav-link.active {
+  color: #FFFFFF;
+  background: rgba(0, 168, 204, 0.25);
+  border-color: #00D2FF;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.4), inset 0 0 6px rgba(0, 210, 255, 0.15);
+}
+
+body.feg-light-theme .feg-nav.active {
+  background: rgba(244, 247, 251, 0.98);
+}
+
+body.feg-light-theme .feg-hamburger span {
+  background: var(--feg-white);
+}
+
+body.feg-light-theme .feg-hero-globe::before {
+  background: radial-gradient(circle at 50% 50%,
+    rgba(11, 94, 215, 0.14) 0%,
+    rgba(11, 94, 215, 0.07) 35%,
+    transparent 70%);
+}
+
+/* Smooth theme transition */
+body,
+body * {
+  transition-property: background-color, color, border-color, box-shadow, text-shadow;
+  transition-duration: 0.3s;
+}

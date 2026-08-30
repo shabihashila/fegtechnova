@@ -1,0 +1,326 @@
+<?php
+
+namespace SimplyBook\Features\TaskManagement\Tasks;
+
+use SimplyBook\Interfaces\TaskInterface;
+
+/**
+ * @SuppressWarnings("PHPMD.NumberOfChildren") This class is the base for all
+ * tasks and as such will have many child classes by design.
+ */
+abstract class AbstractTask implements TaskInterface
+{
+    public const STATUS_OPEN = 'open';
+    public const STATUS_UPGRADE = 'upgrade';
+    public const STATUS_URGENT = 'urgent';
+    public const STATUS_DISMISSED = 'dismissed';
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_PREMIUM = 'premium';
+    public const STATUS_HIDDEN = 'hidden';
+
+    /**
+     * Override this constant to define the identifier of the task. This
+     * identifier is used to identify the task in the database and in the UI.
+     */
+    public const IDENTIFIER = '';
+
+    /**
+     * Option key to store the menu bubble counter for tasks. Can be used to
+     * show the number of urgent tasks in the admin menu. Currently only used
+     * if the Black Friday promotion is active.
+     */
+    public const MENU_BUBBLE_OPTION_KEY = 'simplybook_task_bubble_counter';
+
+    /**
+     * Override this property to define the version of the task. This version is
+     * used to determine if the task should be upgraded during a plugin update.
+     */
+    protected string $version;
+
+    /**
+     * Override this property to define if the task is required or not. If the
+     * task is required, the user will not be able to dismiss the task.
+     */
+    protected bool $required;
+
+    /**
+     * Override this property to define if the task should be reactivated when
+     * the task is upgraded. This is useful for tasks that are dismissed by the
+     * user but should be reactivated when the task is upgraded to a new
+     * version.
+     */
+    protected bool $reactivateOnUpgrade;
+
+    /**
+     * Use this property to define if the task is a premium task. Useful for
+     * the UI.
+     */
+    protected bool $premium;
+
+    /**
+     * Use this property to define if the task is related to a special feature
+     * or not. Useful for the UI.
+     */
+    protected bool $specialFeature;
+
+    /**
+     * Override this property to make the task snoozable. When snoozable,
+     * the task can be temporarily hidden for a specified duration.
+     */
+    protected bool $snoozable = false;
+
+    /**
+     * Override this property to customize the snooze duration in seconds.
+     * Defaults to 24 hours (DAY_IN_SECONDS).
+     */
+    protected int $snoozeDuration = DAY_IN_SECONDS;
+
+    /**
+     * Timestamp when the task was snoozed. Stored as task property and
+     * serialized with the task.
+     */
+    protected ?int $snoozedAt = null;
+
+    /**
+     * By default, a task is active on construct. This is because the $status
+     * property is not set. The {@see getStatus()} method will therefore return
+     * the default status 'open'. If you want to set a different default status
+     * use the {@see setStatus()} method in the construct of the task. See
+     * {@see AddMandatoryProviderTask} for an example.
+     */
+    private string $status;
+
+    /**
+     * Override this method to define the text that should be displayed to the
+     * user in the tasks dashboard component
+     * @abstract
+     */
+    abstract public function getText(): string;
+
+    /**
+     * @inheritDoc
+     */
+    public function getId(): string
+    {
+        return static::IDENTIFIER;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getVersion(): string
+    {
+        return $this->version ?? '1.0.0';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatus(): string
+    {
+        // Snooze temporarily overrides the status
+        if ($this->isSnoozable() && $this->isSnoozed()) {
+            return self::STATUS_HIDDEN;
+        }
+
+        return $this->status ?? self::STATUS_OPEN;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function reactivateOnUpgrade(): bool
+    {
+        return $this->reactivateOnUpgrade ?? false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAction(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStatus(string $status): void
+    {
+        $knownStatuses = [
+            self::STATUS_OPEN,
+            self::STATUS_UPGRADE,
+            self::STATUS_URGENT,
+            self::STATUS_DISMISSED,
+            self::STATUS_COMPLETED,
+            self::STATUS_PREMIUM,
+            self::STATUS_HIDDEN,
+        ];
+        if (!in_array($status, $knownStatuses)) {
+            return; // Not allowed
+        }
+
+        $this->status = $status;
+    }
+
+    /**
+     * Activate the task by setting the status to 'open'
+     */
+    public function open(): void
+    {
+        $this->status = self::STATUS_OPEN;
+    }
+
+    /**
+     * Set the task to 'urgent' status
+     */
+    public function urgent(): void
+    {
+        $this->status = self::STATUS_URGENT;
+    }
+
+    /**
+     * Set the task to 'upgrade' status
+     */
+    public function upgrade(): void
+    {
+        $this->status = self::STATUS_UPGRADE;
+    }
+
+    /**
+     * Dismiss the task by setting the status to 'dismissed'. Only allowed if
+     * the task is not required.
+     */
+    public function dismiss(): void
+    {
+        if ($this->required) {
+            return; // Not allowed
+        }
+
+        $this->status = self::STATUS_DISMISSED;
+    }
+
+    /**
+     * Complete the task by setting the status to 'completed'
+     */
+    public function completed(): void
+    {
+        $this->status = self::STATUS_COMPLETED;
+    }
+
+    /**
+     * Hide the task by setting the status to 'hidden'
+     */
+    public function hide(): void
+    {
+        $this->status = self::STATUS_HIDDEN;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isRequired(): bool
+    {
+        return $this->required ?? false;
+    }
+
+    /**
+     * Reads if the task is premium
+     */
+    public function isPremium(): bool
+    {
+        return $this->premium ?? false;
+    }
+
+    /**
+     * Reads if the task is related to a special feature
+     */
+    public function isSpecialFeature(): bool
+    {
+        return $this->specialFeature ?? false;
+    }
+
+    /**
+     * Reads if the task is snoozable
+     */
+    public function isSnoozable(): bool
+    {
+        return $this->snoozable;
+    }
+
+    /**
+     * Get the snooze duration in seconds
+     */
+    public function getSnoozeDuration(): int
+    {
+        return $this->snoozeDuration;
+    }
+
+    /**
+     * Check if the task is currently snoozed
+     */
+    public function isSnoozed(): bool
+    {
+        if (!$this->isSnoozable() || $this->snoozedAt === null) {
+            return false;
+        }
+
+        return (time() - $this->snoozedAt) < $this->getSnoozeDuration();
+    }
+
+    /**
+     * Snooze the task by storing the current timestamp
+     */
+    public function snooze(): void
+    {
+        if (!$this->isSnoozable()) {
+            return;
+        }
+
+        $this->snoozedAt = time();
+    }
+
+    /**
+     * Clear the snooze state for this task
+     */
+    public function clearSnooze(): void
+    {
+        $this->snoozedAt = null;
+    }
+
+    /**
+     * Build the label for the task. This is used to display the task in the
+     * tasks dashboard component. The label is used to indicate if the task
+     * is premium or a special feature. If not, the label reflects the status.
+     */
+    public function getLabel(): string
+    {
+        if ($this->isPremium()) {
+            return __('Premium', 'simplybook');
+        }
+
+        if ($this->isSpecialFeature()) {
+            return __('Special feature', 'simplybook');
+        }
+
+        return ucfirst($this->getStatus());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'text' => $this->getText(),
+            'label' => $this->getLabel(),
+            'status' => $this->getStatus(),
+            'premium' => $this->isPremium(),
+            'special_feature' => $this->isSpecialFeature(),
+            'type' => $this->isRequired() ? 'required' : 'optional',
+            'action' => $this->getAction(),
+            'snoozable' => $this->isSnoozable(),
+        ];
+    }
+}

@@ -1,0 +1,37 @@
+<?php
+
+namespace SimplyBook\Features\TaskManagement\Tasks;
+
+/**
+ * A task to present when the user only has one provider. They probably have
+ * more, but we cannot be sure. Therefor it is dismissible.
+ */
+class AddAllProvidersTask extends AbstractTask
+{
+    public const IDENTIFIER = 'add_all_providers';
+
+    /**
+     * @inheritDoc
+     */
+    protected bool $required = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function getText(): string
+    {
+        return __('Have you added all Service Providers?', 'simplybook');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAction(): array
+    {
+        return [
+            'type' => 'button',
+            'text' => __('Add Providers', 'simplybook'),
+            'login_link' => '/v2/management?hash=providers',
+        ];
+    }
+}

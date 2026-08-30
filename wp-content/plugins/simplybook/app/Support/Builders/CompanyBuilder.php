@@ -1,0 +1,176 @@
+<?php
+
+namespace SimplyBook\Support\Builders;
+
+use SimplyBook\Support\Utility\StringUtility;
+
+final class CompanyBuilder
+{
+    public string $email = '';
+    public string $userLogin = '';
+    public int $category = 8; // Default category is 8: "Other category"
+    public string $companyName = '';
+    public string $phone = '';
+    public string $city = '';
+    public string $address = '';
+    public string $service = '';
+    public string $country = '';
+    public string $zip = '';
+    public bool $terms = false;
+    public bool $marketingConsent = false;
+    public string $password = ''; // Should be encrypted
+
+    /**
+     * Fields required for simplified registration flow.
+     * Only email and password are needed for new account creation.
+     */
+    private array $requiredFields = ['email', 'password'];
+
+    /**
+     * Method can be used to build a CompanyBuilder object from an array of
+     * key-value pairs. Only known properties will be set. Supports both
+     * snake_case and camelCase keys.
+     */
+    public function buildFromArray(array $properties = []): self
+    {
+        foreach ($properties as $key => $value) {
+            $propertyName = StringUtility::toCamelCase($key);
+            $method = 'set' . StringUtility::toPascalCase($key);
+
+            if ((property_exists($this, $propertyName) === false) || (method_exists($this, $method) === false)) {
+                continue;
+            }
+
+            $this->{$method}($value);
+        }
+
+        return $this;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = sanitize_email($email);
+        return $this;
+    }
+
+    public function setCategory(int $category): self
+    {
+        if ($category >= 1) {
+            $this->category = $category;
+        }
+
+        return $this;
+    }
+
+    public function setCompanyName(string $companyName): self
+    {
+        $this->companyName = sanitize_text_field($companyName);
+        return $this;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = preg_replace('/[^0-9]/', '', $phone);
+        return $this;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = sanitize_text_field($city);
+        return $this;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = sanitize_text_field($address);
+        return $this;
+    }
+
+    public function setService(string $service): self
+    {
+        $this->service = sanitize_text_field($service);
+        return $this;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = sanitize_text_field($country);
+        return $this;
+    }
+
+    public function setZip(string $zip): self
+    {
+        $this->zip = strtolower(str_replace(' ', '', trim(sanitize_text_field($zip))));
+        return $this;
+    }
+
+    public function setTerms(bool $terms): self
+    {
+        $this->terms = $terms;
+        return $this;
+    }
+
+    public function setMarketingConsent(bool $marketingConsent): self
+    {
+        $this->marketingConsent = $marketingConsent;
+        return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = sanitize_text_field($password);
+        return $this;
+    }
+
+    /**
+     * The user login is by default the email address. But a user can change
+     * this in the SimplyBook system, so for existing accounts this value
+     * can be different.
+     */
+    public function setUserLogin(string $userLogin): self
+    {
+        $this->userLogin = sanitize_text_field($userLogin);
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'email' => $this->email,
+            'userLogin' => $this->userLogin,
+            'category' => $this->category,
+            'companyName' => $this->companyName,
+            'phone' => $this->phone,
+            'city' => $this->city,
+            'address' => $this->address,
+            'service' => $this->service,
+            'country' => $this->country,
+            'zip' => $this->zip,
+            'terms' => $this->terms,
+            'marketingConsent' => $this->marketingConsent,
+            'password' => $this->password, // Should be encrypted
+        ];
+    }
+
+    /**
+     * Validation - checks all required fields are filled.
+     */
+    public function isValid(): bool
+    {
+        return empty($this->getInvalidFields());
+    }
+
+    /**
+     * Get fields that are required but empty.
+     */
+    public function getInvalidFields(): array
+    {
+        $invalid = [];
+        foreach ($this->requiredFields as $field) {
+            if (empty($this->{$field})) {
+                $invalid[] = $field;
+            }
+        }
+        return $invalid;
+    }
+}

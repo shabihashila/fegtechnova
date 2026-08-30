@@ -1,0 +1,149 @@
+<?php
+
+namespace SimplyBook\Features\Onboarding;
+
+use SimplyBook\Http\ApiClient;
+use SimplyBook\Services\PluginFirstUseTimeService;
+use SimplyBook\Traits\LegacySave;
+use SimplyBook\Traits\HasEncryption;
+use SimplyBook\Traits\HasRestAccess;
+use SimplyBook\Support\Helpers\Storage;
+use SimplyBook\Support\Builders\CompanyBuilder;
+
+class OnboardingService
+{
+    use HasEncryption;
+    use LegacySave;
+    use HasRestAccess;
+
+    private ApiClient $client;
+    private PluginFirstUseTimeService $pluginFirstUseTimeService;
+
+    public function __construct(ApiClient $client, PluginFirstUseTimeService $pluginFirstUseTimeService)
+    {
+        $this->client = $client;
+        $this->pluginFirstUseTimeService = $pluginFirstUseTimeService;
+    }
+
+    /**
+     * Store the onboarding step in the general options without autoload
+     */
+    public function setCompletedStep(int $step): void
+    {
+        update_option('simplybook_completed_step', $step, false);
+    }
+
+    /**
+     * Set the onboarding as completed in the general options without autoload
+     */
+    public function setOnboardingCompleted(): bool
+    {
+        $this->setCompletedStep(2);
+        $this->clearTemporaryData();
+
+        $this->client->clearFailedAuthenticationFlag();
+        $this->pluginFirstUseTimeService->saveCurrentPluginFirstUseTimeIfMissing();
+
+        $completedPreviously = get_option('simplybook_onboarding_completed', false);
+        if ($completedPreviously) {
+            return true;
+        }
+
+        return update_option('simplybook_onboarding_completed', true, false);
+    }
+
+    /**
+     * This method should be called after a successful company registration request.
+     * Note: completed_step is set in RegistrationCallbackEndpoint after callback authentication succeeds.
+     */
+    public function finishCompanyRegistration(): void
+    {
+        update_option("simplybook_company_registration_start_time", time(), false);
+    }
+
+    /**
+     * Store company data from the onboarding step in the options
+     */
+    public function storeCompanyData(CompanyBuilder $companyBuilder): void
+    {
+        $options = get_option('simplybook_company_data', []);
+
+        $companyData = array_filter($companyBuilder->toArray());
+        foreach ($companyData as $key => $value) {
+            $options[$key] = $value;
+        }
+
+        update_option('simplybook_company_data', $options);
+    }
+
+    /**
+     * Retrieve company data from the options and build a CompanyBuilder object
+     */
+    public function getCompanyData(): CompanyBuilder
+    {
+        $companyData = get_option('simplybook_company_data', []);
+        return (new CompanyBuilder())->buildFromArray($companyData);
+    }
+
+    /**
+     * Method is used to build the company domain and login based on the given
+     * domain and login values. For non-default domains the domain should be
+     * appended to the login for the authentication process. The domains are
+     * maintained here {@see config/env.php}
+     *
+     * @see /NL14RSP2-49?focusedCommentId=3407285
+     *
+     * @example Domain: login:simplybook.vip & Login: admin -> [simplybook.vip, admin.simplybook.vip]
+     * @example Domain: default:simplybook.it & login: admin -> [simplybook.it, admin]
+     * @example Domain: simplybook.de & login: admin -> [simplybook.de, admin]
+     *
+     * @since 3.2.4 All domains are now listed as "default": in config/env.php,
+     * reference: {@see /NL14RSP2-335}
+     *
+     * @see /NL14RSP2-337 - This feature introduced the ability for users to
+     * enter their own domain as a string, which will not be marked as "default:"
+     */
+    public function parseCompanyDomainAndLogin(string $domain, string $login): array
+    {
+        if (strpos($domain, ':') === false) {
+            return [$domain, $login];
+        }
+
+        [$prefix, $parsedDomain] = explode(':', $domain, 2);
+
+        if ($prefix === 'login') {
+            $login .= '.' . $parsedDomain;
+        }
+
+        return [$parsedDomain, $login];
+    }
+
+    /**
+     * Method can be used to set temporary data for the onboarding process.
+     */
+    public function setTemporaryData(array $data): void
+    {
+        $options = get_option('simplybook_temporary_onboarding_data', []);
+        $options = array_merge($options, $data);
+        update_option('simplybook_temporary_onboarding_data', $options, false);
+    }
+
+    /**
+     * Method can be used to retrieve temporary data for the onboarding process.
+     * Returns the array of data as a Storage object for easier access.
+     */
+    public function getTemporaryDataStorage(): Storage
+    {
+        return new Storage(
+            get_option('simplybook_temporary_onboarding_data', [])
+        );
+    }
+
+    /**
+     * Method should be used to clear the temporary data for the onboarding.
+     */
+    public function clearTemporaryData(): void
+    {
+        delete_option('simplybook_temporary_onboarding_data');
+    }
+}

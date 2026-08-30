@@ -1,0 +1,941 @@
+/**
+ * FEG TechNova design system — component styles.
+ * Tokens live in theme.json; this file covers layout and components
+ * that core block styles do not provide. Original design per
+ * requirements.md section 10.
+ */
+
+/* ---------- Base ---------- */
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+:where(a):focus-visible,
+:where(button):focus-visible,
+:where(input):focus-visible,
+:where(select):focus-visible,
+:where(textarea):focus-visible,
+:where([tabindex]):focus-visible {
+	outline: 2px solid var(--wp--preset--color--ink);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* Skip link (rendered in the header part) */
+.fegn-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	background: var(--wp--preset--color--brand);
+	color: #fff;
+	padding: 0.75rem 1.25rem;
+	z-index: 1000;
+	border-radius: 0 0 8px 0;
+}
+.fegn-skip-link:focus {
+	left: 0;
+}
+
+/* ---------- Header ---------- */
+
+.fegn-site-header {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(8px);
+	border-bottom: 1px solid var(--wp--preset--color--border-color);
+}
+
+.fegn-header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	max-width: var(--wp--style--global--wide-size);
+	margin-inline: auto;
+	padding-block: 0.75rem;
+}
+
+.fegn-brand {
+	text-decoration: none;
+	color: var(--wp--preset--color--ink);
+}
+
+.fegn-brand-name {
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--ink);
+	margin: 0;
+	white-space: nowrap;
+}
+
+/* Primary navigation bar — items distribute across the freed header space */
+.fegn-primary-nav {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	min-width: 0;
+}
+
+.fegn-nav-list {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1.25rem;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fegn-nav-list > li {
+	display: flex;
+	align-items: center;
+}
+
+/* Plain top-level links (AI Chatbot, Bulk SMS, About, Contact) */
+.fegn-nav-link,
+.fegn-mega-trigger {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-height: 44px;
+	padding: 0.5rem 0.75rem;
+	font: inherit;
+	font-weight: 500;
+	color: var(--wp--preset--color--body-text);
+	text-decoration: none;
+	white-space: nowrap;
+	border-radius: 8px;
+	transition: color 180ms cubic-bezier(0.33, 1, 0.68, 1),
+		background-color 180ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Smooth accent line that grows from the center on hover/focus */
+.fegn-nav-link::after,
+.fegn-mega-trigger::after {
+	content: "";
+	position: absolute;
+	left: 0.75rem;
+	right: 0.75rem;
+	bottom: 0.35rem;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--wp--preset--color--brand);
+	transform: scaleX(0);
+	transform-origin: center;
+	transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fegn-nav-link:hover,
+.fegn-nav-link:focus-visible,
+.fegn-mega-trigger:hover,
+.fegn-mega-trigger:focus-visible,
+.fegn-mega-trigger[aria-expanded='true'] {
+	color: var(--wp--preset--color--ink);
+}
+
+.fegn-nav-link:hover::after,
+.fegn-nav-link:focus-visible::after,
+.fegn-mega-trigger:hover::after,
+.fegn-mega-trigger:focus-visible::after,
+.fegn-mega-trigger[aria-expanded='true']::after {
+	transform: scaleX(1);
+}
+
+.fegn-nav-link.current-menu-item,
+.fegn-mega-trigger[aria-current='page'] {
+	color: var(--wp--preset--color--brand);
+	font-weight: 600;
+}
+.fegn-nav-link.current-menu-item::after {
+	transform: scaleX(1);
+}
+
+/* Hamburger toggle — hidden on desktop */
+.fegn-nav-toggle {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: 1px solid var(--wp--preset--color--border-color);
+	border-radius: 10px;
+	background: transparent;
+	color: var(--wp--preset--color--ink);
+	cursor: pointer;
+	transition: background-color 160ms ease, border-color 160ms ease;
+}
+.fegn-nav-toggle:hover {
+	background: var(--wp--preset--color--light-blue);
+}
+.fegn-nav-toggle-box {
+	position: relative;
+	display: block;
+	width: 20px;
+	height: 14px;
+}
+.fegn-nav-toggle-bar,
+.fegn-nav-toggle-box::before,
+.fegn-nav-toggle-box::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+	transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 160ms ease;
+}
+.fegn-nav-toggle-box::before { top: 0; }
+.fegn-nav-toggle-bar { top: 50%; transform: translateY(-50%); }
+.fegn-nav-toggle-box::after { bottom: 0; }
+
+.fegn-nav-toggle[aria-expanded='true'] .fegn-nav-toggle-box::before {
+	transform: translateY(6px) rotate(45deg);
+}
+.fegn-nav-toggle[aria-expanded='true'] .fegn-nav-toggle-bar {
+	opacity: 0;
+}
+.fegn-nav-toggle[aria-expanded='true'] .fegn-nav-toggle-box::after {
+	transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile drawer call-to-action (conversion path preserved on small screens) */
+.fegn-drawer-cta {
+	display: none;
+}
+
+/* Mobile navigation overlay */
+.fegn-primary-nav .is-menu-open {
+	background: var(--wp--preset--color--surface);
+}
+
+/* ---------- Services mega menu (desktop) ---------- */
+
+.fegn-mega {
+	position: static;
+}
+
+.fegn-mega-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-height: 44px;
+	padding: 0.75rem 0.875rem;
+	border: 0;
+	border-radius: 8px;
+	background: none;
+	font: inherit;
+	font-weight: 500;
+	color: var(--wp--preset--color--body-text);
+	cursor: pointer;
+	transition: background-color 180ms cubic-bezier(0.33, 1, 0.68, 1), color 180ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+.fegn-mega-trigger:hover,
+.fegn-mega-trigger[aria-expanded='true'] {
+	background: var(--wp--preset--color--light-blue);
+	color: var(--wp--preset--color--ink);
+}
+
+.fegn-mega .fegn-chevron {
+	transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fegn-mega.is-open .fegn-chevron,
+.fegn-mega:hover .fegn-chevron {
+	transform: rotate(180deg);
+}
+
+/* Floating glass card: the panel spans the header width but renders an
+   elevated rounded card constrained to the wide grid. Visibility (not
+   display) toggles so the cubic-bezier open/close transition can play while
+   closed panels stay out of the tab order and hit-testing. */
+.fegn-mega-panel {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: var(--wp--preset--spacing--20);
+	right: var(--wp--preset--spacing--20);
+	z-index: 999;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(-10px);
+	pointer-events: none;
+	transition:
+		opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+		visibility 0s linear 260ms;
+}
+.fegn-mega.is-open .fegn-mega-panel {
+	visibility: visible;
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
+	transition:
+		opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+		visibility 0s;
+}
+
+.fegn-mega-cols {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.75rem;
+	max-width: var(--wp--style--global--wide-size);
+	margin-inline: auto;
+	padding: 2rem 2.25rem 2.25rem;
+	background: rgba(255, 255, 255, 0.97);
+	backdrop-filter: blur(14px) saturate(140%);
+	-webkit-backdrop-filter: blur(14px) saturate(140%);
+	border: 1px solid rgba(217, 225, 236, 0.9);
+	border-radius: 20px;
+	box-shadow:
+		0 32px 64px rgba(8, 26, 51, 0.16),
+		0 10px 24px rgba(8, 26, 51, 0.08);
+}
+
+/* Single-column dropdown variant (Website / Products / Marketing) — a
+   tight card pinned to the start of the full-width panel. */
+.fegn-mega-cols--simple {
+	grid-template-columns: 1fr;
+	gap: 0;
+	max-width: 340px;
+	padding: 1rem 1rem 1.25rem;
+}
+
+/* Column headings carry the primary brand color for visual hierarchy */
+.fegn-mega-col-title {
+	margin: 0 0 0.75rem;
+	font-size: 0.8125rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.09em;
+	color: var(--wp--preset--color--brand);
+}
+
+/* Column 1 — accent card treatment with a subtle brand border */
+.fegn-mega-col--accent {
+	align-self: start;
+	background: linear-gradient(180deg, #EAF2FF 0%, #F6F8FB 100%);
+	border: 1px solid rgba(24, 99, 220, 0.22);
+	border-left: 3px solid var(--wp--preset--color--brand);
+	border-radius: 14px;
+	padding: 1.25rem 1.25rem 0.75rem;
+	margin: -0.25rem;
+}
+.fegn-mega-col--accent .fegn-mega-list a:focus-visible {
+	outline-color: var(--wp--preset--color--brand);
+}
+
+/* Sub-links: muted bullet marker that sharpens on hover/focus, soft
+   highlight box, 4px translate, and color shift to the dark brand tone */
+.fegn-mega-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.fegn-mega-list a {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0.625rem 0.75rem 0.625rem 1.55rem;
+	border-radius: 10px;
+	color: var(--wp--preset--color--body-text);
+	text-decoration: none;
+	font-weight: 500;
+	line-height: 1.35;
+	transition:
+		color 180ms cubic-bezier(0.33, 1, 0.68, 1),
+		background-color 180ms cubic-bezier(0.33, 1, 0.68, 1),
+		transform 180ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+.fegn-mega-list a::before {
+	content: "";
+	position: absolute;
+	left: 0.65rem;
+	top: 50%;
+	width: 6px;
+	height: 6px;
+	border-radius: 2px;
+	background: var(--wp--preset--color--brand);
+	opacity: 0.3;
+	transform: translateY(-50%) scale(0.9);
+	transition: opacity 180ms ease, transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fegn-mega-list a:hover,
+.fegn-mega-list a:focus-visible {
+	color: var(--wp--preset--color--brand-dark);
+	background: var(--wp--preset--color--light-blue);
+	transform: translateX(4px);
+}
+.fegn-mega-list a:hover::before,
+.fegn-mega-list a:focus-visible::before {
+	opacity: 1;
+	transform: translateY(-50%) scale(1.15);
+}
+
+/* "All Services" — distinct emphasis plus animated arrow on hover */
+.fegn-mega-all {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-height: 44px;
+	margin-top: 0.5rem;
+	padding: 0.625rem 0.875rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--wp--preset--color--brand);
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 0.9375rem;
+	text-decoration: none;
+	box-shadow: 0 4px 12px rgba(24, 99, 220, 0.28);
+	transition:
+		background-color 180ms cubic-bezier(0.33, 1, 0.68, 1),
+		box-shadow 180ms cubic-bezier(0.33, 1, 0.68, 1),
+		transform 180ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+.fegn-mega-all .fegn-arrow {
+	display: inline-block;
+	transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fegn-mega-all:hover,
+.fegn-mega-all:focus-visible {
+	background: var(--wp--preset--color--brand-dark);
+	box-shadow: 0 6px 16px rgba(16, 74, 168, 0.32);
+	transform: translateY(-1px);
+	color: #FFFFFF;
+}
+.fegn-mega-all:hover .fegn-arrow,
+.fegn-mega-all:focus-visible .fegn-arrow {
+	transform: translateX(4px);
+}
+
+/* WCAG-compliant focus ring tuned for the panel surface */
+.fegn-mega :is(a, button):focus-visible {
+	outline: 2px solid var(--wp--preset--color--brand);
+	outline-offset: 2px;
+	border-radius: 10px;
+}
+
+/* Mobile drawer (requirement 9.1: a visible conversion path + full nav).
+   The same <nav> becomes an off-canvas panel toggled by .fegn-nav-toggle. */
+@media (max-width: 781px) {
+	.fegn-nav-toggle {
+		display: inline-flex;
+		position: relative;
+		z-index: 1001;
+	}
+
+	.fegn-primary-nav {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: min(86vw, 340px);
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 0.5rem;
+		padding: 5.5rem 1.25rem 2rem;
+		background: var(--wp--preset--color--surface);
+		box-shadow: -18px 0 48px rgba(8, 26, 51, 0.22);
+		transform: translateX(100%);
+		visibility: hidden;
+		transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 280ms;
+		z-index: 998;
+		overflow-y: auto;
+	}
+
+	.fegn-primary-nav.is-open {
+		transform: translateX(0);
+		visibility: visible;
+		transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+	}
+
+	.fegn-nav-list {
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 0.25rem;
+		width: 100%;
+	}
+
+	.fegn-nav-list > li {
+		width: 100%;
+	}
+
+	.fegn-nav-link,
+	.fegn-mega-trigger {
+		width: 100%;
+		min-height: 48px;
+		justify-content: space-between;
+		padding: 0.75rem 0.5rem;
+		font-size: 1.0625rem;
+		border-radius: 10px;
+	}
+
+	/* Accent line does not suit the stacked drawer list */
+	.fegn-nav-link::after,
+	.fegn-mega-trigger::after {
+		display: none;
+	}
+
+	/* Panels render inline within the drawer (not floating) */
+	.fegn-mega {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.fegn-mega-panel {
+		position: static;
+		visibility: visible;
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 280ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.fegn-mega.is-open .fegn-mega-panel {
+		max-height: 70vh;
+	}
+
+	.fegn-mega-cols,
+	.fegn-mega-cols--simple {
+		grid-template-columns: 1fr;
+		max-width: none;
+		margin: 0;
+		padding: 0.25rem 0 0.5rem;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+	}
+
+	.fegn-mega-list a {
+		min-height: 44px;
+		padding-block: 0.5rem;
+		font-size: 1rem;
+	}
+
+	/* Conversion path preserved inside the drawer */
+	.fegn-drawer-cta {
+		display: block;
+		margin-top: 1rem;
+		padding: 0.875rem 1.5rem;
+		background: var(--wp--preset--color--brand);
+		color: #FFFFFF;
+		font-weight: 600;
+		text-align: center;
+		text-decoration: none;
+		border-radius: 12px;
+		min-height: 44px;
+	}
+	.fegn-drawer-cta:hover,
+	.fegn-drawer-cta:focus-visible {
+		background: var(--wp--preset--color--brand-dark);
+		color: #FFFFFF;
+	}
+}
+
+/* Scrim behind the open drawer */
+.fegn-nav-scrim {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(8, 26, 51, 0.45);
+	z-index: 997;
+	opacity: 0;
+	transition: opacity 240ms ease;
+}
+.fegn-nav-scrim.is-visible {
+	display: block;
+	opacity: 1;
+}
+
+/* ---------- Shared section + type helpers ---------- */
+
+.fegn-eyebrow {
+	color: var(--wp--preset--color--brand);
+	text-transform: uppercase;
+	margin-bottom: 0.75rem;
+}
+.fegn-eyebrow--light {
+	color: #7FB3F5;
+}
+
+.fegn-lead {
+	color: var(--wp--preset--color--body-text);
+	max-width: 60ch;
+}
+.fegn-lead--light {
+	color: #C9D7EC;
+}
+
+.fegn-section-title {
+	max-width: 24ch;
+}
+.fegn-section-title--light {
+	color: #FFFFFF;
+}
+
+.fegn-text-link {
+	color: var(--wp--preset--color--brand);
+	font-weight: 600;
+	text-decoration: none;
+}
+.fegn-text-link:hover {
+	color: var(--wp--preset--color--brand-dark);
+	text-decoration: underline;
+}
+
+.fegn-muted-note {
+	color: var(--wp--preset--color--muted);
+}
+
+.fegn-section-head {
+	align-items: flex-end;
+}
+
+/* ---------- Hero ---------- */
+
+.fegn-hero-grid {
+	gap: var(--wp--preset--spacing--60);
+}
+.fegn-hero .wp-block-heading h1,
+.fegn-hero h1 {
+	color: var(--wp--preset--color--ink);
+	max-width: 18ch;
+}
+.fegn-hero-actions {
+	gap: 0.75rem;
+}
+.fegn-hero-actions .is-style-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--wp--preset--color--brand);
+	border: 2px solid var(--wp--preset--color--brand);
+}
+.fegn-hero-actions .is-style-outline .wp-block-button__link:hover {
+	background: var(--wp--preset--color--light-blue);
+	color: var(--wp--preset--color--brand-dark);
+	border-color: var(--wp--preset--color--brand-dark);
+}
+
+.fegn-hero-panel h2 {
+	color: var(--wp--preset--color--ink);
+	margin-bottom: 1rem;
+}
+.fegn-hero-list {
+	margin: 0;
+	padding-left: 1.1rem;
+}
+.fegn-hero-list li {
+	margin-bottom: 0.75rem;
+	color: var(--wp--preset--color--body-text);
+}
+
+/* ---------- Capability cards ---------- */
+
+.fegn-cards {
+	gap: 1.5rem;
+}
+.fegn-card {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border-color);
+	border-radius: 20px;
+	padding: 2rem;
+	transition: transform 200ms ease, box-shadow 200ms ease;
+}
+@media (hover: hover) {
+	.fegn-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 32px rgba(8, 26, 51, 0.08);
+	}
+}
+.fegn-card h3 {
+	color: var(--wp--preset--color--ink);
+	margin-bottom: 0.75rem;
+}
+.fegn-card p {
+	color: var(--wp--preset--color--body-text);
+}
+.fegn-card-link a {
+	color: var(--wp--preset--color--brand);
+	font-weight: 600;
+	text-decoration: none;
+}
+.fegn-card-link a:hover {
+	color: var(--wp--preset--color--brand-dark);
+	text-decoration: underline;
+}
+
+/* ---------- Process steps (dark section) ---------- */
+
+.fegn-steps {
+	gap: 1.5rem;
+}
+.fegn-step {
+	border-top: 3px solid var(--wp--preset--color--teal);
+	padding-top: 1.25rem;
+}
+.fegn-step-number {
+	/* 20px bold clears the WCAG "large text" threshold, so the white-on-teal
+	   ratio (3.3:1) meets AA large-text contrast */
+	font-size: 1.25rem;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 999px;
+	background: var(--wp--preset--color--teal);
+	color: #fff;
+	font-weight: 700;
+	margin-bottom: 0.75rem;
+}
+.fegn-step h3 {
+	color: #FFFFFF;
+	margin-bottom: 0.5rem;
+}
+.fegn-step p {
+	color: #C9D7EC;
+}
+
+/* ---------- Page header / inner pages ---------- */
+
+.fegn-page-header h1 {
+	max-width: 22ch;
+}
+.fegn-post-meta {
+	color: var(--wp--preset--color--muted);
+	margin-top: 0.75rem;
+}
+
+/* ---------- Post list cards ---------- */
+
+.fegn-post-card h2 {
+	margin-bottom: 0.25rem;
+}
+.fegn-post-card h2 a {
+	color: var(--wp--preset--color--ink);
+	text-decoration: none;
+}
+.fegn-post-card h2 a:hover {
+	color: var(--wp--preset--color--brand);
+}
+
+/* ---------- Footer ---------- */
+
+.fegn-site-footer a {
+	color: #C9D7EC;
+	text-decoration: none;
+}
+.fegn-site-footer a:hover,
+.fegn-site-footer a:focus-visible {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+.fegn-footer-pre {
+	align-items: center;
+	gap: 1.5rem;
+	padding-block: var(--wp--preset--spacing--60);
+}
+.fegn-footer-pre h2 {
+	color: #FFFFFF;
+	max-width: 26ch;
+	margin: 0;
+}
+.fegn-footer-cols {
+	gap: 2rem;
+}
+.fegn-footer-heading {
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.75rem;
+}
+.fegn-footer-tagline {
+	max-width: 34ch;
+}
+.fegn-footer-bottom {
+	padding-block: 1.5rem 2rem;
+	border-top: 1px solid rgba(217, 225, 236, 0.2);
+	margin-top: 2rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+	.fegn-nav-link,
+	.fegn-mega-trigger {
+		padding: 0.5rem 0.625rem;
+	}
+	.fegn-mega-cols {
+		gap: 1.25rem;
+		padding: 1.5rem;
+	}
+	.fegn-mega-list a {
+		padding-inline: 0.5rem;
+		font-size: 0.9375rem;
+	}
+}
+
+@media (max-width: 900px) {
+	.fegn-mega-cols {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 781px) {
+	.fegn-hero-grid > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+	.fegn-hero-panel {
+		margin-top: 0.5rem;
+	}
+	.fegn-section-head {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+}
+
+/* ---------- CPT templates, query cards, meta sections ---------- */
+
+.fegn-meta-section {
+	margin-block: var(--wp--preset--spacing--70);
+}
+.fegn-meta-section h2 {
+	color: var(--wp--preset--color--ink);
+	margin-bottom: 1rem;
+}
+.fegn-meta-section h3 {
+	color: var(--wp--preset--color--ink);
+	margin-top: 2rem;
+	margin-bottom: 0.75rem;
+}
+
+.fegn-query-cards .fegn-card {
+	height: 100%;
+}
+.fegn-query-cards .wp-block-post-title a {
+	color: var(--wp--preset--color--ink);
+	text-decoration: none;
+}
+.fegn-query-cards .wp-block-post-title a:hover,
+.fegn-query-cards .wp-block-post-title a:focus-visible {
+	color: var(--wp--preset--color--brand);
+}
+.fegn-card-term {
+	font-size: 0.875rem;
+	color: var(--wp--preset--color--brand);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin-bottom: 0.5rem;
+}
+.fegn-query-cards .wp-block-post-excerpt__more-text a {
+	font-weight: 600;
+	color: var(--wp--preset--color--brand);
+	text-decoration: none;
+}
+.fegn-query-cards .wp-block-post-excerpt__more-text a:hover {
+	text-decoration: underline;
+}
+
+.fegn-process-list,
+.fegn-related-list,
+.fegn-results-list {
+	padding-left: 1.25rem;
+}
+.fegn-process-list li,
+.fegn-related-list li,
+.fegn-results-list li {
+	margin-bottom: 0.6rem;
+}
+.fegn-related-list a {
+	color: var(--wp--preset--color--brand);
+	font-weight: 600;
+	text-decoration: none;
+}
+.fegn-related-list a:hover {
+	text-decoration: underline;
+}
+.fegn-results-context {
+	color: var(--wp--preset--color--muted);
+}
+
+.fegn-faq-list {
+	max-width: 46rem;
+}
+.fegn-faq-item {
+	border: 1px solid var(--wp--preset--color--border-color);
+	border-radius: 12px;
+	background: var(--wp--preset--color--surface);
+	margin-bottom: 0.75rem;
+}
+.fegn-faq-item summary {
+	cursor: pointer;
+	font-weight: 600;
+	color: var(--wp--preset--color--ink);
+	padding: 1rem 1.25rem;
+	min-height: 44px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+.fegn-faq-item[open] summary {
+	border-bottom: 1px solid var(--wp--preset--color--border-color);
+}
+.fegn-faq-item summary:hover {
+	background: var(--wp--preset--color--soft-surface);
+	border-radius: 12px 12px 0 0;
+}
+.fegn-faq-answer {
+	padding: 1rem 1.25rem;
+}
+.fegn-faq-answer p:last-child {
+	margin-bottom: 0;
+}
+
+.fegn-testimonial {
+	border-left: 4px solid var(--wp--preset--color--teal);
+	background: var(--wp--preset--color--soft-surface);
+	border-radius: 0 16px 16px 0;
+	padding: 1.5rem 2rem;
+	margin: 2rem 0;
+}
+.fegn-testimonial blockquote {
+	margin: 0;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: var(--wp--preset--color--body-text);
+}
+.fegn-testimonial figcaption {
+	margin-top: 1rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--muted);
+}
+
+/* ---------- Motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

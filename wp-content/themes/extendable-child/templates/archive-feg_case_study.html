@@ -1,0 +1,58 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"fegn-main","layout":{"type":"default"}} -->
+<main id="fegn-main" class="wp-block-group fegn-main">
+
+	<!-- wp:group {"className":"fegn-page-header","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--60)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-page-header has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
+		<!-- wp:heading {"level":1,"className":"alignwide"} -->
+		<h1 class="wp-block-heading alignwide">Case studies</h1>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"className":"alignwide fegn-lead","fontSize":"large"} -->
+		<p class="alignwide fegn-lead has-large-font-size">Selected delivery stories, published only with client approval. Ask us about projects similar to yours.</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--80)">
+
+		<!-- wp:query {"queryId":0,"query":{"postType":"feg_case_study","perPage":9,"pages":0,"offset":0,"inherit":false,"order":"desc","orderBy":"date"},"className":"alignwide","layout":{"type":"default"}} -->
+		<div class="wp-block-query alignwide">
+			<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+				<!-- wp:group {"className":"fegn-card fegn-case-card","layout":{"type":"constrained"}} -->
+				<div class="wp-block-group fegn-card fegn-case-card">
+					<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/10","style":{"border":{"radius":"12px"}}} /-->
+					<!-- wp:post-terms {"term":"feg_cs_industry","className":"fegn-card-term"} /-->
+					<!-- wp:post-title {"isLink":true,"level":2} /-->
+					<!-- wp:post-excerpt {"excerptLength":33,"moreText":"Read case study →"} /-->
+				</div>
+				<!-- /wp:group -->
+			<!-- /wp:post-template -->
+
+			<!-- wp:no-results -->
+				<!-- wp:paragraph {"className":"fegn-muted-note"} -->
+				<p class="fegn-muted-note">Case studies are published only after client approval. In the meantime, ask us directly about relevant projects in your industry.</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:buttons -->
+				<div class="wp-block-buttons">
+					<!-- wp:button --><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contact/">Discuss Your Project</a></div><!-- /wp:button -->
+				</div>
+				<!-- /wp:buttons -->
+			<!-- /wp:no-results -->
+
+			<!-- wp:query-pagination {"paginationArrow":"arrow","layout":{"type":"flex","justifyContent":"space-between"}} -->
+				<!-- wp:query-pagination-previous /-->
+				<!-- wp:query-pagination-numbers /-->
+				<!-- wp:query-pagination-next /-->
+			<!-- /wp:query-pagination -->
+		</div>
+		<!-- /wp:query -->
+
+	</div>
+	<!-- /wp:group -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

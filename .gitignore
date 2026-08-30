@@ -1,0 +1,32 @@
+# --- Sensitive / environment-specific ---
+wp-config.php
+wp-config-sample.php
+.htaccess
+.htaccess.bk
+.maintenance
+
+# --- WordPress uploads, caches, backups ---
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/backup/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/litespeed/
+wp-content/updraft/
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/ai1wm-backups/
+wp-content/w3tc-config/
+wp-content/debug.log
+
+# --- Logs ---
+*.log
+
+# --- OS artifacts ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# --- Editor / tooling ---
+.vscode/
+.idea/
