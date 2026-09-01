@@ -154,6 +154,66 @@
 			"name": "page-plain",
 			"title": "Page, plain (no title)",
 			"postTypes": ["page"]
+		},
+		{
+			"name": "page-contact",
+			"title": "Contact Page",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-services",
+			"title": "Services Page",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-company-profile",
+			"title": "Company Profile",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-why-choose-us",
+			"title": "Why Choose Us",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-erp-development",
+			"title": "ERP Development",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-saas",
+			"title": "SaaS Development",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-web-app",
+			"title": "Web App Development",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-mobile-app",
+			"title": "Mobile App Development",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-crm",
+			"title": "CRM Systems",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-uiux",
+			"title": "UI/UX Design",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-ai-automation",
+			"title": "AI Automation",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "page-ai-chatbot",
+			"title": "AI Chatbot Development",
+			"postTypes": ["page"]
 		}
 	]
 }
