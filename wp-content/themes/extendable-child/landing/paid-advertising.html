@@ -5,19 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Paid Advertising | FEG TechNova</title>
 <meta name="description" content="Maximize your ROI with hyper-targeted paid ad campaigns with 5.4x ROAS guaranteed." />
+<!-- Tailwind CSS via CDN for zero build-step, instant delivery -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
+// Custom design tokens for the FEG TechNova dark-mode design system
 tailwind.config = { theme: { extend: {
-  colors: { navy:'#0B0F19', panel:'#111827', cyan:'#00F2FE', purple:'#8B5CF6' },
+  colors: { navy:'#0B0F19', panel:'#111827', cyan:'#00F2FE', purple:'#4FACFE' },
   fontFamily: { sans:['Inter','ui-sans-serif','system-ui','sans-serif'] }
 } } };
 </script>
+<!-- Font Awesome for crisp, lightweight icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-  body { background:#0B0F19; font-family:'Inter',ui-sans-serif,system-ui,sans-serif; }
-  .glass { background:rgba(255,255,255,0.045); border:1px solid rgba(255,255,255,0.08); }
-  .glow { box-shadow:0 0 30px rgba(0,242,254,0.15); }
-  .text-grad { background:linear-gradient(135deg,#00F2FE,#8B5CF6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  body { background:#0B0F19; font-family:'Inter',ui-sans-serif,system-ui,sans-serif; }        /* Dark base */
+  .glass { background:rgba(255,255,255,0.045); border:1px solid rgba(255,255,255,0.08); }   /* Glassmorphism panel */
+  .glow  { box-shadow:0 0 30px rgba(0,242,254,0.15); }                                       /* Soft cyan glow */
+  .text-grad { background:linear-gradient(135deg,#00F2FE,#4FACFE); background-clip:text; -webkit-background-clip:text; color:transparent; } /* Cyan->purple gradient text */
+  /* PERFORMANCE: kill all transitions, animations & smooth scroll for instant load */
   * { transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 </style>
 </head>
@@ -25,10 +29,13 @@ tailwind.config = { theme: { extend: {
 
 <!-- HERO -->
 <section class="relative pt-24 pb-20 overflow-hidden">
+  <!-- Ambient gradient orbs (static, no animation) -->
   <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-cyan/10 blur-[120px]"></div>
   <div class="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-purple/10 blur-[120px]"></div>
   <div class="max-w-7xl mx-auto px-5 relative">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Hero copy + metrics -->
       <div>
         <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-cyan/30 text-cyan bg-cyan/5"><i class="fas fa-bullseye"></i> Paid Advertising</span>
         <h1 class="mt-6 text-4xl md:text-5xl font-black leading-[1.1] text-white">Maximize Your <span class="text-grad">ROI</span> With Hyper-Targeted Paid Ad Campaigns</h1>
@@ -46,7 +53,7 @@ tailwind.config = { theme: { extend: {
         </div>
       </div>
 
-      <!-- AD SPEND vs RETURN -->
+      <!-- Ad spend vs return dashboard + 5.4x badge -->
       <div class="relative">
         <div class="glass rounded-2xl glow p-6 relative">
           <div class="flex items-center gap-2 border-b border-white/10 pb-3 mb-4">
