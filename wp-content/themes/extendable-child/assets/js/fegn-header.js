@@ -7,7 +7,7 @@
 	var megaEls = Array.prototype.slice.call(document.querySelectorAll('[data-fegn-mega]'));
 	var desktopMq = window.matchMedia('(min-width: 782px)');
 	var hoverMq = window.matchMedia('(hover: hover) and (pointer: fine)');
-	var HOVER_CLOSE_DELAY = 180;
+	var HOVER_CLOSE_DELAY = 300;
 	var closeTimer = null;
 
 	function megaTrigger(root) {
@@ -61,7 +61,7 @@
 				closeMega(root, true);
 				return;
 			}
-			if (event.target === trigger && event.key === 'ArrowDown') {
+			if (event.key === 'ArrowDown' && (event.target === trigger || event.target.classList.contains('fegn-mega-link'))) {
 				event.preventDefault();
 				openMega(root);
 				var first = focusables(root)[0];
