@@ -2413,3 +2413,728 @@ body {
 		scroll-behavior: auto !important;
 	}
 }
+
+/* =====================================================================
+   Mobile navigation + global responsiveness fixes
+   Appended overrides: drawer anchoring, header alignment, accordion,
+   touch targets, page bounds, type scale, floating widgets.
+   ===================================================================== */
+
+/* Drawer header / close / CTA shell — hidden on desktop. */
+.fegn-drawer-head,
+.fegn-drawer-cta-wrap {
+	display: none;
+}
+
+/* ---------- 1. Full-width anchored drawer (mobile) ---------- */
+@media (max-width: 781px) {
+	.fegn-primary-nav {
+		/* Anchor strictly to the viewport right edge; never bleed right. */
+		left: auto !important;
+		right: 0 !important;
+		top: 0 !important;
+		bottom: 0 !important;
+		width: min(85vw, 380px) !important;
+		max-width: 100% !important;
+		min-height: 100dvh;
+		max-height: 100dvh;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		-webkit-overflow-scrolling: touch;
+		padding: 0 !important; /* inner regions carry padding so CTA never overflows */
+	}
+
+	.fegn-primary-nav.is-open {
+		transform: translateX(0);
+		visibility: visible;
+	}
+
+	/* In-drawer header row: brand left, X button right, inside padding. */
+	.fegn-drawer-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 1rem 1.25rem;
+		border-bottom: 1px solid var(--wp--preset--color--border-color);
+		background: var(--wp--preset--color--surface);
+		position: sticky;
+		top: 0;
+		z-index: 2;
+	}
+
+	.fegn-drawer-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-width: 0;
+		font-weight: 700;
+		font-size: 0.95rem;
+		color: var(--wp--preset--color--ink);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.fegn-drawer-brand svg {
+		flex-shrink: 0;
+		display: block;
+	}
+
+	/* Clearly tappable X, pinned inside drawer padding (never off-canvas). */
+	.fegn-drawer-close {
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		margin: 0;
+		margin-right: -0.5rem; /* optical align inside 1.25rem padding */
+		border: 1px solid var(--wp--preset--color--border-color);
+		border-radius: 10px;
+		background: transparent;
+		color: var(--wp--preset--color--ink);
+		cursor: pointer;
+	}
+
+	.fegn-drawer-close:hover,
+	.fegn-drawer-close:focus-visible {
+		background: var(--wp--preset--color--light-blue);
+		outline: 2px solid var(--wp--preset--color--brand);
+		outline-offset: 2px;
+	}
+
+	.fegn-nav-list {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.75rem 1.25rem 0.5rem;
+	}
+
+	/* Bottom CTA: always inside the drawer viewport, never overflowing. */
+	.fegn-drawer-cta-wrap {
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.75rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
+		margin-top: auto;
+		background: linear-gradient(to bottom, transparent, var(--wp--preset--color--surface) 30%);
+		position: sticky;
+		bottom: 0;
+	}
+
+	.fegn-drawer-cta {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box;
+		min-height: 48px;
+		margin: 0 !important;
+		padding: 0.875rem 1rem !important;
+		white-space: normal;
+		text-align: center;
+		line-height: 1.35;
+		overflow-wrap: anywhere;
+	}
+
+	/* ---------- 3. Smooth nested accordion dropdowns ---------- */
+	.fegn-mega-head {
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+
+	.fegn-mega.is-open .fegn-mega-head {
+		background: var(--wp--preset--color--light-blue);
+	}
+
+	.fegn-mega.is-open .fegn-chevron {
+		transform: rotate(180deg);
+	}
+
+	.fegn-mega-panel {
+		/* Inline accordion flow; JS animates max-height via scrollHeight. */
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		max-height: 0;
+		overflow: hidden;
+		visibility: hidden;
+		opacity: 1;
+		transition:
+			max-height 300ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s linear 300ms;
+	}
+
+	.fegn-mega.is-open .fegn-mega-panel {
+		visibility: visible;
+		max-height: 70vh; /* no-JS fallback; JS upgrades to scrollHeight/none */
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		transition:
+			max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s;
+	}
+
+	.fegn-mega-cols,
+	.fegn-mega-cols--simple {
+		border-left: 2px solid var(--wp--preset--color--border-color);
+		margin: 0.25rem 0 0.5rem 0.5rem;
+		padding: 0.25rem 0 0.25rem 0.75rem !important;
+	}
+
+	.fegn-mega-col {
+		min-width: 0;
+		padding: 0.25rem 0;
+	}
+
+	.fegn-mega-col + .fegn-mega-col {
+		border-top: 1px dashed var(--wp--preset--color--border-color);
+		padding-top: 0.75rem;
+		margin-top: 0.5rem;
+	}
+
+	.fegn-mega-col-title {
+		padding-left: 0.75rem;
+	}
+
+	/* Indented sub-menu links: wrap cleanly, never cut off text. */
+	.fegn-mega-list a {
+		min-height: 44px;
+		height: auto;
+		padding: 0.65rem 0.75rem 0.65rem 1.75rem !important;
+		font-size: 0.98rem;
+		line-height: 1.5;
+		white-space: normal;
+		overflow-wrap: break-word;
+		word-break: break-word;
+		transform: none !important;
+	}
+
+	.fegn-mega-list a::before {
+		left: 0.75rem;
+	}
+
+	.fegn-mega-all {
+		margin: 0.5rem 0 0.25rem 0.75rem;
+		max-width: calc(100% - 0.75rem);
+		box-sizing: border-box;
+		white-space: normal;
+		text-align: center;
+		justify-content: center;
+	}
+
+	/* ---------- 5. Touch-friendly hit targets ---------- */
+	.fegn-nav-link,
+	.fegn-mega-link,
+	.fegn-mega-trigger,
+	.fegn-mega-list a,
+	.fegn-drawer-cta {
+		min-height: 44px;
+		line-height: 1.5;
+	}
+
+	.fegn-mega-trigger {
+		flex-shrink: 0;
+		border-radius: 10px;
+	}
+
+	.fegn-mega-trigger:focus-visible,
+	.fegn-nav-link:focus-visible,
+	.fegn-mega-link:focus-visible {
+		outline: 2px solid var(--wp--preset--color--brand);
+		outline-offset: 2px;
+	}
+}
+
+/* Full-screen fallback on very narrow phones. */
+@media (max-width: 480px) {
+	.fegn-primary-nav {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
+/* ---------- 1b. Header alignment (max-width: 768px) ---------- */
+@media (max-width: 768px) {
+	.fegn-site-header {
+		width: 100%;
+		box-sizing: border-box;
+		overflow-x: clip;
+	}
+
+	.fegn-header-inner {
+		gap: 0.75rem;
+		padding-block: 0.65rem;
+		padding-inline: 1rem;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.fegn-brand {
+		flex: 1 1 auto;
+		min-width: 0;
+		justify-content: flex-start;
+	}
+
+	.fegn-brand-name {
+		font-size: 1rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.fegn-nav-toggle {
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+
+	/* Keep the toggle visible above the scrim but below the in-drawer X. */
+	.fegn-site-header.is-drawer-open .fegn-nav-toggle {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+/* ---------- 2. Global page bounds: no horizontal scroll ---------- */
+html,
+body {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	overflow-x: hidden;
+}
+
+body {
+	overflow-x: clip;
+}
+
+#fegn-main,
+.fegn-main,
+.fegn-section,
+.fegn-hero,
+.fegn-services-hero,
+.fegn-contact-hero,
+.fegn-company-hero,
+.fegn-wcu-hero,
+.fegn-erp-hero,
+.fegn-sec-hero,
+.fegn-ai-hero,
+.fegn-services-cta,
+.fegn-sec-cta,
+.fegn-ai-cta,
+.fegn-erp-cta,
+.fegn-company-cta,
+.fegn-wcu-cta {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	overflow-x: clip;
+}
+
+.fegn-main img,
+.fegn-main iframe,
+.fegn-main video,
+.fegn-main table,
+.fegn-main pre {
+	max-width: 100%;
+}
+
+.fegn-main pre {
+	overflow-x: auto;
+	box-sizing: border-box;
+}
+
+@media (max-width: 781px) {
+	/* Core columns must stack and stay inside the viewport. */
+	.fegn-hero-grid,
+	.fegn-cards,
+	.fegn-steps,
+	.fegn-contact-grid,
+	.fegn-service-cards,
+	.fegn-process-timeline,
+	.fegn-vision-mission,
+	.fegn-stats-grid,
+	.fegn-expertise-grid,
+	.fegn-wcu-grid,
+	.fegn-promise-grid,
+	.fegn-erp-module-grid,
+	.fegn-process-steps,
+	.fegn-security-grid,
+	.fegn-compare-grid,
+	.fegn-feature-grid,
+	.fegn-ai-stats,
+	.fegn-ai-cap-grid,
+	.fegn-ai-feat-grid,
+	.fegn-ai-hero-split {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box;
+	}
+
+	.fegn-hero-grid > .wp-block-column,
+	.fegn-contact-grid > .wp-block-column {
+		min-width: 0;
+		overflow-wrap: break-word;
+	}
+
+	/* Reduce section padding so content never pushes past the viewport. */
+	.fegn-section,
+	.fegn-hero,
+	.fegn-services-hero,
+	.fegn-sec-hero,
+	.fegn-erp-hero,
+	.fegn-ai-hero {
+		padding-inline: 0;
+	}
+
+	/* Buttons wrap instead of forcing sideways scroll. */
+	.fegn-hero-actions,
+	.fegn-erp-hero .wp-block-buttons,
+	.fegn-sec-hero .wp-block-buttons,
+	.fegn-ai-hero .wp-block-buttons {
+		flex-wrap: wrap;
+	}
+
+	.fegn-hero-actions .wp-block-button,
+	.fegn-hero-actions .wp-block-button__link {
+		max-width: 100%;
+		box-sizing: border-box;
+		white-space: normal;
+	}
+
+	/* ---------- Typography: scale heroes smoothly, no awkward breaks ---------- */
+	.fegn-hero h1,
+	.fegn-services-title,
+	.fegn-contact-title,
+	.fegn-company-title,
+	.fegn-wcu-title,
+	.fegn-erp-title,
+	.fegn-sec-title,
+	.fegn-ai-title {
+		font-size: clamp(1.65rem, 7vw, 2rem) !important;
+		line-height: 1.2 !important;
+		max-width: 100% !important;
+		overflow-wrap: break-word;
+		word-break: break-word;
+		text-wrap: balance;
+	}
+
+	.fegn-hero h2,
+	.fegn-section-title,
+	.fegn-services-cta-title,
+	.fegn-sec-cta-title,
+	.fegn-ai-cta-title,
+	.fegn-erp-cta-title,
+	.fegn-company-cta-title,
+	.fegn-wcu-cta-title {
+		font-size: clamp(1.3rem, 5.5vw, 1.6rem) !important;
+		line-height: 1.25 !important;
+		max-width: 100% !important;
+		overflow-wrap: break-word;
+		text-wrap: balance;
+	}
+
+	.fegn-lead,
+	.fegn-ai-lead {
+		font-size: 1rem !important;
+		line-height: 1.65 !important;
+		max-width: 100% !important;
+	}
+
+	.fegn-chat-window {
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* Contact form stays clear of floating widgets. */
+	.fegn-contact-form-card {
+		margin-bottom: 1rem;
+	}
+
+	.fegn-form-submit {
+		width: 100%;
+		box-sizing: border-box;
+	}
+}
+
+/* ---------- Floating widgets (language switcher): never cover CTAs/fields --- */
+.gt_switcher_wrapper,
+#gt_float_wrapper,
+.trp-language-switcher,
+.trp-floater-ls,
+.weglot-container,
+[class*='language-switch'],
+[class*='lang-switch'],
+[class*='gtranslate'],
+[id*='language-switch'],
+[id*='gtranslate'] {
+	z-index: 900 !important; /* below scrim (997) + drawer (998) + header (1000) */
+	max-width: calc(100vw - 24px);
+	box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+	/* Dock it small at bottom-right with safe-area padding; keep it off inputs. */
+	.gt_switcher_wrapper,
+	#gt_float_wrapper,
+	.trp-language-switcher,
+	.trp-floater-ls,
+	.weglot-container,
+	[class*='language-switch'],
+	[class*='lang-switch'],
+	[class*='gtranslate'],
+	[id*='language-switch'],
+	[id*='gtranslate'] {
+		position: fixed !important;
+		right: 12px !important;
+		bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+		left: auto !important;
+		transform: scale(0.9);
+		transform-origin: bottom right;
+	}
+
+	/* Hide the floater entirely while the drawer is open (scrim covers it). */
+	body:has(.fegn-primary-nav.is-open) .gt_switcher_wrapper,
+	body:has(.fegn-primary-nav.is-open) #gt_float_wrapper,
+	body:has(.fegn-primary-nav.is-open) .trp-language-switcher,
+	body:has(.fegn-primary-nav.is-open) .trp-floater-ls,
+	body:has(.fegn-primary-nav.is-open) .weglot-container,
+	body:has(.fegn-primary-nav.is-open) [class*='language-switch'],
+	body:has(.fegn-primary-nav.is-open) [class*='lang-switch'],
+	body:has(.fegn-primary-nav.is-open) [class*='gtranslate'] {
+		opacity: 0 !important;
+		visibility: hidden !important;
+		pointer-events: none !important;
+	}
+}
+
+/* =====================================================================
+   Mobile drawer overlap fix (max-width: 768px)
+   Kills absolute-positioned submenus, forces single-column accordion,
+   scrollable body + fixed header/footer, safe touch indentation.
+   This block intentionally comes last so it wins over desktop + 781px.
+   ===================================================================== */
+@media (max-width: 768px) {
+	/* ---- 3. Scrollable drawer body + fixed header/footer shell ---- */
+	.fegn-primary-nav {
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: stretch !important;
+		justify-content: flex-start !important;
+		gap: 0 !important;
+		height: 100vh !important;
+		height: 100dvh !important;
+		max-height: 100vh !important;
+		max-height: 100dvh !important;
+		min-height: 100vh !important;
+		min-height: 100dvh !important;
+		overflow: hidden !important;
+	}
+
+	/* Header (logo + X) pinned at the top of the drawer. */
+	.fegn-drawer-head {
+		flex: 0 0 auto !important;
+		position: sticky !important;
+		top: 0 !important;
+		z-index: 3 !important;
+	}
+
+	/* The scrollable body: expanding accordions push siblings down
+	   inside this container instead of overlapping the CTA. */
+	.fegn-nav-list {
+		flex: 1 1 auto !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: stretch !important;
+		width: 100% !important;
+		min-height: 0 !important;
+		overflow-y: auto !important;
+		overflow-x: hidden !important;
+		overscroll-behavior: contain !important;
+		-webkit-overflow-scrolling: touch !important;
+		padding-bottom: 24px !important;
+	}
+
+	.fegn-nav-list > li {
+		position: relative !important;
+		display: block !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow: visible !important;
+	}
+
+	/* CTA footer pinned at the bottom with spec spacing. */
+	.fegn-drawer-cta-wrap {
+		flex: 0 0 auto !important;
+		margin-top: 24px !important;
+		padding-top: 12px !important;
+		padding-bottom: 32px !important;
+		border-top: 1px solid var(--wp--preset--color--border-color) !important;
+		background: var(--wp--preset--color--surface) !important;
+	}
+
+	/* ---- 1. Remove absolute positioning on ALL mobile submenus ----
+	   Expanding a parent MUST push lower items + CTA down in normal
+	   flow; nothing may float/overlap. */
+	.fegn-primary-nav .fegn-mega,
+	.fegn-primary-nav li {
+		position: relative !important;
+		overflow: visible !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-panel,
+	.fegn-primary-nav .mega-menu,
+	.fegn-primary-nav .dropdown-menu,
+	.fegn-primary-nav .sub-menu,
+	.fegn-primary-nav ul ul,
+	.fegn-primary-nav .fegn-mega-cols,
+	.fegn-primary-nav .fegn-mega-list {
+		position: static !important;
+		float: none !important;
+		top: auto !important;
+		left: auto !important;
+		right: auto !important;
+		bottom: auto !important;
+		transform: none !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-panel {
+		display: block !important;
+		height: auto !important;
+		/* NOTE: no !important on max-height/overflow so JS inline
+		   scrollHeight animation can override during transitions. */
+		max-height: 0;
+		overflow: hidden;
+		visibility: hidden !important;
+		opacity: 1 !important;
+		pointer-events: none !important;
+		padding: 0 !important;
+		border: 0 !important;
+		background: transparent !important;
+		transition:
+			max-height 300ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s linear 300ms !important;
+	}
+
+	.fegn-primary-nav .fegn-mega.is-open .fegn-mega-panel,
+	.fegn-primary-nav li.is-open > .mega-menu,
+	.fegn-primary-nav li.is-open > .dropdown-menu,
+	.fegn-primary-nav li.is-open > .sub-menu,
+	.fegn-primary-nav li.is-open > ul ul {
+		visibility: visible !important;
+		pointer-events: auto !important;
+		/* No-JS fallback: fully expanded in normal flow (pushes content
+		   down). JS overrides with exact scrollHeight during animation,
+		   then releases back to none on transitionend. */
+		max-height: none;
+		overflow: visible;
+		transition:
+			max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s !important;
+	}
+
+	/* ---- 2. Single-column mobile accordion ----
+	   Override desktop multi-column/grid; stack everything vertically. */
+	.fegn-primary-nav .fegn-mega-cols,
+	.fegn-primary-nav .fegn-mega-cols--simple,
+	.fegn-primary-nav .mega-menu,
+	.fegn-primary-nav .dropdown-menu {
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: stretch !important;
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 0 !important;
+		padding: 4px 0 8px !important;
+		margin: 0 !important;
+		background: transparent !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-col {
+		display: block !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+		padding: 4px 0 !important;
+		margin: 0 !important;
+		background: transparent !important;
+		border: 0 !important;
+		border-left: 0 !important;
+		border-right: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-col + .fegn-mega-col {
+		border-top: 1px solid var(--wp--preset--color--border-color) !important;
+		margin-top: 8px !important;
+		padding-top: 12px !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-list,
+	.fegn-primary-nav .fegn-mega-list li,
+	.fegn-primary-nav .mega-menu li,
+	.fegn-primary-nav .dropdown-menu li,
+	.fegn-primary-nav .sub-menu li {
+		display: block !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* ---- 4. Typography & touch spacing ----
+	   Sub-categories indented 16px, individual links 28px, 12px vertical
+	   touch padding so targets never collide. */
+	.fegn-primary-nav .fegn-mega-col-title {
+		padding-left: 16px !important;
+		margin: 8px 0 4px !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-list a,
+	.fegn-primary-nav .mega-menu a,
+	.fegn-primary-nav .dropdown-menu a,
+	.fegn-primary-nav .sub-menu a {
+		display: flex !important;
+		align-items: center !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+		min-height: 44px !important;
+		padding: 12px 12px 12px 28px !important;
+		font-size: 1rem !important;
+		line-height: 1.5 !important;
+		white-space: normal !important;
+		overflow-wrap: break-word !important;
+		word-break: break-word !important;
+		transform: none !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-list a::before {
+		left: 14px !important;
+	}
+
+	.fegn-primary-nav .fegn-mega-all {
+		width: calc(100% - 32px) !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+		margin: 12px 0 4px 16px !important;
+	}
+}
