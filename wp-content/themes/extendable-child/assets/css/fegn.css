@@ -600,6 +600,7 @@ body {
 		min-height: 48px;
 		display: inline-flex;
 		align-items: center;
+		justify-content: flex-start;
 		padding: 0.75rem 0.25rem 0.75rem 0.5rem;
 		font-size: 1.0625rem;
 	}
@@ -1649,6 +1650,13 @@ body {
 	}
 }
 
+/* Tablet step so 4-up stats never squeeze into a narrow band. */
+@media (max-width: 900px) {
+	.fegn-stats-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+}
+
 @media (max-width: 781px) {
 	.fegn-vision-mission,
 	.fegn-stats-grid,
@@ -2662,8 +2670,10 @@ body {
 	}
 }
 
-/* ---------- 1b. Header alignment (max-width: 768px) ---------- */
-@media (max-width: 768px) {
+/* ---------- 1b. Header alignment (tablet and below) ----------
+   781px (not 768px) so there is no 769–781px band where the desktop
+   brand + 6-item nav squeeze into a phone-width bar. */
+@media (max-width: 781px) {
 	.fegn-site-header {
 		width: 100%;
 		box-sizing: border-box;
@@ -2747,6 +2757,25 @@ body {
 	max-width: 100%;
 }
 
+.fegn-main img {
+	height: auto;
+}
+
+/* Wide tables scroll inside their figure instead of pushing the viewport. */
+.fegn-main figure.wp-block-table {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+/* Third-party embeds (forms, maps) can never exceed the column. */
+.fegn-main form,
+.fegn-main input,
+.fegn-main select,
+.fegn-main textarea {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
 .fegn-main pre {
 	overflow-x: auto;
 	box-sizing: border-box;
@@ -2785,14 +2814,20 @@ body {
 		overflow-wrap: break-word;
 	}
 
-	/* Reduce section padding so content never pushes past the viewport. */
+	/* Gutters: constrained-layout children go full-width on phones, so
+	   sections must carry their own side padding (never 0) or text and
+	   step markers sit exactly on the screen edge. Backgrounds stay
+	   edge-to-edge since padding is inside the section box. */
 	.fegn-section,
 	.fegn-hero,
 	.fegn-services-hero,
 	.fegn-sec-hero,
 	.fegn-erp-hero,
-	.fegn-ai-hero {
-		padding-inline: 0;
+	.fegn-ai-hero,
+	.fegn-contact-hero,
+	.fegn-company-hero,
+	.fegn-wcu-hero {
+		padding-inline: 1rem;
 	}
 
 	/* Buttons wrap instead of forcing sideways scroll. */
@@ -3438,7 +3473,8 @@ button.fegn-form-submit {
 
 .fegn-case-metrics {
 	display: flex;
-	gap: 1.25rem;
+	flex-wrap: wrap;
+	gap: 1.25rem 2rem;
 	margin: 1rem 0 0.25rem;
 }
 
@@ -3463,5 +3499,22 @@ button.fegn-form-submit {
 		min-height: 96px;
 		margin: -1.5rem -1.5rem 1.25rem;
 		font-size: 2rem;
+	}
+	.fegn-case-metrics {
+		gap: 1rem 1.5rem;
+	}
+	.fegn-case-metric {
+		flex: 1 1 40%;
+		min-width: 0;
+	}
+}
+
+/* Mobile matches laptop: heroes, headers, section heads and CTAs keep
+   the theme's left alignment (no forced centering). */
+
+@media (max-width: 480px) {
+	.fegn-eyebrow {
+		letter-spacing: 0.04em;
+		font-size: 0.78rem;
 	}
 }
