@@ -1,16 +1,8 @@
 <?php
 /**
- * Template Name: Landing — Domain & Hosting
- * Serves the standalone Tailwind landing page.
+ * Template Name: Landing -- Domain & Hosting
+ * Renders landing/domain-hosting.html inside the global theme chrome
+ * (standard header/footer template parts) via fegn_render_landing_page().
  */
 
-$file = get_stylesheet_directory() . '/landing/domain-hosting.html';
-if ( file_exists( $file ) ) {
-	readfile( $file );
-	exit;
-}
-
-// Fallback if file is missing
-get_header();
-esc_html_e( 'Landing page file not found.', 'fegn' );
-get_footer();
+fegn_render_landing_page( get_stylesheet_directory() . '/landing/domain-hosting.html' );

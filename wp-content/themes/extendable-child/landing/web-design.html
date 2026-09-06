@@ -25,38 +25,39 @@ tailwind.config = {
 <script src="https://unpkg.com/lucide@latest"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <style>
-  body { background:#0B0F19; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-  .glass { background: rgba(255,255,255,0.045); border:1px solid rgba(255,255,255,0.08); }
-  .glow-cyan { box-shadow: 0 0 30px rgba(0,242,254,0.15); }
+  body { background:linear-gradient(180deg,#F8FAFC 0%,#F1F5F9 100%); background-attachment:fixed; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color:#1E293B; } /* Light brand base */
+  .glass { background:rgba(255,255,255,0.78); border:1px solid rgba(226,232,240,0.85); box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:all 0.3s ease; } /* Light glassmorphism panel */
+  .glow-cyan { box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); } /* Soft brand elevation */
   .text-grad { background: linear-gradient(135deg,#00F2FE,#4FACFE); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  /* Performance: disable all transitions, animations, and smooth scroll */
-  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  /* Smooth in-page jumps; motion disabled for reduced-motion users */
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .glass { transition:none; } }
 </style>
 </head>
-<body class="text-slate-200 antialiased">
+<body class="text-slate-600 antialiased">
+
 
 <!-- HERO -->
 <section class="relative pt-32 pb-24 overflow-hidden">
-  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-skyblue/10 blur-[120px]"></div>
-  <div class="absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full bg-cyan/10 blur-[120px]"></div>
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-sky-100/70 blur-[120px]"></div>
+  <div class="absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full bg-blue-100/70 blur-[120px]"></div>
   <div class="max-w-7xl mx-auto px-5 relative">
     <div class="grid lg:grid-cols-2 gap-14 items-center">
       <div>
-        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-cyan/30 text-cyan bg-cyan/5">✏️ Custom Web Design</span>
-        <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.1] text-white">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-blue-200 text-blue-700 bg-blue-50">✏️ Custom Web Design</span>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.1] text-slate-900">
           Turning Your Vision into <span class="text-grad">High-Converting</span> Digital Experiences
         </h1>
-        <p class="mt-6 text-lg text-slate-400 max-w-xl leading-relaxed">Tailor-made, responsive, and pixel-perfect custom websites crafted to elevate your brand.</p>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">Tailor-made, responsive, and pixel-perfect custom websites crafted to elevate your brand.</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-skyblue text-navy font-bold hover:opacity-90 ">Get a Free Quote</a>
-          <a href="/services/" class="px-7 py-3.5 rounded-xl border border-white/15 text-white font-semibold hover:bg-white/5 ">View Portfolio</a>
+          <a href="/services/" class="px-7 py-3.5 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-100 ">View Portfolio</a>
         </div>
-        <div class="mt-10 flex items-center gap-8 text-sm text-slate-400">
-          <div><p class="text-2xl font-black text-cyan">100%</p><p>Responsive</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-cyan">90+</p><p>PageSpeed Score</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-cyan">SEO</p><p>Built-In</p></div>
+        <div class="mt-10 flex items-center gap-8 text-sm text-slate-600">
+          <div><p class="text-2xl font-black text-blue-600">100%</p><p>Responsive</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">90+</p><p>PageSpeed Score</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">SEO</p><p>Built-In</p></div>
         </div>
       </div>
 
@@ -65,44 +66,44 @@ tailwind.config = {
         <!-- Laptop -->
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px]">
           <div>
-            <div class="rounded-t-xl bg-panel border border-white/10 overflow-hidden shadow-2xl">
-              <div class="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-white/10">
+            <div class="rounded-t-xl bg-slate-100 border border-slate-200 overflow-hidden shadow-2xl">
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-slate-100 border-b border-slate-200">
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
               </div>
-              <div class="p-4 bg-gradient-to-br from-navy to-panel">
-                <div class="h-2 w-2/3 rounded bg-cyan/60 mb-3"></div>
+              <div class="p-4 bg-gradient-to-br from-slate-200 to-slate-100">
+                <div class="h-2 w-2/3 rounded bg-blue-300 mb-3"></div>
                 <div class="h-2 w-1/2 rounded bg-slate-500/40 mb-3"></div>
                 <div class="grid grid-cols-3 gap-2 mb-3">
-                  <div class="h-12 rounded bg-skyblue/30"></div><div class="h-12 rounded bg-cyan/30"></div><div class="h-12 rounded bg-emerald/30"></div>
+                  <div class="h-12 rounded bg-sky-200"></div><div class="h-12 rounded bg-sky-200"></div><div class="h-12 rounded bg-emerald-200"></div>
                 </div>
-                <div class="h-1.5 w-full rounded bg-white/10 mb-2"></div>
-                <div class="h-1.5 w-5/6 rounded bg-white/10"></div>
+                <div class="h-1.5 w-full rounded bg-slate-200 mb-2"></div>
+                <div class="h-1.5 w-5/6 rounded bg-slate-200"></div>
               </div>
             </div>
-            <div class="mx-auto w-24 h-2 rounded-b-lg bg-white/10"></div>
+            <div class="mx-auto w-24 h-2 rounded-b-lg bg-slate-200"></div>
           </div>
         </div>
         <!-- Tablet -->
         <div class="absolute left-[18%] top-[24%] rotate-[-4deg]">
-          <div class="w-[150px] rounded-xl bg-panel border border-white/10 overflow-hidden shadow-2xl">
-            <div class="p-3 bg-gradient-to-br from-navy to-panel">
-              <div class="h-1.5 w-3/4 rounded bg-cyan/60 mb-2"></div>
+          <div class="w-[150px] rounded-xl bg-slate-100 border border-slate-200 overflow-hidden shadow-2xl">
+            <div class="p-3 bg-gradient-to-br from-slate-200 to-slate-100">
+              <div class="h-1.5 w-3/4 rounded bg-blue-300 mb-2"></div>
               <div class="grid grid-cols-2 gap-1.5 mb-2">
-                <div class="h-8 rounded bg-skyblue/30"></div><div class="h-8 rounded bg-cyan/30"></div>
+                <div class="h-8 rounded bg-sky-200"></div><div class="h-8 rounded bg-sky-200"></div>
               </div>
-              <div class="h-1.5 w-full rounded bg-white/10"></div>
+              <div class="h-1.5 w-full rounded bg-slate-200"></div>
             </div>
           </div>
         </div>
         <!-- Mobile -->
         <div class="absolute right-[16%] top-[70%] rotate-[5deg]">
-          <div class="w-[80px] rounded-2xl bg-panel border border-white/10 overflow-hidden shadow-2xl">
-            <div class="p-2.5 bg-gradient-to-br from-navy to-panel">
-              <div class="h-1.5 w-2/3 rounded bg-cyan/60 mb-1.5"></div>
-              <div class="h-10 rounded bg-emerald/30 mb-1.5"></div>
-              <div class="h-1 w-full rounded bg-white/10"></div>
+          <div class="w-[80px] rounded-2xl bg-slate-100 border border-slate-200 overflow-hidden shadow-2xl">
+            <div class="p-2.5 bg-gradient-to-br from-slate-200 to-slate-100">
+              <div class="h-1.5 w-2/3 rounded bg-blue-300 mb-1.5"></div>
+              <div class="h-10 rounded bg-emerald-200 mb-1.5"></div>
+              <div class="h-1 w-full rounded bg-slate-200"></div>
             </div>
           </div>
         </div>
@@ -115,42 +116,42 @@ tailwind.config = {
 <section class="py-20 relative">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center max-w-2xl mx-auto">
-      <span class="text-xs font-semibold tracking-widest uppercase text-cyan">What We Build</span>
-      <h2 class="mt-4 text-3xl md:text-4xl font-black text-white">Websites That Look Stunning and Perform Flawlessly</h2>
-      <p class="mt-4 text-slate-400">Every pixel engineered for speed, clarity, and conversion.</p>
+      <span class="text-xs font-semibold tracking-widest uppercase text-blue-600">What We Build</span>
+      <h2 class="mt-4 text-3xl md:text-4xl font-black text-slate-900">Websites That Look Stunning and Perform Flawlessly</h2>
+      <p class="mt-4 text-slate-600">Every pixel engineered for speed, clarity, and conversion.</p>
     </div>
     <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40 ">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-pen-ruler"></i></div>
-        <h3 class="mt-5 font-bold text-white">Modern UX/UI Prototyping</h3>
-        <p class="mt-2 text-sm text-slate-400">Interactive prototypes in Figma to lock in the experience before we write a single line of code.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-pen-ruler"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Modern UX/UI Prototyping</h3>
+        <p class="mt-2 text-sm text-slate-600">Interactive prototypes in Figma to lock in the experience before we write a single line of code.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40 ">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-code"></i></div>
-        <h3 class="mt-5 font-bold text-white">Clean Scalable Code</h3>
-        <p class="mt-2 text-sm text-slate-400">Maintainable, commented architecture that's easy to extend as your business grows.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-code"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Clean Scalable Code</h3>
+        <p class="mt-2 text-sm text-slate-600">Maintainable, commented architecture that's easy to extend as your business grows.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40 ">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-mobile-screen"></i></div>
-        <h3 class="mt-5 font-bold text-white">Mobile-First Layouts</h3>
-        <p class="mt-2 text-sm text-slate-400">Designed mobile-first so every visitor gets a flawless experience on any device.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-mobile-screen"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Mobile-First Layouts</h3>
+        <p class="mt-2 text-sm text-slate-600">Designed mobile-first so every visitor gets a flawless experience on any device.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40 ">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-magnifying-glass-chart"></i></div>
-        <h3 class="mt-5 font-bold text-white">Built-In SEO Optimization</h3>
-        <p class="mt-2 text-sm text-slate-400">Technical SEO baked in from day one for higher rankings and organic traffic.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-magnifying-glass-chart"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Built-In SEO Optimization</h3>
+        <p class="mt-2 text-sm text-slate-600">Technical SEO baked in from day one for higher rankings and organic traffic.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- METRICS -->
-<section class="py-14 border-y border-white/5 bg-panel/40">
+<section class="py-14 border-y border-slate-200 bg-white/60">
   <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    <div><p class="text-4xl font-black text-grad">50+</p><p class="mt-2 text-sm text-slate-400">Websites Delivered</p></div>
-    <div><p class="text-4xl font-black text-grad">100%</p><p class="mt-2 text-sm text-slate-400">Responsive Design</p></div>
-    <div><p class="text-4xl font-black text-grad">90+</p><p class="mt-2 text-sm text-slate-400">Avg. PageSpeed</p></div>
-    <div><p class="text-4xl font-black text-grad">2×</p><p class="mt-2 text-sm text-slate-400">Avg. Conversion Lift</p></div>
+    <div><p class="text-4xl font-black text-grad">50+</p><p class="mt-2 text-sm text-slate-600">Websites Delivered</p></div>
+    <div><p class="text-4xl font-black text-grad">100%</p><p class="mt-2 text-sm text-slate-600">Responsive Design</p></div>
+    <div><p class="text-4xl font-black text-grad">90+</p><p class="mt-2 text-sm text-slate-600">Avg. PageSpeed</p></div>
+    <div><p class="text-4xl font-black text-grad">2×</p><p class="mt-2 text-sm text-slate-600">Avg. Conversion Lift</p></div>
   </div>
 </section>
 
@@ -158,17 +159,14 @@ tailwind.config = {
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-5">
     <div class="glass rounded-3xl glow-cyan p-10 md:p-14 text-center">
-      <h2 class="text-3xl md:text-4xl font-black text-white">Let's Build Your Dream Website</h2>
-      <p class="mt-4 text-slate-400 max-w-xl mx-auto">Share your vision and we'll turn it into a high-converting digital experience.</p>
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900">Let's Build Your Dream Website</h2>
+      <p class="mt-4 text-slate-600 max-w-xl mx-auto">Share your vision and we'll turn it into a high-converting digital experience.</p>
       <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-skyblue text-navy font-bold hover:opacity-90 ">Start Your Project</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="py-10 border-t border-white/5 text-center text-sm text-slate-500">
-  <p>© 2026 FEG TechNova. All rights reserved.</p>
-</footer>
+<!-- FOOTER-REMOVED: global theme footer renders via fegn_render_landing_page() -->
 
 <script>
   lucide.createIcons();

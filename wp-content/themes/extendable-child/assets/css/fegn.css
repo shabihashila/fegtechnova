@@ -3138,3 +3138,228 @@ body {
 		margin: 12px 0 4px 16px !important;
 	}
 }
+
+/* =====================================================================
+   Website + Marketing hub pages (page-website / page-marketing)
+   Reuses fegn-service-card / feature-card / glass-card / stats-grid.
+   Only hub-specific bits live here: tech badges, metric cards, anchors.
+   All grids inherit existing 1-column mobile stacking.
+   ===================================================================== */
+
+/* Anchor offset so in-page jumps clear the sticky header. */
+#fegn-web-services,
+#fegn-marketing-services {
+	display: block;
+	scroll-margin-top: 96px;
+}
+
+/* Tech badge pill inside tech cards. */
+.fegn-tech-badge {
+	display: inline-block;
+	padding: 4px 14px;
+	border-radius: 999px;
+	background: rgba(37, 99, 235, 0.1);
+	color: #2563eb;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	margin: 0 0 0.75rem;
+}
+
+.fegn-tech-card {
+	text-align: left;
+}
+
+/* Metric counter cards: centered glass cards inside the stats grid. */
+.fegn-metric-card {
+	text-align: center;
+}
+
+.fegn-metric-card .fegn-stat-value {
+	margin-bottom: 0.35rem;
+}
+
+@media (max-width: 781px) {
+	.fegn-metric-card {
+		padding: 1.5rem;
+	}
+}
+
+/* ---------- Project inquiry form status ---------- */
+
+.fegn-form-status {
+	border-radius: 10px;
+	padding: 0.875rem 1rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1.5;
+	margin: 0 0 1.25rem;
+	box-sizing: border-box;
+}
+
+.fegn-form-status[hidden] {
+	display: none;
+}
+
+.fegn-form-status.is-info {
+	background: var(--wp--preset--color--light-blue);
+	color: var(--wp--preset--color--brand-dark);
+}
+
+.fegn-form-status.is-success {
+	background: #e7f6ec;
+	color: #146c2e;
+	border: 1px solid #b7e2c3;
+}
+
+.fegn-form-status.is-error {
+	background: #fdecec;
+	color: #b42318;
+	border: 1px solid #f3b8b0;
+}
+
+.fegn-form-submit:disabled {
+	opacity: 0.7;
+	cursor: progress;
+}
+
+button.fegn-form-submit {
+	font: inherit;
+}
+
+/* =====================================================================
+   Contact form refinement — "Send a Project Inquiry" card
+   Compact spacing, frosted-glass brand aesthetic, crisp focus states.
+   Appended last so it wins over base + responsive contact rules.
+   ===================================================================== */
+
+/* Compact glassmorphism card (overrides the 2.5rem inline padding). */
+.fegn-contact-form-card {
+	padding: 24px 28px !important;
+	background: rgba(255, 255, 255, 0.85);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(220, 230, 242, 0.8);
+	border-radius: 16px;
+	box-shadow: 0 10px 30px rgba(0, 50, 120, 0.06);
+}
+
+/* Tighten vertical rhythm (overrides 1.25rem/1.5rem inline margins). */
+.fegn-contact-form-inner > p {
+	margin-bottom: 12px !important;
+}
+
+.fegn-contact-form-inner > p:last-child {
+	margin-bottom: 0 !important;
+}
+
+/* Off-screen honeypot must not add layout height. */
+.fegn-contact-form-inner > p[aria-hidden='true'] {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.fegn-contact-form-card > h2 {
+	margin-bottom: 0.35rem;
+}
+
+.fegn-form-label {
+	margin-bottom: 0.25rem;
+}
+
+/* Compact inputs + brand-blue focus glow. */
+.fegn-form-input {
+	padding: 10px 14px;
+}
+
+.fegn-form-input:focus {
+	outline: none;
+	border-color: #0052cc;
+	box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.12);
+}
+
+/* Shorter message box to balance the Direct Contact column. */
+.fegn-form-textarea {
+	min-height: 90px;
+}
+
+/* Wider submit with a smooth, tactile hover. */
+.fegn-contact-form-inner .fegn-form-submit {
+	min-width: 220px;
+	padding: 14px 44px;
+	transition:
+		background-color 220ms ease,
+		box-shadow 220ms ease,
+		transform 220ms ease;
+}
+
+.fegn-contact-form-inner .fegn-form-submit:hover,
+.fegn-contact-form-inner .fegn-form-submit:focus-visible {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 22px rgba(29, 78, 216, 0.4);
+}
+
+@media (max-width: 781px) {
+	.fegn-contact-form-card {
+		padding: 20px !important;
+	}
+
+	.fegn-contact-form-inner .fegn-form-submit {
+		width: 100%;
+		min-width: 0;
+	}
+}
+
+/* =====================================================================
+   AI chatbot mockup — light theme
+   The mockup keeps its fegn-chat-* layout classes; only surfaces that
+   were dark glass are remapped to the light brand palette so the AI
+   pages match the core service pages. Appended last to win the cascade.
+   ===================================================================== */
+
+.fegn-chat-window {
+	background: #ffffff;
+	border: 1px solid rgba(226, 232, 240, 0.9);
+	box-shadow: 0 10px 30px rgba(0, 50, 120, 0.08);
+}
+
+.fegn-chat-header {
+	background: #f1f5f9;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.fegn-chat-title {
+	color: #0f172a;
+}
+
+.fegn-chat-msg--user {
+	background: linear-gradient(135deg, #1863dc 0%, #104aa8 100%);
+}
+
+.fegn-chat-msg--user p {
+	color: #ffffff;
+}
+
+.fegn-chat-msg--bot {
+	background: #f1f5f9;
+	border: 1px solid #e2e8f0;
+}
+
+.fegn-chat-msg--bot p {
+	color: #334155;
+}
+
+.fegn-chat-action-btn {
+	background: rgba(24, 99, 220, 0.08);
+	border: 1px solid rgba(24, 99, 220, 0.3);
+	color: #1d4ed8;
+}
+
+.fegn-chat-input {
+	background: #f1f5f9;
+	border-top: 1px solid #e2e8f0;
+}
+
+.fegn-chat-input-ph {
+	color: #94a3b8;
+}

@@ -25,83 +25,84 @@ tailwind.config = {
 <script src="https://unpkg.com/lucide@latest"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <style>
-  body { background:#0B0F19; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-  .glass { background: rgba(255,255,255,0.045); border:1px solid rgba(255,255,255,0.08); }
-  .glow-emerald { box-shadow: 0 0 30px rgba(16,185,129,0.2); }
-  .glow-cyan { box-shadow: 0 0 30px rgba(0,242,254,0.15); }
+  body { background:linear-gradient(180deg,#F8FAFC 0%,#F1F5F9 100%); background-attachment:fixed; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color:#1E293B; } /* Light brand base */
+  .glass { background:rgba(255,255,255,0.78); border:1px solid rgba(226,232,240,0.85); box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:all 0.3s ease; } /* Light glassmorphism panel */
+  .glow-emerald { box-shadow:0 10px 30px -5px rgba(16,185,129,0.14); } /* Soft emerald elevation */
+  .glow-cyan { box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); } /* Soft brand elevation */
   .text-grad { background: linear-gradient(135deg,#00F2FE,#4FACFE); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  /* Performance: disable all transitions, animations, and smooth scroll */
-  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  /* Smooth in-page jumps; motion disabled for reduced-motion users */
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .glass { transition:none; } }
 </style>
 </head>
-<body class="text-slate-200 antialiased">
+<body class="text-slate-600 antialiased">
+
 
 <!-- HERO -->
 <section class="relative pt-32 pb-24 overflow-hidden">
-  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-emerald/10 blur-[120px]"></div>
-  <div class="absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full bg-emerald/20 blur-[120px]"></div>
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-emerald-100/70 blur-[120px]"></div>
+  <div class="absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full bg-emerald-100/80 blur-[120px]"></div>
   <div class="max-w-7xl mx-auto px-5 relative">
     <div class="grid lg:grid-cols-2 gap-14 items-center">
       <div>
-        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-emerald/40 text-emerald bg-emerald/5"><i class="fab fa-shopify"></i> Shopify Experts</span>
-        <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.1] text-white">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-emerald-200 text-emerald-700 bg-emerald-50"><i class="fab fa-shopify"></i> Shopify Experts</span>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.1] text-slate-900">
           Scale Your Brand with <span class="text-grad">Custom, High-Performance</span> Shopify Stores
         </h1>
-        <p class="mt-6 text-lg text-slate-400 max-w-xl leading-relaxed">Tailored themes, app integrations, and conversion rate optimization for elite e-commerce brands.</p>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">Tailored themes, app integrations, and conversion rate optimization for elite e-commerce brands.</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald to-cyan text-navy font-bold hover:opacity-90 ">Get a Free Audit</a>
-          <a href="/services/" class="px-7 py-3.5 rounded-xl border border-white/15 text-white font-semibold hover:bg-white/5 ">Our Work</a>
+          <a href="/services/" class="px-7 py-3.5 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-100 ">Our Work</a>
         </div>
-        <div class="mt-10 flex items-center gap-8 text-sm text-slate-400">
-          <div><p class="text-2xl font-black text-emerald">100%</p><p>Custom Themes</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-emerald">99+</p><p>PageSpeed Score</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-emerald">0</p><p>Downtime Migration</p></div>
+        <div class="mt-10 flex items-center gap-8 text-sm text-slate-600">
+          <div><p class="text-2xl font-black text-emerald-600">100%</p><p>Custom Themes</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-emerald-600">99+</p><p>PageSpeed Score</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-emerald-600">0</p><p>Downtime Migration</p></div>
         </div>
       </div>
 
       <!-- SHOPIFY DASHBOARD UI -->
       <div class="relative">
-        <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-emerald/20 to-cyan/10 blur-2xl"></div>
+        <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-emerald-100/80 to-sky-100/50 blur-2xl"></div>
         <div class="glass rounded-2xl glow-emerald p-5 relative">
           <!-- Window controls -->
-          <div class="flex items-center gap-1.5 mb-4 pb-3 border-b border-white/10">
+          <div class="flex items-center gap-1.5 mb-4 pb-3 border-b border-slate-200">
             <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
-            <span class="ml-2 text-xs text-slate-400 flex items-center gap-2"><i class="fab fa-shopify text-emerald"></i> Shopify Admin</span>
+            <span class="ml-2 text-xs text-slate-600 flex items-center gap-2"><i class="fab fa-shopify text-emerald-600"></i> Shopify Admin</span>
           </div>
           <div class="space-y-3">
             <!-- Revenue card -->
             <div class="glass rounded-xl p-4 flex items-center justify-between">
               <div>
-                <p class="text-xs text-slate-400">Total Revenue</p>
-                <p class="text-xl font-black text-white">$284,590</p>
+                <p class="text-xs text-slate-600">Total Revenue</p>
+                <p class="text-xl font-black text-slate-900">$284,590</p>
               </div>
-              <span class="text-emerald text-xs font-bold bg-emerald/10 px-2.5 py-1 rounded-full">▲ +42%</span>
+              <span class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2.5 py-1 rounded-full">▲ +42%</span>
             </div>
             <!-- Orders row -->
             <div class="glass rounded-xl p-4">
-              <p class="text-xs text-slate-400 mb-2">Recent Orders</p>
+              <p class="text-xs text-slate-600 mb-2">Recent Orders</p>
               <div class="space-y-2">
                 <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-300">#1024 — Jane Cooper</span><span class="text-emerald font-bold">$459</span>
+                  <span class="text-slate-700">#1024 — Jane Cooper</span><span class="text-emerald-600 font-bold">$459</span>
                 </div>
                 <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-300">#1025 — Marcus Lee</span><span class="text-emerald font-bold">$212</span>
+                  <span class="text-slate-700">#1025 — Marcus Lee</span><span class="text-emerald-600 font-bold">$212</span>
                 </div>
               </div>
             </div>
             <!-- Conversion rate + PageSpeed badge -->
             <div class="flex gap-3">
               <div class="glass rounded-xl p-4 flex-1">
-                <p class="text-xs text-slate-400 mb-1">Cart Conversion</p>
-                <p class="text-2xl font-black text-emerald">3.8%</p>
+                <p class="text-xs text-slate-600 mb-1">Cart Conversion</p>
+                <p class="text-2xl font-black text-emerald-600">3.8%</p>
               </div>
               <div class="glass rounded-xl p-4 flex-1">
-                <p class="text-xs text-slate-400 mb-1">Avg. Order Value</p>
-                <p class="text-2xl font-black text-white">$98</p>
+                <p class="text-xs text-slate-600 mb-1">Avg. Order Value</p>
+                <p class="text-2xl font-black text-slate-900">$98</p>
               </div>
             </div>
           </div>
@@ -124,42 +125,42 @@ tailwind.config = {
 <section class="py-20 relative">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center max-w-2xl mx-auto">
-      <span class="text-xs font-semibold tracking-widest uppercase text-emerald">Shopify Excellence</span>
-      <h2 class="mt-4 text-3xl md:text-4xl font-black text-white">Built for Elite E-Commerce Brands</h2>
-      <p class="mt-4 text-slate-400">Speed, customization, and reliability — everything your Shopify store needs to win.</p>
+      <span class="text-xs font-semibold tracking-widest uppercase text-emerald-600">Shopify Excellence</span>
+      <h2 class="mt-4 text-3xl md:text-4xl font-black text-slate-900">Built for Elite E-Commerce Brands</h2>
+      <p class="mt-4 text-slate-600">Speed, customization, and reliability — everything your Shopify store needs to win.</p>
     </div>
     <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="glass rounded-2xl p-6 hover:border-emerald/40 ">
-        <div class="w-12 h-12 rounded-xl bg-emerald/10 text-emerald flex items-center justify-center text-xl"><i class="fas fa-palette"></i></div>
-        <h3 class="mt-5 font-bold text-white">100% Custom Theme Setup</h3>
-        <p class="mt-2 text-sm text-slate-400">Bespoke themes that reflect your brand identity, not a template everyone already uses.</p>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-palette"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">100% Custom Theme Setup</h3>
+        <p class="mt-2 text-sm text-slate-600">Bespoke themes that reflect your brand identity, not a template everyone already uses.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-emerald/40 ">
-        <div class="w-12 h-12 rounded-xl bg-emerald/10 text-emerald flex items-center justify-center text-xl"><i class="fas fa-gauge-high"></i></div>
-        <h3 class="mt-5 font-bold text-white">PageSpeed 90+ Guarantee</h3>
-        <p class="mt-2 text-sm text-slate-400">Optimized code and assets for core web vitals that competitors can't match.</p>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-gauge-high"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">PageSpeed 90+ Guarantee</h3>
+        <p class="mt-2 text-sm text-slate-600">Optimized code and assets for core web vitals that competitors can't match.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-emerald/40 ">
-        <div class="w-12 h-12 rounded-xl bg-emerald/10 text-emerald flex items-center justify-center text-xl"><i class="fas fa-puzzle-piece"></i></div>
-        <h3 class="mt-5 font-bold text-white">Custom App Development</h3>
-        <p class="mt-2 text-sm text-slate-400">Tailored Shopify apps and private integrations that automate your operations.</p>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-puzzle-piece"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Custom App Development</h3>
+        <p class="mt-2 text-sm text-slate-600">Tailored Shopify apps and private integrations that automate your operations.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-emerald/40 ">
-        <div class="w-12 h-12 rounded-xl bg-emerald/10 text-emerald flex items-center justify-center text-xl"><i class="fas fa-arrows-rotate"></i></div>
-        <h3 class="mt-5 font-bold text-white">Zero-Downtime Migration</h3>
-        <p class="mt-2 text-sm text-slate-400">Seamless store migration with no loss of data, SEO, or a single minute of sales downtime.</p>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-arrows-rotate"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Zero-Downtime Migration</h3>
+        <p class="mt-2 text-sm text-slate-600">Seamless store migration with no loss of data, SEO, or a single minute of sales downtime.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- METRICS -->
-<section class="py-14 border-y border-white/5 bg-panel/40">
+<section class="py-14 border-y border-slate-200 bg-white/60">
   <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    <div><p class="text-4xl font-black text-grad">99+</p><p class="mt-2 text-sm text-slate-400">PageSpeed Score</p></div>
-    <div><p class="text-4xl font-black text-grad">3.8%</p><p class="mt-2 text-sm text-slate-400">Cart Conversion</p></div>
-    <div><p class="text-4xl font-black text-grad">0</p><p class="mt-2 text-sm text-slate-400">Downtime</p></div>
-    <div><p class="text-4xl font-black text-grad">40+</p><p class="mt-2 text-sm text-slate-400">Stores Optimized</p></div>
+    <div><p class="text-4xl font-black text-grad">99+</p><p class="mt-2 text-sm text-slate-600">PageSpeed Score</p></div>
+    <div><p class="text-4xl font-black text-grad">3.8%</p><p class="mt-2 text-sm text-slate-600">Cart Conversion</p></div>
+    <div><p class="text-4xl font-black text-grad">0</p><p class="mt-2 text-sm text-slate-600">Downtime</p></div>
+    <div><p class="text-4xl font-black text-grad">40+</p><p class="mt-2 text-sm text-slate-600">Stores Optimized</p></div>
   </div>
 </section>
 
@@ -167,17 +168,14 @@ tailwind.config = {
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-5">
     <div class="glass rounded-3xl glow-emerald p-10 md:p-14 text-center">
-      <h2 class="text-3xl md:text-4xl font-black text-white">Take Your Shopify Store to the Next Level</h2>
-      <p class="mt-4 text-slate-400 max-w-xl mx-auto">Get a free audit of your store and see exactly where you're leaving sales on the table.</p>
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900">Take Your Shopify Store to the Next Level</h2>
+      <p class="mt-4 text-slate-600 max-w-xl mx-auto">Get a free audit of your store and see exactly where you're leaving sales on the table.</p>
       <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald to-cyan text-navy font-bold hover:opacity-90 ">Claim Your Free Audit</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="py-10 border-t border-white/5 text-center text-sm text-slate-500">
-  <p>© 2026 FEG TechNova. All rights reserved.</p>
-</footer>
+<!-- FOOTER-REMOVED: global theme footer renders via fegn_render_landing_page() -->
 
 <script>
   lucide.createIcons();

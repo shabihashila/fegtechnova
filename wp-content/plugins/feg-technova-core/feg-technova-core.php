@@ -21,6 +21,7 @@ define( 'FEGNT_CORE_DIR', plugin_dir_path( __FILE__ ) );
 require_once FEGNT_CORE_DIR . 'includes/post-types.php';
 require_once FEGNT_CORE_DIR . 'includes/meta.php';
 require_once FEGNT_CORE_DIR . 'includes/blocks.php';
+require_once FEGNT_CORE_DIR . 'includes/contact-form.php';
 
 /**
  * Register the structured content types.

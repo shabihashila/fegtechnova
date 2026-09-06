@@ -1,15 +1,8 @@
 <?php
 /**
- * Template Name: Landing — Web Design & Development
- * Serves the standalone Tailwind landing page.
+ * Template Name: Landing -- Web Design & Development
+ * Renders landing/web-design.html inside the global theme chrome
+ * (standard header/footer template parts) via fegn_render_landing_page().
  */
 
-$file = get_stylesheet_directory() . '/landing/web-design.html';
-if ( file_exists( $file ) ) {
-	readfile( $file );
-	exit;
-}
-
-get_header();
-esc_html_e( 'Landing page file not found.', 'fegn' );
-get_footer();
+fegn_render_landing_page( get_stylesheet_directory() . '/landing/web-design.html' );

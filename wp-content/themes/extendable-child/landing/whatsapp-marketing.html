@@ -8,7 +8,7 @@
 <!-- Tailwind CSS via CDN for zero build-step, instant delivery -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-// Custom design tokens for the FEG TechNova dark-mode design system
+// Custom design tokens for the FEG TechNova light design system
 tailwind.config = { theme: { extend: {
   colors: { navy:'#0B0F19', panel:'#111827', cyan:'#00F2FE', purple:'#4FACFE' },
   fontFamily: { sans:['Inter','ui-sans-serif','system-ui','sans-serif'] }
@@ -17,57 +17,58 @@ tailwind.config = { theme: { extend: {
 <!-- Font Awesome for crisp, lightweight icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-  body { background:#0B0F19; font-family:'Inter',ui-sans-serif,system-ui,sans-serif; }        /* Dark base */
-  .glass { background:rgba(255,255,255,0.045); border:1px solid rgba(255,255,255,0.08); }   /* Glassmorphism panel */
-  .glow  { box-shadow:0 0 30px rgba(0,242,254,0.15); }                                       /* Soft cyan glow */
+  body { background:linear-gradient(180deg,#F8FAFC 0%,#F1F5F9 100%); background-attachment:fixed; font-family:'Inter',ui-sans-serif,system-ui,sans-serif; color:#1E293B; } /* Light brand base */
+  .glass { background:rgba(255,255,255,0.75); border:1px solid rgba(226,232,240,0.8); box-shadow:0 10px 25px -5px rgba(0,50,120,0.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; } /* Light glassmorphism panel */
+  .glow  { box-shadow:0 10px 25px -5px rgba(0,50,120,0.08); } /* Soft brand elevation */
   .text-grad { background:linear-gradient(135deg,#00F2FE,#4FACFE); background-clip:text; -webkit-background-clip:text; color:transparent; } /* Cyan->purple gradient text */
-  /* PERFORMANCE: kill all transitions, animations & smooth scroll for instant load */
-  * { transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+  /* Smooth in-page jumps; motion disabled for reduced-motion users */
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .glass { transition:none; } }
 </style>
 </head>
-<body class="text-slate-200 antialiased">
+<body class="text-slate-600 antialiased">
+
 
 <!-- HERO -->
 <section class="relative pt-24 pb-20 overflow-hidden">
   <!-- Ambient gradient orbs (static, no animation) -->
-  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-cyan/10 blur-[120px]"></div>
-  <div class="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-purple/10 blur-[120px]"></div>
+  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-100/70 blur-[120px]"></div>
+  <div class="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-sky-100/70 blur-[120px]"></div>
   <div class="max-w-7xl mx-auto px-5 relative">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
 
       <!-- Hero copy + metrics -->
       <div>
-        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-cyan/30 text-cyan bg-cyan/5"><i class="fab fa-whatsapp"></i> WhatsApp Marketing</span>
-        <h1 class="mt-6 text-4xl md:text-5xl font-black leading-[1.1] text-white">Direct-to-Customer <span class="text-grad">Engagement</span> via Automated WhatsApp Marketing</h1>
-        <p class="mt-6 text-lg text-slate-400 max-w-xl leading-relaxed">Reach your audience where they already talk. Automated broadcasts, smart chatbots, and CRM integration that drive measurable responses.</p>
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-blue-200 text-blue-700 bg-blue-50"><i class="fab fa-whatsapp"></i> WhatsApp Marketing</span>
+        <h1 class="mt-6 text-4xl md:text-5xl font-black leading-[1.1] text-slate-900">Direct-to-Customer <span class="text-grad">Engagement</span> via Automated WhatsApp Marketing</h1>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">Reach your audience where they already talk. Automated broadcasts, smart chatbots, and CRM integration that drive measurable responses.</p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:bg-white/5">Schedule a Strategy Call</a>
-          <a href="#features" class="px-7 py-3.5 rounded-xl border border-white/15 text-white font-semibold hover:bg-white/5">See Features</a>
+          <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:opacity-90">Schedule a Strategy Call</a>
+          <a href="#features" class="px-7 py-3.5 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-100">See Features</a>
         </div>
-        <div class="mt-10 flex items-center gap-8 text-sm text-slate-400">
-          <div><p class="text-2xl font-black text-cyan">98%</p><p>Open Rate</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-cyan"><</p><p>5s Delivery</p></div>
-          <div class="w-px h-10 bg-white/10"></div>
-          <div><p class="text-2xl font-black text-cyan">2×</p><p>Reply Uplift</p></div>
+        <div class="mt-10 flex items-center gap-8 text-sm text-slate-600">
+          <div><p class="text-2xl font-black text-blue-600">98%</p><p>Open Rate</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600"><</p><p>5s Delivery</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">2×</p><p>Reply Uplift</p></div>
         </div>
       </div>
 
       <!-- Interactive chat preview -->
       <div class="relative">
-        <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-cyan/15 to-purple/10 blur-2xl"></div>
+        <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-blue-200/60 to-sky-100/50 blur-2xl"></div>
         <div class="glass rounded-2xl glow p-6 relative">
-          <div class="flex items-center gap-2 border-b border-white/10 pb-3 mb-4">
-            <span class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald to-cyan flex items-center justify-center text-white text-sm"><i class="fab fa-whatsapp"></i></span>
-            <span class="font-bold text-white">FEG Shop</span>
+          <div class="flex items-center gap-2 border-b border-slate-200 pb-3 mb-4">
+            <span class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald to-cyan flex items-center justify-center text-slate-900 text-sm"><i class="fab fa-whatsapp"></i></span>
+            <span class="font-bold text-slate-900">FEG Shop</span>
             <span class="text-xs text-emerald font-semibold bg-emerald/10 px-2 py-1 rounded-full">● Online</span>
           </div>
           <div class="space-y-3 text-sm">
             <div class="max-w-[85%] ml-auto bg-gradient-to-r from-cyan/50 to-purple/40 rounded-xl px-3 py-2 text-navy">Hi! Is the premium plan back in stock?</div>
-            <div class="max-w-[85%] mr-auto bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-slate-300">Great question! Yes — it just restocked. Can I reserve one for you with 15% off today?</div>
+            <div class="max-w-[85%] mr-auto bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-slate-700">Great question! Yes — it just restocked. Can I reserve one for you with 15% off today?</div>
             <div class="max-w-[85%] ml-auto bg-gradient-to-r from-cyan/50 to-purple/40 rounded-xl px-3 py-2 text-navy">Absolutely, please!</div>
-            <div class="max-w-[85%] mr-auto bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-slate-300"><i class="fas fa-circle-check text-emerald"></i> Order reserved! Your WhatsApp checkout link is ready.</div>
-            <div class="glass rounded-lg px-4 py-2 flex justify-between"><span class="text-slate-300">Automation</span><span class="text-emerald font-bold">Completed</span></div>
+            <div class="max-w-[85%] mr-auto bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-slate-700"><i class="fas fa-circle-check text-emerald"></i> Order reserved! Your WhatsApp checkout link is ready.</div>
+            <div class="glass rounded-lg px-4 py-2 flex justify-between"><span class="text-slate-700">Automation</span><span class="text-emerald font-bold">Completed</span></div>
           </div>
         </div>
       </div>
@@ -79,42 +80,42 @@ tailwind.config = { theme: { extend: {
 <section class="py-20" id="features">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center max-w-2xl mx-auto">
-      <span class="text-xs font-semibold tracking-widest uppercase text-cyan">Core Features</span>
-      <h2 class="mt-4 text-3xl md:text-4xl font-black text-white">Automate Conversations That Convert</h2>
-      <p class="mt-4 text-slate-400">Turn every WhatsApp message into a revenue opportunity with fully automated flows.</p>
+      <span class="text-xs font-semibold tracking-widest uppercase text-blue-600">Core Features</span>
+      <h2 class="mt-4 text-3xl md:text-4xl font-black text-slate-900">Automate Conversations That Convert</h2>
+      <p class="mt-4 text-slate-600">Turn every WhatsApp message into a revenue opportunity with fully automated flows.</p>
     </div>
     <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-bullhorn"></i></div>
-        <h3 class="mt-5 font-bold text-white">Broadcast Campaigns</h3>
-        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Blast promotions to thousands of contacts in seconds with rich media messages.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-bullhorn"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Broadcast Campaigns</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Blast promotions to thousands of contacts in seconds with rich media messages.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-robot"></i></div>
-        <h3 class="mt-5 font-bold text-white">Automated Chatbots</h3>
-        <p class="mt-2 text-sm text-slate-400 leading-relaxed">AI-driven flows that answer, qualify, and close leads around the clock.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-robot"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Automated Chatbots</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">AI-driven flows that answer, qualify, and close leads around the clock.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-percent"></i></div>
-        <h3 class="mt-5 font-bold text-white">98% Delivery &amp; Open Rate</h3>
-        <p class="mt-2 text-sm text-slate-400 leading-relaxed">WhatsApp's unbeatable reach means your message is actually seen and opened.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-percent"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">98% Delivery &amp; Open Rate</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">WhatsApp's unbeatable reach means your message is actually seen and opened.</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:border-cyan/40">
-        <div class="w-12 h-12 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center text-xl"><i class="fas fa-plug-circle-bolt"></i></div>
-        <h3 class="mt-5 font-bold text-white">CRM Integration</h3>
-        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Every conversation synced to your CRM with lead scoring and auto-tagging.</p>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-plug-circle-bolt"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">CRM Integration</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Every conversation synced to your CRM with lead scoring and auto-tagging.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- METRICS -->
-<section class="py-14 border-y border-white/5 bg-panel/40">
+<section class="py-14 border-y border-slate-200 bg-white/60">
   <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    <div><p class="text-4xl font-black text-grad">98%</p><p class="mt-2 text-sm text-slate-400">Open Rate</p></div>
-    <div><p class="text-4xl font-black text-grad">5×</p><p class="mt-2 text-sm text-slate-400">Faster Engagement</p></div>
-    <div><p class="text-4xl font-black text-grad">80%</p><p class="mt-2 text-sm text-slate-400">Auto-Resolved Queries</p></div>
-    <div><p class="text-4xl font-black text-grad">24/7</p><p class="mt-2 text-sm text-slate-400">Response Availability</p></div>
+    <div><p class="text-4xl font-black text-grad">98%</p><p class="mt-2 text-sm text-slate-600">Open Rate</p></div>
+    <div><p class="text-4xl font-black text-grad">5×</p><p class="mt-2 text-sm text-slate-600">Faster Engagement</p></div>
+    <div><p class="text-4xl font-black text-grad">80%</p><p class="mt-2 text-sm text-slate-600">Auto-Resolved Queries</p></div>
+    <div><p class="text-4xl font-black text-grad">24/7</p><p class="mt-2 text-sm text-slate-600">Response Availability</p></div>
   </div>
 </section>
 
@@ -122,16 +123,13 @@ tailwind.config = { theme: { extend: {
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-5">
     <div class="glass rounded-3xl glow p-10 md:p-14 text-center">
-      <h2 class="text-3xl md:text-4xl font-black text-white">Put WhatsApp on Auto-Pilot</h2>
-      <p class="mt-4 text-slate-400 max-w-xl mx-auto">Let's build a WhatsApp marketing engine that turns chats into customers.</p>
-      <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:bg-white/5">Schedule a Strategy Call</a>
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900">Put WhatsApp on Auto-Pilot</h2>
+      <p class="mt-4 text-slate-600 max-w-xl mx-auto">Let's build a WhatsApp marketing engine that turns chats into customers.</p>
+      <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:opacity-90">Schedule a Strategy Call</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="py-10 border-t border-white/5 text-center text-sm text-slate-500">
-  <p>© 2026 FEG TechNova. All rights reserved.</p>
-</footer>
+<!-- FOOTER-REMOVED: global theme footer renders via fegn_render_landing_page() -->
 </body>
 </html>
