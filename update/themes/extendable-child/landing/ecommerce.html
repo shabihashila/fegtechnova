@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ecommerce Website | FEG TechNova</title>
+<meta name="description" content="Complete e-commerce architectures optimized for seamless shopping and maximum conversions." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0B0F19',
+        panel: '#111827',
+        cyan: '#00F2FE',
+        skyblue: '#4FACFE',
+        emerald: '#10B981',
+      },
+      fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+    },
+  },
+};
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  body { background:linear-gradient(180deg,#F8FAFC 0%,#F1F5F9 100%); background-attachment:fixed; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color:#1E293B; } /* Light brand base */
+  .glass { background:rgba(255,255,255,0.78); border:1px solid rgba(226,232,240,0.85); box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:all 0.3s ease; } /* Light glassmorphism panel */
+  .glow-cyan { box-shadow:0 10px 30px -5px rgba(0,50,120,0.05); } /* Soft brand elevation */
+  .glow-emerald { box-shadow:0 10px 30px -5px rgba(16,185,129,0.14); } /* Soft emerald elevation */
+  .text-grad { background: linear-gradient(135deg,#00F2FE,#4FACFE); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  /* Smooth in-page jumps; motion disabled for reduced-motion users */
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .glass { transition:none; } }
+</style>
+</head>
+<body class="text-slate-600 antialiased">
+
+
+<!-- HERO -->
+<section class="relative pt-32 pb-24 overflow-hidden">
+  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-emerald-100/70 blur-[120px]"></div>
+  <div class="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-blue-100/70 blur-[120px]"></div>
+  <div class="max-w-7xl mx-auto px-5 relative">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-emerald-200 text-emerald-700 bg-emerald-50">🛒 E-Commerce Solutions</span>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.1] text-slate-900">
+          Build a <span class="text-grad">High-Growth Online Store</span> Engineered to Boost Sales
+        </h1>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">Complete e-commerce architectures optimized for seamless shopping and maximum conversions.</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-skyblue text-navy font-bold hover:opacity-90 ">Launch Your Store</a>
+          <a href="/services/" class="px-7 py-3.5 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-100 ">See Demo</a>
+        </div>
+        <div class="mt-10 flex items-center gap-8 text-sm text-slate-600">
+          <div><p class="text-2xl font-black text-emerald-600">+340%</p><p>Conversion Lift</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">1-Click</p><p>Checkout</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">24/7</p><p>Sales Support</p></div>
+        </div>
+      </div>
+
+      <!-- STOREFRONT UI -->
+      <div class="relative">
+        <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-emerald-100/70 to-sky-100/50 blur-2xl"></div>
+        <!-- Product grid card -->
+        <div class="glass rounded-2xl glow-emerald p-5 relative">
+          <div class="flex items-center justify-between mb-4">
+            <p class="font-semibold text-slate-900">Trending Products</p>
+            <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2.5 py-1 rounded-full">🔥 Live</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="glass rounded-xl p-3">
+              <div class="h-16 rounded-lg bg-gradient-to-br from-emerald/40 to-cyan/30 mb-2"></div>
+              <p class="text-xs text-slate-700">Wireless Headphones</p>
+              <p class="font-bold text-slate-900 text-sm">$129 <span class="text-slate-500 line-through text-xs">$199</span></p>
+              <button class="mt-2 w-full py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-bold hover:bg-blue-200">Add to Cart</button>
+            </div>
+            <div class="glass rounded-xl p-3">
+              <div class="h-16 rounded-lg bg-gradient-to-br from-skyblue/40 to-emerald/30 mb-2"></div>
+              <p class="text-xs text-slate-700">Smart Watch</p>
+              <p class="font-bold text-slate-900 text-sm">$249</p>
+              <button class="mt-2 w-full py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-bold hover:bg-blue-200">Add to Cart</button>
+            </div>
+          </div>
+          <!-- Cart popup -->
+          <div class="absolute -right-4 top-20 w-56 glass rounded-xl p-4 shadow-2xl">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs font-bold text-slate-900 flex items-center gap-2"><i class="fas fa-cart-shopping text-emerald-600"></i> Your Cart</p>
+              <span class="text-[10px] text-slate-600">2 items</span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-slate-700">Headphones</span><span class="text-slate-900 font-bold">$129</span></div>
+              <div class="flex justify-between"><span class="text-slate-700">Smart Watch</span><span class="text-slate-900 font-bold">$249</span></div>
+              <div class="border-t border-slate-200 pt-2 flex justify-between"><span class="text-slate-600">Total</span><span class="text-emerald-600 font-black">$378</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Conversion badge -->
+        <div class="absolute -left-6 -bottom-6">
+          <div class="glass rounded-2xl px-5 py-4 text-center glow-emerald">
+            <p class="text-3xl font-black text-emerald-600">+340%</p>
+            <p class="text-xs text-slate-600 mt-1">Avg. Conversion Rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-semibold tracking-widest uppercase text-emerald-600">Why Choose Us</span>
+      <h2 class="mt-4 text-3xl md:text-4xl font-black text-slate-900">Complete E-Commerce Stacks, Done Right</h2>
+      <p class="mt-4 text-slate-600">From product pages to payments, we optimize every step of the buying journey.</p>
+    </div>
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-coins"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Multi-Currency &amp; Local Gateways</h3>
+        <p class="mt-2 text-sm text-slate-600">Accept payments globally with local gateways, multi-currency support, and automatic tax handling.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-sync"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Real-Time Inventory Sync</h3>
+        <p class="mt-2 text-sm text-slate-600">Stock levels update instantly across all channels — no more overselling or stockouts.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-bolt"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Fast One-Page Checkout</h3>
+        <p class="mt-2 text-sm text-slate-600">A friction-free single-page checkout that recovers carts and lifts average order value.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-emerald-300 hover:-translate-y-1 ">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-chart-line"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Customer Analytics</h3>
+        <p class="mt-2 text-sm text-slate-600">Deep behavioral analytics to understand shoppers and grow repeat purchases.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="py-14 border-y border-slate-200 bg-white/60">
+  <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div><p class="text-4xl font-black text-grad">+340%</p><p class="mt-2 text-sm text-slate-600">Avg. Conversion Lift</p></div>
+    <div><p class="text-4xl font-black text-grad">30+</p><p class="mt-2 text-sm text-slate-600">Stores Launched</p></div>
+    <div><p class="text-4xl font-black text-grad">24h</p><p class="mt-2 text-sm text-slate-600">Support Response</p></div>
+    <div><p class="text-4xl font-black text-grad">100%</p><p class="mt-2 text-sm text-slate-600">Payment Gateways</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-5">
+    <div class="glass rounded-3xl glow-cyan p-10 md:p-14 text-center">
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900">Ready to Scale Your Online Store?</h2>
+      <p class="mt-4 text-slate-600 max-w-xl mx-auto">Let's build a store that turns visitors into loyal, repeat customers.</p>
+      <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald to-cyan text-navy font-bold hover:opacity-90 ">Start Selling Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER-REMOVED: global theme footer renders via fegn_render_landing_page() -->
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

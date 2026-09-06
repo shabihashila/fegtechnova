@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creative Graphic Design | FEG TechNova</title>
+<meta name="description" content="Pixel-perfect visuals crafted to elevate your brand identity across every format." />
+<!-- Tailwind CSS via CDN for zero build-step, instant delivery -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+// Custom design tokens for the FEG TechNova light design system
+tailwind.config = { theme: { extend: {
+  colors: { navy:'#0B0F19', panel:'#111827', cyan:'#00F2FE', purple:'#4FACFE' },
+  fontFamily: { sans:['Inter','ui-sans-serif','system-ui','sans-serif'] }
+} } };
+</script>
+<!-- Font Awesome for crisp, lightweight icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  body { background:linear-gradient(180deg,#F8FAFC 0%,#F1F5F9 100%); background-attachment:fixed; font-family:'Inter',ui-sans-serif,system-ui,sans-serif; color:#1E293B; } /* Light brand base */
+  .glass { background:rgba(255,255,255,0.75); border:1px solid rgba(226,232,240,0.8); box-shadow:0 10px 25px -5px rgba(0,50,120,0.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; } /* Light glassmorphism panel */
+  .glow  { box-shadow:0 10px 25px -5px rgba(0,50,120,0.08); } /* Soft brand elevation */
+  .text-grad { background:linear-gradient(135deg,#00F2FE,#4FACFE); background-clip:text; -webkit-background-clip:text; color:transparent; } /* Cyan->purple gradient text */
+  /* Smooth in-page jumps; motion disabled for reduced-motion users */
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .glass { transition:none; } }
+</style>
+</head>
+<body class="text-slate-600 antialiased">
+
+
+<!-- HERO -->
+<section class="relative pt-24 pb-20 overflow-hidden">
+  <!-- Ambient gradient orbs (static, no animation) -->
+  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-100/70 blur-[120px]"></div>
+  <div class="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-sky-100/70 blur-[120px]"></div>
+  <div class="max-w-7xl mx-auto px-5 relative">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Hero copy + metrics -->
+      <div>
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border border-blue-200 text-blue-700 bg-blue-50"><i class="fas fa-pen-fancy"></i> Creative Graphic Design</span>
+        <h1 class="mt-6 text-4xl md:text-5xl font-black leading-[1.1] text-slate-900">Pixel-Perfect <span class="text-grad">Visuals</span> Crafted to Elevate Your Brand Identity</h1>
+        <p class="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">Brand kits, social creatives, print, and vector illustration — all designed to make you unforgettable.</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/contact/" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:opacity-90">Schedule a Strategy Call</a>
+          <a href="#features" class="px-7 py-3.5 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-100">See Features</a>
+        </div>
+        <div class="mt-10 flex items-center gap-8 text-sm text-slate-600">
+          <div><p class="text-2xl font-black text-blue-600">3×</p><p>Brand Recall</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">+60%</p><p>Engagement</p></div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div><p class="text-2xl font-black text-blue-600">50+</p><p>Formats</p></div>
+        </div>
+      </div>
+
+      <!-- Multi-format creative assets preview grid -->
+      <div class="relative">
+        <div class="glass rounded-2xl glow p-6 relative">
+          <div class="flex items-center gap-2 border-b border-slate-200 pb-3 mb-4">
+            <span class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan to-purple flex items-center justify-center text-navy text-sm"><i class="fas fa-wand-magic-sparkles"></i></span>
+            <span class="text-sm font-semibold text-slate-900">Creative Asset Canvas</span>
+            <span class="text-xs text-emerald font-semibold bg-emerald/10 px-2 py-1 rounded-full">Live</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="glass rounded-lg p-3 text-center"><div class="w-3 h-3 rounded-full bg-cyan mx-auto"></div><p class="text-xs text-slate-600 mt-1">Logo</p></div>
+            <div class="glass rounded-lg p-3 text-center"><i class="fab fa-instagram text-xl text-[#E4405F]"></i><p class="text-xs text-slate-600 mt-1">Social Post</p></div>
+            <div class="glass rounded-lg p-3 text-center"><i class="fas fa-scroll text-xl text-blue-600"></i><p class="text-xs text-slate-600 mt-1">Banner</p></div>
+            <div class="glass rounded-lg p-3 text-center"><i class="fas fa-tag text-xl text-purple"></i><p class="text-xs text-slate-600 mt-1">Label</p></div>
+            <div class="glass rounded-lg p-3 text-center"><i class="fas fa-newspaper text-xl text-blue-600"></i><p class="text-xs text-slate-600 mt-1">Poster</p></div>
+            <div class="glass rounded-lg p-3 text-center"><i class="fas fa-vector-square text-xl text-purple"></i><p class="text-xs text-slate-600 mt-1">Vector</p></div>
+          </div>
+          <div class="mt-3 glass rounded-lg px-4 py-2.5 flex justify-between text-sm"><span class="text-slate-600">Brand Kit</span><span class="text-emerald font-bold">Complete</span></div>
+          <div class="glass rounded-lg px-4 py-2.5 flex justify-between text-sm"><span class="text-slate-600">Assets Delivered</span><span class="text-emerald font-bold">120+</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-20" id="features">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-semibold tracking-widest uppercase text-blue-600">Core Features</span>
+      <h2 class="mt-4 text-3xl md:text-4xl font-black text-slate-900">Design That Demands Attention</h2>
+      <p class="mt-4 text-slate-600">Every asset crafted to reinforce your brand and drive results.</p>
+    </div>
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-boxes-stacked"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Brand Kits</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">A full visual identity system that keeps every touchpoint consistent.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-images"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Social Media Creatives</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">High-impact visuals sized and styled for every social platform.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-print"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Print &amp; Posters</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Eye-catching brochures, flyers, and posters ready for print.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 hover:border-blue-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-vector-square"></i></div>
+        <h3 class="mt-5 font-bold text-slate-900">Custom Vector Illustration</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Scalable, unique illustrations that make your brand one-of-a-kind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="py-14 border-y border-slate-200 bg-white/60">
+  <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div><p class="text-4xl font-black text-grad">3×</p><p class="mt-2 text-sm text-slate-600">Brand Recall</p></div>
+    <div><p class="text-4xl font-black text-grad">+60%</p><p class="mt-2 text-sm text-slate-600">Engagement</p></div>
+    <div><p class="text-4xl font-black text-grad">50+</p><p class="mt-2 text-sm text-slate-600">Formats</p></div>
+    <div><p class="text-4xl font-black text-grad">120+</p><p class="mt-2 text-sm text-slate-600">Assets</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-5">
+    <div class="glass rounded-3xl glow p-10 md:p-14 text-center">
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900">Make Your Brand Impossible to Ignore</h2>
+      <p class="mt-4 text-slate-600 max-w-xl mx-auto">Get pixel-perfect visuals that elevate your business and convert customers.</p>
+      <a href="/contact/" class="mt-8 inline-block px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan to-purple text-navy font-bold hover:opacity-90">Get a Custom Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER-REMOVED: global theme footer renders via fegn_render_landing_page() -->
+</body>
+</html>
