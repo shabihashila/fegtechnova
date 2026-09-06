@@ -3363,3 +3363,105 @@ button.fegn-form-submit {
 .fegn-chat-input-ph {
 	color: #94a3b8;
 }
+
+/* =====================================================================
+   Footer social icons + case-study showcase cards
+   ===================================================================== */
+
+/* Sleek circular icon buttons in the brand palette. */
+.fegn-social-row {
+	gap: 0.6rem;
+	margin-top: 1.25rem;
+}
+
+.fegn-social-row .wp-social-link a {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	color: #c9d7ec;
+	transition:
+		background-color 200ms ease,
+		border-color 200ms ease,
+		color 200ms ease,
+		transform 200ms ease,
+		box-shadow 200ms ease;
+}
+
+.fegn-social-row .wp-social-link svg {
+	width: 20px;
+	height: 20px;
+	fill: currentColor;
+}
+
+.fegn-social-row .wp-social-link a:hover,
+.fegn-social-row .wp-social-link a:focus-visible {
+	background: var(--wp--preset--color--brand);
+	border-color: var(--wp--preset--color--brand);
+	color: #ffffff;
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(24, 99, 220, 0.45);
+	text-decoration: none;
+}
+
+/* Gradient thumbnail banner crowning each featured case card. */
+.fegn-case-thumb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 120px;
+	margin: -2rem -1.75rem 1.25rem;
+	padding: 1.5rem 1rem;
+	border-radius: 12px 12px 0 0;
+	color: #ffffff;
+	font-size: 2.5rem;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.fegn-case-thumb--erp {
+	background: linear-gradient(135deg, #1863dc 0%, #104aa8 100%);
+}
+
+.fegn-case-thumb--saas {
+	background: linear-gradient(135deg, #0f9f8f 0%, #0b6e63 100%);
+}
+
+.fegn-case-thumb--ai {
+	background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.fegn-case-metrics {
+	display: flex;
+	gap: 1.25rem;
+	margin: 1rem 0 0.25rem;
+}
+
+.fegn-case-metric {
+	display: flex;
+	flex-direction: column;
+}
+
+.fegn-case-metric strong {
+	color: var(--wp--preset--color--brand-dark);
+	font-size: 1.25rem;
+	line-height: 1.1;
+}
+
+.fegn-case-metric span {
+	color: var(--wp--preset--color--muted);
+	font-size: 0.8125rem;
+}
+
+@media (max-width: 781px) {
+	.fegn-case-thumb {
+		min-height: 96px;
+		margin: -1.5rem -1.5rem 1.25rem;
+		font-size: 2rem;
+	}
+}

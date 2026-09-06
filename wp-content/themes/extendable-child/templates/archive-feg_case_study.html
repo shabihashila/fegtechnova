@@ -3,19 +3,138 @@
 <!-- wp:group {"tagName":"main","className":"fegn-main","layout":{"type":"default"}} -->
 <main id="fegn-main" class="wp-block-group fegn-main">
 
-	<!-- wp:group {"className":"fegn-page-header","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--60)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-page-header has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
-		<!-- wp:heading {"level":1,"className":"alignwide"} -->
-		<h1 class="wp-block-heading alignwide">Case studies</h1>
-		<!-- /wp:heading -->
-		<!-- wp:paragraph {"className":"alignwide fegn-lead","fontSize":"large"} -->
-		<p class="alignwide fegn-lead has-large-font-size">Selected delivery stories, published only with client approval. Ask us about projects similar to yours.</p>
-		<!-- /wp:paragraph -->
+	<!-- HERO -->
+	<!-- wp:group {"className":"fegn-services-hero","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--70)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-services-hero has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+		<!-- wp:group {"className":"alignwide","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group alignwide">
+			<!-- wp:paragraph {"className":"fegn-eyebrow","fontSize":"small","style":{"typography":{"fontWeight":"600","letterSpacing":"0.08em"}}} -->
+			<p class="fegn-eyebrow has-small-font-size" style="font-weight:600;letter-spacing:0.08em">Case Studies</p>
+			<!-- /wp:paragraph -->
+			<!-- wp:heading {"level":1,"className":"fegn-services-title"} -->
+			<h1 class="wp-block-heading fegn-services-title">Real projects. Measurable results.</h1>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"fegn-lead","fontSize":"large"} -->
+			<p class="fegn-lead has-large-font-size">A showcase of enterprise software, SaaS, and AI engagements — published only with client approval. Ask us about work similar to yours.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--80)">
+	<!-- FEATURED CASE STUDIES -->
+	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+		<!-- wp:group {"className":"alignwide fegn-section-head","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
+		<div class="wp-block-group alignwide fegn-section-head">
+			<!-- wp:group -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"className":"fegn-eyebrow","fontSize":"small","style":{"typography":{"fontWeight":"600","letterSpacing":"0.08em"}}} -->
+				<p class="fegn-eyebrow has-small-font-size" style="font-weight:600;letter-spacing:0.08em">Featured Work</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:heading {"level":2,"className":"fegn-section-title"} -->
+				<h2 class="wp-block-heading fegn-section-title">Flagship delivery stories.</h2>
+				<!-- /wp:heading -->
+			</div>
+			<!-- /wp:group -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:columns {"className":"alignwide fegn-service-cards","style":{"spacing":{"margin":{"top":"var(--wp--preset--spacing--60)"}}}} -->
+		<div class="wp-block-columns alignwide fegn-service-cards" style="margin-top:var(--wp--preset--spacing--60)">
+
+			<!-- wp:column {"className":"fegn-service-card"} -->
+			<div class="wp-block-column fegn-service-card">
+				<!-- wp:html -->
+				<div class="fegn-case-thumb fegn-case-thumb--erp" aria-hidden="true">ERP</div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-hero-badge","fontSize":"small"} -->
+				<p class="fegn-hero-badge has-small-font-size">Enterprise ERP</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
+				<h3 class="wp-block-heading has-x-large-font-size">Enterprise ERP Integration</h3>
+				<!-- /wp:heading -->
+				<!-- wp:paragraph -->
+				<p>Unified finance, inventory, and operations for a multi-branch enterprise into one reliable platform.</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				<div class="fegn-case-metrics"><div class="fegn-case-metric"><strong>85%</strong><span>Faster reporting</span></div><div class="fegn-case-metric"><strong>99.9%</strong><span>System uptime</span></div></div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-card-link"} -->
+				<p class="fegn-card-link"><a href="/erp-development/">Ask about this project →</a></p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column {"className":"fegn-service-card"} -->
+			<div class="wp-block-column fegn-service-card">
+				<!-- wp:html -->
+				<div class="fegn-case-thumb fegn-case-thumb--saas" aria-hidden="true">SaaS</div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-hero-badge","fontSize":"small"} -->
+				<p class="fegn-hero-badge has-small-font-size">SaaS Platform</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
+				<h3 class="wp-block-heading has-x-large-font-size">Multi-Tenant SaaS Platform</h3>
+				<!-- /wp:heading -->
+				<!-- wp:paragraph -->
+				<p>Production-grade SaaS with subscription billing and tenant isolation, from concept to launch.</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				<div class="fegn-case-metrics"><div class="fegn-case-metric"><strong>3x</strong><span>User growth</span></div><div class="fegn-case-metric"><strong>24/7</strong><span>Availability</span></div></div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-card-link"} -->
+				<p class="fegn-card-link"><a href="/saas-development/">Ask about this project →</a></p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column {"className":"fegn-service-card"} -->
+			<div class="wp-block-column fegn-service-card">
+				<!-- wp:html -->
+				<div class="fegn-case-thumb fegn-case-thumb--ai" aria-hidden="true">AI</div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-hero-badge","fontSize":"small"} -->
+				<p class="fegn-hero-badge has-small-font-size">AI Chatbot</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
+				<h3 class="wp-block-heading has-x-large-font-size">AI Chatbot Deployment</h3>
+				<!-- /wp:heading -->
+				<!-- wp:paragraph -->
+				<p>Custom RAG chatbot trained on enterprise knowledge — support automation across web and WhatsApp.</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				<div class="fegn-case-metrics"><div class="fegn-case-metric"><strong>80%</strong><span>Queries auto-resolved</span></div><div class="fegn-case-metric"><strong>60%</strong><span>Cost reduction</span></div></div>
+				<!-- /wp:html -->
+				<!-- wp:paragraph {"className":"fegn-card-link"} -->
+				<p class="fegn-card-link"><a href="/ai-chatbot/">Ask about this project →</a></p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:column -->
+
+		</div>
+		<!-- /wp:columns -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- ALL CASE STUDIES (dynamic) -->
+	<!-- wp:group {"className":"fegn-section fegn-section--soft","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section fegn-section--soft has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+
+		<!-- wp:group {"className":"alignwide fegn-section-head","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
+		<div class="wp-block-group alignwide fegn-section-head">
+			<!-- wp:group -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"className":"fegn-eyebrow","fontSize":"small","style":{"typography":{"fontWeight":"600","letterSpacing":"0.08em"}}} -->
+				<p class="fegn-eyebrow has-small-font-size" style="font-weight:600;letter-spacing:0.08em">Library</p>
+				<!-- /wp:paragraph -->
+				<!-- wp:heading {"level":2,"className":"fegn-section-title"} -->
+				<h2 class="wp-block-heading fegn-section-title">Browse all case studies.</h2>
+				<!-- /wp:heading -->
+			</div>
+			<!-- /wp:group -->
+		</div>
+		<!-- /wp:group -->
 
 		<!-- wp:query {"queryId":0,"query":{"postType":"feg_case_study","perPage":9,"pages":0,"offset":0,"inherit":false,"order":"desc","orderBy":"date"},"className":"alignwide","layout":{"type":"default"}} -->
 		<div class="wp-block-query alignwide">
@@ -49,6 +168,29 @@
 		</div>
 		<!-- /wp:query -->
 
+	</div>
+	<!-- /wp:group -->
+
+	<!-- CTA BANNER -->
+	<!-- wp:group {"className":"fegn-services-cta","style":{"color":{"background":"linear-gradient(135deg, #1863DC 0%, #104AA8 50%, #0F9F8F 100%)","text":"#FFFFFF"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--70)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-services-cta has-background has-text-color" style="background:linear-gradient(135deg, #1863DC 0%, #104AA8 50%, #0F9F8F 100%);color:#FFFFFF;padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+		<!-- wp:group {"className":"alignwide","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group alignwide" style="text-align:center">
+			<!-- wp:heading {"level":2,"className":"fegn-services-cta-title","style":{"color":{"text":"#FFFFFF"}}} -->
+			<h2 class="wp-block-heading fegn-services-cta-title has-text-color" style="color:#FFFFFF">Need proof for your industry? Let's talk.</h2>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"fegn-lead fegn-lead--light","fontSize":"large","style":{"spacing":{"margin":{"top":"1rem","bottom":"2rem"}}}} -->
+			<p class="fegn-lead fegn-lead--light has-large-font-size" style="color:#C9D7EC;margin-top:1rem;margin-bottom:2rem">Request custom case studies relevant to your business — or start your own success story today.</p>
+			<!-- /wp:paragraph -->
+			<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+			<div class="wp-block-buttons" style="display:flex;justify-content:center">
+				<!-- wp:button {"className":"is-style-fill","backgroundColor":"surface","textColor":"ink"} -->
+				<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button has-ink-color has-surface-background-color has-text-color has-background" href="/contact/">Request Case Studies</a></div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 
