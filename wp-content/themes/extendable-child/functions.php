@@ -47,6 +47,60 @@ function fegn_enqueue_header_script() {
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_header_script' );
 
 /**
+ * Visitor theme switch (light / dark): toggle behavior script.
+ */
+function fegn_enqueue_theme_script() {
+	$js_path = get_stylesheet_directory() . '/assets/js/fegn-theme.js';
+	if ( ! file_exists( $js_path ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'fegn-theme',
+		get_stylesheet_directory_uri() . '/assets/js/fegn-theme.js',
+		array(),
+		(string) filemtime( $js_path ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_theme_script' );
+
+/**
+ * Pre-paint theme guard: resolves saved choice > OS preference > light
+ * and sets data-theme before the body parses, so dark visitors never
+ * see a white flash. Runs first in wp_head.
+ */
+function fegn_theme_guard() {
+	?>
+	<script>
+	(function(){try{var t=null;try{t=window.localStorage.getItem('fegn-theme');}catch(e){}if(t!=='dark'&&t!=='light'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+	</script>
+	<meta name="theme-color" content="#FFFFFF">
+	<?php
+}
+add_action( 'wp_head', 'fegn_theme_guard', 0 );
+
+/**
+ * Scroll-reveal entrance animations (all pages): fade + rise content
+ * once on viewport entry. Footer-loaded, versioned by filemtime.
+ */
+function fegn_enqueue_reveal_script() {
+	$js_path = get_stylesheet_directory() . '/assets/js/fegn-reveal.js';
+	if ( ! file_exists( $js_path ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'fegn-reveal',
+		get_stylesheet_directory_uri() . '/assets/js/fegn-reveal.js',
+		array(),
+		(string) filemtime( $js_path ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_reveal_script' );
+
+/**
  * Project inquiry form: AJAX submission without page reload.
  * Nonce + endpoint are exposed via wp_localize_script; the server-side
  * handler lives in the feg-technova-core plugin (includes/contact-form.php).
@@ -236,6 +290,25 @@ function fegn_render_landing_page( $file ) {
 			// Theme-owned static assets (Tailwind CDN, font CSS, page styles).
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $head_extras;
+			// Visitor dark mode: approximate dark wash over the light
+			// Tailwind pattern. Only applies with data-theme="dark".
+			?>
+			<style id="fegn-landing-dark">
+			html[data-theme="dark"] body{background:#0B0F19 !important;color:#CBD5E1 !important;}
+			html[data-theme="dark"] .text-slate-900{color:#F1F5F9 !important;}
+			html[data-theme="dark"] .text-slate-700{color:#C3D0E2 !important;}
+			html[data-theme="dark"] .text-slate-600{color:#9FB0C7 !important;}
+			html[data-theme="dark"] .glass{background:rgba(255,255,255,0.045) !important;border-color:rgba(255,255,255,0.09) !important;box-shadow:none !important;}
+			html[data-theme="dark"] .border-slate-200{border-color:rgba(148,163,184,0.2) !important;}
+			html[data-theme="dark"] .border-slate-300{border-color:rgba(148,163,184,0.3) !important;}
+			html[data-theme="dark"] .bg-white\/60{background:rgba(255,255,255,0.03) !important;}
+			html[data-theme="dark"] .bg-blue-50{background:rgba(37,99,235,0.14) !important;}
+			html[data-theme="dark"] .bg-emerald-50{background:rgba(16,185,129,0.12) !important;}
+			html[data-theme="dark"] .text-blue-600{color:#7FB3F5 !important;}
+			html[data-theme="dark"] .text-blue-700{color:#9DBCFA !important;}
+			html[data-theme="dark"] .text-emerald-600,.text-emerald-700{color:#34D399 !important;}
+			</style>
+			<?php
 		},
 		5
 	);
@@ -276,9 +349,14 @@ function fegn_render_landing_page( $file ) {
  * @param string $slug Template part slug (header|footer).
  */
 function fegn_landing_template_part( $slug ) {
+	/* Mirror core template-part markup: the sticky menu CSS anchors on
+	 * this wrapper (a bare sticky header can't travel outside a
+	 * header-height parent, and without the wrapper there is none). */
+	echo '<div class="wp-block-template-part">';
 	if ( function_exists( 'block_template_part' ) ) {
 		block_template_part( $slug );
-		return;
+	} else {
+		echo do_blocks( '<!-- wp:template-part {"slug":"' . esc_attr( $slug ) . '"} /-->' );
 	}
-	echo do_blocks( '<!-- wp:template-part {"slug":"' . esc_attr( $slug ) . '"} /-->' );
+	echo '</div>';
 }

@@ -41,12 +41,22 @@ body {
 /* ---------- Header ---------- */
 
 .fegn-site-header {
-	position: sticky;
-	top: 0;
+	position: static;
 	z-index: 1000;
 	background: rgba(255, 255, 255, 0.92);
 	backdrop-filter: blur(8px);
 	border-bottom: 1px solid var(--wp--preset--color--border-color);
+}
+
+/* The menu pins while scrolling by sticking the header's template-part
+   wrapper, not the header itself: a sticky element cannot travel outside
+   its parent's box, and that wrapper is exactly header-height (so a
+   sticky header alone scrolls away with it). The wrapper is a direct
+   child of the tall .wp-site-blocks, giving the stick room to work. */
+.wp-block-template-part:has(> .fegn-site-header) {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 }
 
 .fegn-header-inner {
@@ -2713,13 +2723,16 @@ body {
 	}
 }
 
-/* ---------- 2. Global page bounds: no horizontal scroll ---------- */
+/* ---------- 2. Global page bounds: no horizontal scroll ----------
+   overflow-x:clip (NOT hidden) — clip prevents sideways scroll without
+   creating a scroll container, so position:sticky headers keep working.
+   overflow-x:hidden on html/body is what made the menu scroll away. */
 html,
 body {
 	width: 100%;
 	max-width: 100%;
 	box-sizing: border-box;
-	overflow-x: hidden;
+	overflow-x: clip;
 }
 
 body {
@@ -3517,4 +3530,473 @@ button.fegn-form-submit {
 		letter-spacing: 0.04em;
 		font-size: 0.78rem;
 	}
+}
+
+/* =====================================================================
+   Seamless header + first section, site-wide.
+   No divider line under the nav anywhere; the homepage hero melts into
+   the header background; every hero joins the sticky header tightly.
+   Inner-page heroes keep their own backgrounds — only the divider and
+   the oversized top gap are removed.
+   ===================================================================== */
+.fegn-site-header {
+	border-bottom: 0;
+}
+
+body.home .fegn-hero {
+	background: transparent !important;
+}
+
+.fegn-hero,
+.fegn-services-hero,
+.fegn-sec-hero,
+.fegn-erp-hero,
+.fegn-ai-hero,
+.fegn-contact-hero,
+.fegn-company-hero,
+.fegn-wcu-hero,
+.fegn-page-header {
+	padding-top: 2.5rem !important;
+	padding-bottom: 3rem !important;
+}
+
+/* First sections share the menu background (near-white) on every page.
+   Light heroes go fully transparent; their ink/muted text is unaffected.
+   (Homepage hero is covered by the body.home rule above.) */
+.fegn-services-hero,
+.fegn-sec-hero,
+.fegn-erp-hero,
+.fegn-contact-hero,
+.fegn-company-hero,
+.fegn-wcu-hero,
+.fegn-page-header {
+	background: transparent !important;
+}
+
+/* AI heroes sit on the dark .fegn-ai-main page wrapper, so they get an
+   explicit light band instead — the rest of the AI page stays dark.
+   Text and controls are re-inked for the light surface. */
+.fegn-ai-hero {
+	background: #fff !important;
+}
+.fegn-ai-hero .fegn-ai-title {
+	color: var(--wp--preset--color--ink);
+}
+.fegn-ai-hero .fegn-ai-lead {
+	color: var(--wp--preset--color--muted);
+}
+.fegn-ai-hero .fegn-ai-badge {
+	background: rgba(37, 99, 235, 0.1);
+	color: #2563eb;
+	border-color: transparent;
+	box-shadow: none;
+}
+.fegn-ai-hero .fegn-ai-badge--subtle {
+	background: rgba(37, 99, 235, 0.1);
+	color: #2563eb;
+	border-color: transparent;
+	box-shadow: none;
+}
+.fegn-ai-hero .fegn-ai-outline {
+	border-color: #2563eb !important;
+	color: #1d4ed8 !important;
+}
+.fegn-ai-hero .fegn-ai-outline:hover {
+	background: rgba(37, 99, 235, 0.08) !important;
+	border-color: #1d4ed8 !important;
+}
+
+/* Hero copy shares one left edge with the grids/cards below it.
+   (Constrained layout otherwise centers the narrow hero column inside
+   the wide hero box, offsetting badge/title/lede from everything
+   beneath.) CTA banners intentionally stay centered. */
+.fegn-services-hero .alignwide > *,
+.fegn-sec-hero .alignwide > *,
+.fegn-erp-hero .alignwide > *,
+.fegn-ai-hero .alignwide > *,
+.fegn-contact-hero .alignwide > *,
+.fegn-company-hero .alignwide > *,
+.fegn-wcu-hero .alignwide > * {
+	margin-left: 0 !important;
+	margin-right: auto !important;
+	text-align: left;
+}
+
+.fegn-services-hero .alignwide .wp-block-buttons,
+.fegn-sec-hero .alignwide .wp-block-buttons,
+.fegn-erp-hero .alignwide .wp-block-buttons,
+.fegn-ai-hero .alignwide .wp-block-buttons {
+	justify-content: flex-start;
+}
+
+/* =====================================================================
+   Scroll-reveal entrance animations (all pages).
+   JS-gated: without JS nothing is ever hidden. Elements fade + rise
+   once when they enter the viewport; stagger comes from --fegn-d.
+   ===================================================================== */
+.fegn-js .fegn-reveal {
+	opacity: 0;
+	transform: translateY(18px);
+	transition:
+		opacity 600ms ease,
+		transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+	transition-delay: var(--fegn-d, 0ms);
+}
+
+.fegn-js .fegn-reveal.is-in {
+	opacity: 1;
+	transform: none;
+}
+
+@media (max-width: 781px) {
+	.fegn-js .fegn-reveal {
+		transform: translateY(14px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fegn-js .fegn-reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* =====================================================================
+   Visitor theme switch (light / dark)
+   ===================================================================== */
+
+/* Toggle button: same chrome as the hamburger, icon swaps per theme. */
+.fegn-theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	flex-shrink: 0;
+	border: 1px solid var(--wp--preset--color--border-color);
+	border-radius: 10px;
+	background: transparent;
+	color: var(--wp--preset--color--ink);
+	cursor: pointer;
+	transition: background-color 160ms ease, border-color 160ms ease;
+}
+.fegn-theme-toggle:hover {
+	background: var(--wp--preset--color--light-blue);
+}
+.fegn-theme-toggle .fegn-theme-icon--sun {
+	display: none;
+}
+html[data-theme="dark"] .fegn-theme-toggle .fegn-theme-icon--moon {
+	display: none;
+}
+html[data-theme="dark"] .fegn-theme-toggle .fegn-theme-icon--sun {
+	display: block;
+}
+
+.fegn-drawer-head-actions {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-shrink: 0;
+}
+.fegn-drawer-head-actions .fegn-drawer-close {
+	margin-right: -0.5rem; /* optical align inside 1.25rem padding */
+}
+
+/* ---------- Dark palette: remap design tokens ---------- */
+html[data-theme="dark"] {
+	color-scheme: dark;
+	--wp--preset--color--surface: #0C1526;
+	--wp--preset--color--soft-surface: #111D33;
+	--wp--preset--color--border-color: #26344D;
+	--wp--preset--color--ink: #F1F5F9;
+	--wp--preset--color--body-text: #C3D0E2;
+	--wp--preset--color--muted: #8CA0B8;
+	--wp--preset--color--light-blue: #16294D;
+	--wp--preset--color--brand: #5B93F5;
+	--wp--preset--color--brand-dark: #9DBCFA;
+}
+
+html[data-theme="dark"] body {
+	background-color: #0B1220;
+	color: var(--wp--preset--color--body-text);
+}
+
+html[data-theme="dark"] :is(h1, h2, h3, h4, h5, h6) {
+	color: var(--wp--preset--color--ink);
+}
+
+html[data-theme="dark"] a:where(:not(.wp-element-button)):not(.fegn-nav-link):not(.fegn-mega-link):not(.fegn-drawer-cta):not(.fegn-mega-all):not(.fegn-text-link) {
+	color: var(--wp--preset--color--brand-dark);
+}
+
+/* ---------- Dark header / nav / drawer ---------- */
+html[data-theme="dark"] .fegn-site-header {
+	background: #0B1220;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
+html[data-theme="dark"] .fegn-mega-cols {
+	background: rgba(12, 21, 38, 0.97);
+	border-color: rgba(148, 163, 184, 0.22);
+}
+
+html[data-theme="dark"] .fegn-mega-col--accent {
+	background: linear-gradient(180deg, #13233F 0%, #0F1B30 100%);
+	border-color: rgba(91, 147, 245, 0.35);
+}
+
+/* Mobile drawer shell keeps its own surface (scoped: desktop nav row
+   must stay transparent so no inset box appears around the links). */
+@media (max-width: 781px) {
+	html[data-theme="dark"] .fegn-primary-nav {
+		background: var(--wp--preset--color--surface);
+	}
+
+	html[data-theme="dark"] .fegn-drawer-head {
+		background: var(--wp--preset--color--surface);
+	}
+}
+
+/* ---------- Dark heroes (first sections follow the dark menu) ---------- */
+html[data-theme="dark"] body.home .fegn-hero,
+html[data-theme="dark"] .fegn-services-hero,
+html[data-theme="dark"] .fegn-sec-hero,
+html[data-theme="dark"] .fegn-erp-hero,
+html[data-theme="dark"] .fegn-contact-hero,
+html[data-theme="dark"] .fegn-company-hero,
+html[data-theme="dark"] .fegn-wcu-hero,
+html[data-theme="dark"] .fegn-page-header {
+	background: transparent !important;
+}
+
+html[data-theme="dark"] .fegn-services-title,
+html[data-theme="dark"] .fegn-sec-title,
+html[data-theme="dark"] .fegn-erp-title,
+html[data-theme="dark"] .fegn-contact-title,
+html[data-theme="dark"] .fegn-company-title,
+html[data-theme="dark"] .fegn-wcu-title,
+html[data-theme="dark"] .fegn-page-header h1 {
+	color: var(--wp--preset--color--ink);
+}
+
+html[data-theme="dark"] .fegn-services-hero .fegn-eyebrow,
+html[data-theme="dark"] .fegn-hero-badge {
+	background: rgba(91, 147, 245, 0.16);
+	color: var(--wp--preset--color--brand-dark);
+}
+
+html[data-theme="dark"] .fegn-sec-hero .is-style-outline .wp-block-button__link {
+	border-color: var(--wp--preset--color--brand);
+	color: var(--wp--preset--color--brand-dark);
+}
+
+/* AI hero band returns to dark (its page never left dark mode). */
+html[data-theme="dark"] .fegn-ai-hero {
+	background: transparent !important;
+}
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-title {
+	color: #FFFFFF;
+}
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-lead {
+	color: #94A3B8;
+}
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-badge,
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-badge--subtle {
+	background: transparent;
+	color: #00F2FE;
+	border-color: #00F2FE;
+	box-shadow: 0 0 12px rgba(0, 242, 254, 0.25), inset 0 0 12px rgba(0, 242, 254, 0.06);
+}
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-outline {
+	border-color: rgba(0, 242, 254, 0.4) !important;
+	color: #00F2FE !important;
+}
+html[data-theme="dark"] .fegn-ai-hero .fegn-ai-outline:hover {
+	background: rgba(0, 242, 254, 0.08) !important;
+	border-color: #00F2FE !important;
+}
+
+/* ---------- Dark cards & surfaces ---------- */
+html[data-theme="dark"] .fegn-card,
+html[data-theme="dark"] .fegn-service-card,
+html[data-theme="dark"] .fegn-module-card,
+html[data-theme="dark"] .fegn-feature-card,
+html[data-theme="dark"] .fegn-glass-card,
+html[data-theme="dark"] .fegn-step-card,
+html[data-theme="dark"] .fegn-security-card,
+html[data-theme="dark"] .fegn-query-cards .fegn-card {
+	background: #101C32;
+	border-color: #26344D;
+}
+
+html[data-theme="dark"] .fegn-card h3,
+html[data-theme="dark"] .fegn-service-card h3,
+html[data-theme="dark"] .fegn-module-card h3,
+html[data-theme="dark"] .fegn-feature-card h3,
+html[data-theme="dark"] .fegn-glass-card :is(h2, h3),
+html[data-theme="dark"] .fegn-step-card h3,
+html[data-theme="dark"] .fegn-security-card h3 {
+	color: var(--wp--preset--color--ink);
+}
+
+html[data-theme="dark"] .fegn-service-card .fegn-card-link a,
+html[data-theme="dark"] .fegn-card-link a {
+	color: var(--wp--preset--color--brand-dark);
+}
+
+html[data-theme="dark"] .fegn-card-icon,
+html[data-theme="dark"] .fegn-module-icon {
+	color: var(--wp--preset--color--brand-dark);
+}
+
+html[data-theme="dark"] .fegn-testimonial {
+	background: #101C32;
+}
+
+html[data-theme="dark"] .fegn-faq-item {
+	background: #101C32;
+	border-color: #26344D;
+}
+html[data-theme="dark"] .fegn-faq-item summary {
+	color: var(--wp--preset--color--ink);
+}
+html[data-theme="dark"] .fegn-faq-item summary:hover {
+	background: #16233C;
+}
+html[data-theme="dark"] .fegn-faq-item[open] summary {
+	border-color: #26344D;
+}
+
+/* Dark contact form + inputs. */
+html[data-theme="dark"] .fegn-contact-form-card {
+	background: rgba(16, 28, 50, 0.9);
+	border-color: rgba(148, 163, 184, 0.22);
+}
+html[data-theme="dark"] .fegn-contact-form-card > h2,
+html[data-theme="dark"] .fegn-form-label {
+	color: var(--wp--preset--color--ink);
+}
+html[data-theme="dark"] .fegn-form-input {
+	background: #0B1526;
+	border-color: #2B3B58;
+	color: var(--wp--preset--color--body-text);
+}
+html[data-theme="dark"] .fegn-form-input::placeholder {
+	color: var(--wp--preset--color--muted);
+}
+
+/* Compare cards + metric/stat labels stay legible. */
+html[data-theme="dark"] .fegn-stat-label {
+	color: var(--wp--preset--color--muted);
+}
+html[data-theme="dark"] .fegn-tech-badge {
+	background: rgba(91, 147, 245, 0.16);
+	color: var(--wp--preset--color--brand-dark);
+}
+
+html[data-theme="dark"] .fegn-contact-card p a {
+	color: var(--wp--preset--color--body-text);
+}
+
+/* Footer deepens one step below the dark page. */
+html[data-theme="dark"] .fegn-site-footer {
+	background: #070D18 !important;
+}
+
+/* Foreground utility classes must stay light in dark mode: the token
+   remap above turns surface/light-blue into dark tones, which would
+   render footer (and similar) copy invisible on dark grounds. */
+html[data-theme="dark"] .has-surface-color {
+	color: #F1F5F9 !important;
+}
+html[data-theme="dark"] .has-light-blue-color {
+	color: #9DBCFA !important;
+}
+html[data-theme="dark"] .has-soft-surface-color {
+	color: #C3D0E2 !important;
+}
+
+/* CTA bands: bright brand gradients become dark panels (titles stay
+   white); white pill buttons become brand pills. Inline template
+   gradients lose to these !important rules. */
+html[data-theme="dark"] .fegn-services-cta,
+html[data-theme="dark"] .fegn-sec-cta,
+html[data-theme="dark"] .fegn-erp-cta,
+html[data-theme="dark"] .fegn-ai-cta,
+html[data-theme="dark"] .fegn-company-cta,
+html[data-theme="dark"] .fegn-wcu-cta {
+	background-color: #101C32 !important;
+	background-image: none !important;
+	border: 1px solid #26344D;
+}
+
+html[data-theme="dark"] .fegn-services-cta .wp-block-button__link,
+html[data-theme="dark"] .fegn-sec-cta .wp-block-button__link,
+html[data-theme="dark"] .fegn-erp-cta .wp-block-button__link,
+html[data-theme="dark"] .fegn-company-cta .wp-block-button__link,
+html[data-theme="dark"] .fegn-wcu-cta .wp-block-button__link {
+	background-color: var(--wp--preset--color--brand) !important;
+	color: #FFFFFF !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] .fegn-services-cta .wp-block-button__link:hover,
+html[data-theme="dark"] .fegn-sec-cta .wp-block-button__link:hover,
+html[data-theme="dark"] .fegn-erp-cta .wp-block-button__link:hover,
+html[data-theme="dark"] .fegn-company-cta .wp-block-button__link:hover,
+html[data-theme="dark"] .fegn-wcu-cta .wp-block-button__link:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Ink is remapped to near-white for TEXT in dark mode — but several
+   dark bands use ink as their BACKGROUND (inline
+   background-color:var(--ink) or CSS rules). Without this they flip
+   white with unreadable light text. Re-darken those surfaces
+   (!important beats their inline styles). */
+html[data-theme="dark"] .fegn-section--dark,
+html[data-theme="dark"] .fegn-erp-compare,
+html[data-theme="dark"] .fegn-wcu-promise,
+html[data-theme="dark"] .has-ink-background-color {
+	background-color: #0C1526 !important;
+	background-image: none !important;
+}
+
+/* No white surfaces in dark mode: chat mockup + any literal-white
+   utility backgrounds go dark. (Near-white TEXT stays — it is required
+   for readable contrast on dark grounds.) */
+html[data-theme="dark"] .fegn-chat-window {
+	background: #101C32;
+	border-color: #26344D;
+}
+html[data-theme="dark"] .fegn-chat-header {
+	background: #0C1526;
+	border-color: #26344D;
+}
+html[data-theme="dark"] .fegn-chat-title {
+	color: var(--wp--preset--color--ink);
+}
+html[data-theme="dark"] .fegn-chat-msg--bot {
+	background: #16233C;
+	border-color: #26344D;
+}
+html[data-theme="dark"] .fegn-chat-msg--bot p {
+	color: var(--wp--preset--color--body-text);
+}
+html[data-theme="dark"] .fegn-chat-input {
+	background: #0C1526;
+	border-top-color: #26344D;
+}
+html[data-theme="dark"] .fegn-chat-input-ph {
+	color: var(--wp--preset--color--muted);
+}
+html[data-theme="dark"] .fegn-chat-action-btn {
+	background: rgba(91, 147, 245, 0.12);
+	border-color: rgba(91, 147, 245, 0.4);
+	color: var(--wp--preset--color--brand-dark);
+}
+html[data-theme="dark"] .has-white-background-color {
+	background-color: #101C32 !important;
 }

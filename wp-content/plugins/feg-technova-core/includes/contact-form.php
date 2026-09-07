@@ -63,6 +63,14 @@ function fegnt_is_local_environment() {
 		if ( 'localhost' === substr( $host, -9 ) ) {
 			return true;
 		}
+		/* LAN / dev hosts (phone-over-WiFi testing via 192.168.x.x, Docker,
+		 * .local/.test domains): no public mail routing, treat as local. */
+		if ( preg_match( '/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|127\.)/', $host ) ) {
+			return true;
+		}
+		if ( preg_match( '/\.(local|test|example|invalid)$/', $host ) ) {
+			return true;
+		}
 	}
 	return false;
 }
