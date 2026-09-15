@@ -78,6 +78,24 @@ function fegn_enqueue_contact_form_script() {
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_contact_form_script' );
 
 /**
+ * Preload the hero slider images needed later in the 12-second CSS
+ * crossfade cycle (slots 2 and 3). Slot 1 is the hero's fallback
+ * background, so it already loads with first paint and needs no
+ * preload. Front page only — avoids wasted bytes elsewhere.
+ */
+function fegn_hero_slider_preloads() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$upload_dir = wp_get_upload_dir();
+	$base       = trailingslashit( $upload_dir['baseurl'] );
+	foreach ( array( 'hero-bg-1.jpg', 'hero-bg-4.jpg' ) as $file ) {
+		echo '<link rel="preload" as="image" href="' . esc_url( $base . 'feg-images/' . $file ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'fegn_hero_slider_preloads', 5 );
+
+/**
  * Retire the superseded dark-neon assets enqueued by the parent theme
  * (see extendable/functions.php feg_enqueue_redesign_assets).
  * Runs at priority 20, after the parent enqueues at 10.
@@ -157,8 +175,8 @@ function fegn_rewrite_root_relative_links( $html ) {
 	$base = rtrim( esc_attr( untrailingslashit( $home_path ) ), '/' ) . '/';
 
 	return preg_replace(
-		'~href=(["\'])/(?!/)~',
-		'href=$1' . $base,
+		'~(href|src)=(["\'])/(?!/)~',
+		'$1=$2' . $base,
 		$html
 	);
 }

@@ -778,28 +778,69 @@ body {
 
 /* ---------- Capability cards ---------- */
 
+.fegn-section--capabilities {
+	background: #ffffff !important;
+}
+
+/* Force WordPress columns to render as CSS grid for equal-height cards. */
 .fegn-cards {
-	gap: 1.5rem;
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr) !important;
+	gap: 24px !important;
+	align-items: stretch;
 }
+
 .fegn-card {
-	background: var(--wp--preset--color--surface);
-	border: 1px solid var(--wp--preset--color--border-color);
-	border-radius: 20px;
-	padding: 2rem;
+	background: #ffffff !important;
+	border: 1px solid var(--wp--preset--color--border-color) !important;
+	box-shadow: 0 4px 20px rgba(18, 38, 63, 0.06) !important;
+	border-radius: 16px !important;
+	padding: 0 !important;
 	transition: transform 200ms ease, box-shadow 200ms ease;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
 }
+
 @media (hover: hover) {
 	.fegn-card:hover {
 		transform: translateY(-4px);
 		box-shadow: 0 12px 32px rgba(8, 26, 51, 0.08);
 	}
 }
-.fegn-card h3 {
-	color: var(--wp--preset--color--ink);
-	margin-bottom: 0.75rem;
+
+.fegn-card-image {
+	margin: 0 !important;
+	padding: 0;
+	line-height: 0;
 }
-.fegn-card p {
+
+.fegn-card-image img {
+	width: 100% !important;
+	height: 190px !important;
+	object-fit: cover !important;
+	border-radius: 16px 16px 0 0 !important;
+	display: block !important;
+}
+
+/* Card text body — flex child grows to push link to bottom. */
+.fegn-card-body {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 24px;
+}
+
+.fegn-card-body h3 {
+	color: var(--wp--preset--color--ink);
+	margin-bottom: 0.5rem;
+}
+.fegn-card-body p {
 	color: var(--wp--preset--color--body-text);
+}
+.fegn-card-body .fegn-card-link {
+	margin-top: auto;
+	padding-top: 0.75rem;
 }
 .fegn-card-link a {
 	color: var(--wp--preset--color--brand);
@@ -809,6 +850,13 @@ body {
 .fegn-card-link a:hover {
 	color: var(--wp--preset--color--brand-dark);
 	text-decoration: underline;
+}
+
+/* Stack cards on narrow screens. */
+@media (max-width: 781px) {
+	.fegn-cards {
+		grid-template-columns: 1fr !important;
+	}
 }
 
 /* ---------- Process steps (dark section) ---------- */
@@ -3464,4 +3512,222 @@ button.fegn-form-submit {
 		margin: -1.5rem -1.5rem 1.25rem;
 		font-size: 2rem;
 	}
+}
+
+/* =====================================================================
+   Hero banner — 3-image pure-CSS crossfade slider + tight nav/hero spacing
+   ---------------------------------------------------------------------
+   EASY SWAP: the slider uses only these 3 files from
+   wp-content/uploads/feg-images/:
+     display order: hero-bg-2.jpg → hero-bg-1.jpg → hero-bg-4.jpg → loop
+   Change only the file names in --fegn-hero-bg-1/2/3 below.
+
+   Paths are relative to this CSS file
+   (wp-content/themes/extendable-child/assets/css/), so they work
+   whether WordPress runs from a subdirectory (/fegtechnova/) or a
+   domain root — no environment-specific URL is baked in.
+
+   Timing: 12s total loop, each image visible 4s with 1s crossfade
+   (see @keyframes fegn-hero-crossfade). No JavaScript involved.
+   ===================================================================== */
+
+:root {
+	--fegn-hero-bg-1: url("../../../../uploads/feg-images/hero-bg-2.jpg"); /* display slot 1 (first visible) */
+	--fegn-hero-bg-2: url("../../../../uploads/feg-images/hero-bg-1.jpg"); /* display slot 2 (second) */
+	--fegn-hero-bg-3: url("../../../../uploads/feg-images/hero-bg-4.jpg"); /* display slot 3 (third) */
+	--fegn-hero-bg: var(--fegn-hero-bg-1); /* fallback = first visible image */
+}
+
+/* --- Tighten header / hero junction: minimal clean spacing --- */
+.fegn-site-header {
+	margin-bottom: 0 !important;
+}
+
+.fegn-main,
+#fegn-main {
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+/* --- Hero background (static slot-1 fallback = first paint, and the
+   no-animation fallback for prefers-reduced-motion) --- */
+.fegn-hero,
+.fegn-hero--bg {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	margin-top: 0 !important;
+	/* Minimal top gap so header and hero sit closely together. */
+	padding-top: 1rem !important;
+	padding-bottom: 2rem !important;
+	background-color: var(--wp--preset--color--soft-surface);
+	background-image: var(--fegn-hero-bg-1);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* --- Light overlay (pseudo-element) keeps heading, buttons and the
+   "How we engage" card fully readable while the background image shows
+   through. z-index 1 = above the slider layers (z-index 0), below the
+   hero content (z-index 1 but later in DOM order). Do not remove. --- */
+.fegn-hero::before,
+.fegn-hero--bg::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.4) 50%,
+		rgba(255, 255, 255, 0.5) 100%
+	);
+}
+
+/* Keep hero content above the overlay — exclude the background slider. */
+.fegn-hero > :not(.fegn-hero__bg-slider),
+.fegn-hero--bg > :not(.fegn-hero__bg-slider) {
+	position: relative;
+	z-index: 1;
+}
+
+/* --- Hero crossfade slider (pure CSS, no JavaScript) ---
+   Stacking, bottom to top:
+     0 = .fegn-hero__bg-slider layers (background photos)
+     1 = .fegn-hero::before (readability overlay, DOM-first so it paints
+         below the z-index:1 hero content that follows it)
+     1 = hero text / buttons / card (above overlay via later DOM order)
+   The slider is absolute so it never affects document flow or the
+   hero's height (no layout shift, mobile-safe).
+   max-width: none overrides WordPress constrained-layout max-width
+   so the images fill the full hero section edge-to-edge. --- */
+.fegn-hero > .fegn-hero__bg-slider,
+.fegn-hero--bg > .fegn-hero__bg-slider {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.fegn-hero__bg-slide {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0;
+	will-change: opacity;
+}
+
+.fegn-hero__bg-slide--1 {
+	background-image: var(--fegn-hero-bg-1); /* hero-bg-2.jpg = first visible */
+	opacity: 1; /* static default: slot 1 visible, no animation */
+}
+
+.fegn-hero__bg-slide--2 {
+	background-image: var(--fegn-hero-bg-2); /* hero-bg-1.jpg */
+}
+
+.fegn-hero__bg-slide--3 {
+	background-image: var(--fegn-hero-bg-3); /* hero-bg-4.jpg */
+}
+
+/* 12s loop, % mapped to seconds (12s = 100%):
+     0.00% (0s)  fade-in starts ......... opacity 0
+     8.33% (1s)  fade-in done ........... opacity 1
+    33.33% (4s)  hold ends, fade-out .... opacity 1
+    41.67% (5s)  fade-out done .......... opacity 0
+   100.00% (12s) stays hidden ........... opacity 0
+   Slides stagger at 0s / 4s / 8s, so each holds 3s fully visible with a
+   1s crossfade on each side inside its 4s slot. At the 12s -> 0s seam,
+   slide 3 is mid fade-out (opacity 1 -> 0) while slide 1 fades back in
+   (opacity 0 -> 1) over the identical slot-1 fallback underneath, so
+   there is no flash or empty frame at the loop restart. */
+@keyframes fegn-hero-crossfade {
+	0% { opacity: 0; }
+	8.33% { opacity: 1; }
+	33.33% { opacity: 1; }
+	41.67% { opacity: 0; }
+	100% { opacity: 0; }
+}
+
+/* Motion-safe users only: run the staggered 12s crossfade. */
+@media (prefers-reduced-motion: no-preference) {
+	.fegn-hero__bg-slide {
+		animation-name: fegn-hero-crossfade;
+		animation-duration: 12s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: infinite;
+	}
+	.fegn-hero__bg-slide--1 {
+		opacity: 0;
+		animation-delay: 0s;
+	}
+	.fegn-hero__bg-slide--2 {
+		animation-delay: 4s;
+	}
+	.fegn-hero__bg-slide--3 {
+		animation-delay: 8s;
+	}
+}
+
+/* Glassmorphism panel for "How we engage" card — frosted glass over hero bg. */
+.fegn-hero-panel {
+	background: rgba(255, 255, 255, 0.35) !important;
+	backdrop-filter: blur(14px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+	border: 1px solid rgba(255, 255, 255, 0.4) !important;
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Dark-overlay alternative (uncomment to use with light text):
+.fegn-hero::before {
+	background: linear-gradient(rgba(8, 26, 51, 0.65), rgba(8, 26, 51, 0.55));
+}
+*/
+
+@media (max-width: 781px) {
+	.fegn-hero,
+	.fegn-hero--bg {
+		padding-top: 0.75rem !important;
+		padding-bottom: 1.5rem !important;
+	}
+}
+
+/* Force Equal Card & Image Heights */
+.fegn-card {
+	display: flex !important;
+	flex-direction: column !important;
+	overflow: hidden !important;
+}
+
+.fegn-card figure,
+.fegn-card .wp-block-image,
+.fegn-card-image {
+	margin: 0 !important;
+	width: 100% !important;
+	height: 200px !important;
+	min-height: 200px !important;
+	max-height: 200px !important;
+	overflow: hidden !important;
+}
+
+.fegn-card img,
+.fegn-card .wp-block-image img,
+.fegn-card-image img {
+	width: 100% !important;
+	height: 200px !important;
+	max-height: 200px !important;
+	object-fit: cover !important;
+	object-position: center !important;
+	border-radius: 16px 16px 0 0 !important;
+	display: block !important;
 }

@@ -3,8 +3,11 @@
 <!-- wp:group {"tagName":"main","className":"fegn-main","layout":{"type":"default"}} -->
 <main id="fegn-main" class="wp-block-group fegn-main">
 
-	<!-- wp:group {"className":"fegn-hero","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--70)","bottom":"var(--wp--preset--spacing--70)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-hero has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+	<!-- wp:group {"className":"fegn-hero fegn-hero--bg","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--20)","bottom":"var(--wp--preset--spacing--40)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-hero fegn-hero--bg has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--40)">
+		<!-- wp:html -->
+		<div class="fegn-hero__bg-slider" aria-hidden="true"><div class="fegn-hero__bg-slide fegn-hero__bg-slide--1"></div><div class="fegn-hero__bg-slide fegn-hero__bg-slide--2"></div><div class="fegn-hero__bg-slide fegn-hero__bg-slide--3"></div></div>
+		<!-- /wp:html -->
 		<!-- wp:columns {"className":"alignwide fegn-hero-grid","verticalAlignment":"center"} -->
 		<div class="wp-block-columns alignwide fegn-hero-grid are-vertically-aligned-center">
 
@@ -67,11 +70,11 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+	<!-- wp:group {"className":"fegn-section fegn-section--capabilities","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section fegn-section--capabilities" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--80)">
 		<!-- wp:group {"className":"alignwide fegn-section-head","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
 		<div class="wp-block-group alignwide fegn-section-head">
-			<!-- wp:group {"layout":{"type":"constrained"}} -->
+			<!-- wp:group -->
 			<div class="wp-block-group">
 				<!-- wp:paragraph {"className":"fegn-eyebrow","fontSize":"small","style":{"typography":{"fontWeight":"600","letterSpacing":"0.08em"}}} -->
 				<p class="fegn-eyebrow has-small-font-size" style="font-weight:600;letter-spacing:0.08em">Core capabilities</p>
@@ -92,6 +95,12 @@
 
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
+				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
+				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-1.jpg" alt="Enterprise Software Development"/></figure>
+				<!-- /wp:image -->
+				<!-- wp:html -->
+				<div class="fegn-card-body">
+				<!-- /wp:html -->
 				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
 				<h3 class="wp-block-heading has-x-large-font-size">Enterprise Software Development</h3>
 				<!-- /wp:heading -->
@@ -101,11 +110,20 @@
 				<!-- wp:paragraph {"className":"fegn-card-link"} -->
 				<p class="fegn-card-link"><a href="/services/">Learn more →</a></p>
 				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				</div>
+				<!-- /wp:html -->
 			</div>
 			<!-- /wp:column -->
 
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
+				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
+				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-2.jpg" alt="ERP Consulting &amp; Integration"/></figure>
+				<!-- /wp:image -->
+				<!-- wp:html -->
+				<div class="fegn-card-body">
+				<!-- /wp:html -->
 				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
 				<h3 class="wp-block-heading has-x-large-font-size">ERP Consulting &amp; Integration</h3>
 				<!-- /wp:heading -->
@@ -115,11 +133,20 @@
 				<!-- wp:paragraph {"className":"fegn-card-link"} -->
 				<p class="fegn-card-link"><a href="/services/">Learn more →</a></p>
 				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				</div>
+				<!-- /wp:html -->
 			</div>
 			<!-- /wp:column -->
 
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
+				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
+				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-3.jpg" alt="SaaS Product Engineering"/></figure>
+				<!-- /wp:image -->
+				<!-- wp:html -->
+				<div class="fegn-card-body">
+				<!-- /wp:html -->
 				<!-- wp:heading {"level":3,"fontSize":"x-large"} -->
 				<h3 class="wp-block-heading has-x-large-font-size">SaaS Product Engineering</h3>
 				<!-- /wp:heading -->
@@ -129,6 +156,9 @@
 				<!-- wp:paragraph {"className":"fegn-card-link"} -->
 				<p class="fegn-card-link"><a href="/services/">Learn more →</a></p>
 				<!-- /wp:paragraph -->
+				<!-- wp:html -->
+				</div>
+				<!-- /wp:html -->
 			</div>
 			<!-- /wp:column -->
 		</div>
