@@ -146,6 +146,18 @@
 			window.requestAnimationFrame(function () {
 				window.requestAnimationFrame(function () { refreshPanelHeight(root); });
 			});
+			/* Watchdog: if the max-height transition never runs to
+			 * completion (frozen timers, odd webviews, tap-emulating
+			 * environments), force the open panel visible so a tap can
+			 * never leave it stuck at height 0. */
+			window.setTimeout(function () {
+				if (!isOpen(root) || !isMobile()) { return; }
+				var p = megaPanel(root);
+				if (p && p.getBoundingClientRect().height <= 1) {
+					p.style.maxHeight = 'none';
+					p.style.overflow = 'visible';
+				}
+			}, 450);
 		}
 
 		function closeMega(root, refocus) {
@@ -174,6 +186,12 @@
 			trigger.addEventListener('click', function (event) {
 				event.stopPropagation();
 				event.preventDefault();
+				/* Rapid-tap guard: some emulators/webviews dispatch the
+				 * same tap twice within milliseconds, which would toggle
+				 * open->shut instantly and look like "nothing happens". */
+				var now = Date.now();
+				if (trigger._fegnLastTap && now - trigger._fegnLastTap < 350) { return; }
+				trigger._fegnLastTap = now;
 				if (isOpen(root)) {
 					closeMega(root, false);
 				} else {
