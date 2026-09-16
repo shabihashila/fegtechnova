@@ -948,15 +948,62 @@ body {
 	margin: 0;
 }
 .fegn-footer-cols {
-	gap: 2rem;
+	gap: 32px;
+	display: grid !important;
+	grid-template-columns: 2fr 1.2fr 1.2fr 1.4fr !important;
+	align-items: start !important;
+}
+.fegn-footer-cols > .wp-block-column {
+	flex-basis: unset;
 }
 .fegn-footer-heading {
+	font-size: 14px;
+	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	margin-bottom: 0.75rem;
+	margin-bottom: 16px;
 }
 .fegn-footer-tagline {
 	max-width: 34ch;
+}
+.fegn-footer-column ul,
+.fegn-footer-service-list,
+.fegn-footer-contact-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.fegn-footer-column ul li,
+.fegn-footer-service-list li,
+.fegn-footer-contact-list li {
+	font-size: 14px !important;
+	line-height: 1.6 !important;
+	margin-bottom: 10px !important;
+	display: block !important;
+}
+.fegn-footer-column ul li:last-child,
+.fegn-footer-service-list li:last-child,
+.fegn-footer-contact-list li:last-child {
+	margin-bottom: 0 !important;
+}
+.fegn-footer-column ul a,
+.fegn-footer-service-list a,
+.fegn-footer-contact-list a {
+	color: #C9D7EC;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+.fegn-footer-column ul a:hover,
+.fegn-footer-column ul a:focus-visible,
+.fegn-footer-service-list a:hover,
+.fegn-footer-service-list a:focus-visible,
+.fegn-footer-contact-list a:hover,
+.fegn-footer-contact-list a:focus-visible {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+.fegn-footer-contact-list li {
+	color: #C9D7EC;
 }
 .fegn-footer-bottom {
 	padding-block: 1.5rem 2rem;
@@ -1024,6 +1071,10 @@ body {
 		align-items: flex-start;
 		flex-direction: column;
 		gap: 0.75rem;
+	}
+	.fegn-footer-cols {
+		grid-template-columns: 1fr !important;
+		gap: 2rem !important;
 	}
 }
 
@@ -1353,17 +1404,68 @@ body {
 
 /* ---------- Contact page ---------- */
 
+/* Force Full-Bleed Background for Contact Hero */
+html body .page-contact-wrapper .fegn-contact-hero,
+html body .fegn-contact-hero {
+	background-image: none !important;
+	background-color: #D5E4ED !important;
+	width: 100vw !important;
+	position: relative !important;
+	left: 50% !important;
+	right: 50% !important;
+	margin-left: -50vw !important;
+	margin-right: -50vw !important;
+	padding: 60px 0 !important;
+	margin-bottom: 30px !important;
+}
+
+html body .fegn-contact-hero > div {
+	max-width: 1200px !important;
+	margin: 0 auto !important;
+	padding: 0 20px !important;
+}
+
+/* Keyframe Animation Definition */
+@keyframes fegnFadeInUp {
+	0% {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Hero Title Animation & Color */
+html body .fegn-contact-hero h1,
+html body .fegn-contact-hero .fegn-title {
+	color: #151B54 !important;
+	animation: fegnFadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Subtitle Animation & Color with Stagger Delay */
+html body .fegn-contact-hero p,
+html body .fegn-contact-hero .fegn-subtitle {
+	color: #151B54 !important;
+	opacity: 0.9;
+	animation: fegnFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards !important;
+}
+
 .fegn-contact-hero {
 	text-align: left;
 }
 
 .fegn-contact-title {
 	max-width: 28ch;
-	color: var(--wp--preset--color--ink);
+	color: #151B54;
 }
 
 .fegn-contact-grid {
-	gap: 3rem;
+	display: grid !important;
+	grid-template-columns: 1fr 1.6fr !important;
+	gap: 32px !important;
+	align-items: start !important;
 }
 
 .fegn-contact-grid > .wp-block-column {
@@ -1378,43 +1480,54 @@ body {
 
 .fegn-contact-info > h2 {
 	color: var(--wp--preset--color--ink);
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.25rem;
 }
 
 .fegn-contact-card {
-	transition: transform 200ms ease, box-shadow 200ms ease;
+	background: #f8fafc !important;
+	border: 1px solid #e2e8f0 !important;
+	border-left: 4px solid #1d4ed8 !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .fegn-contact-card:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 24px rgba(8, 26, 51, 0.08);
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
 }
 
 .fegn-contact-label {
 	margin-bottom: 0.25rem;
 	text-transform: uppercase;
-	color: var(--wp--preset--color--brand);
+	color: #1d4ed8;
+	font-weight: 700;
+	font-size: 0.8125rem;
+	letter-spacing: 0.06em;
 }
 
-.fegn-contact-card p a {
+.fegn-contact-card p {
 	color: var(--wp--preset--color--body-text);
-	text-decoration: none;
-	font-weight: 500;
-	transition: color 180ms ease;
-}
-.fegn-contact-card p a:hover {
-	color: var(--wp--preset--color--brand);
-	text-decoration: underline;
+	line-height: 1.6;
 }
 
 /* Contact form card */
+html body .page-contact-wrapper .fegn-contact-form,
+html body .fegn-contact-form,
+html body .page-contact-wrapper form,
 .fegn-contact-form-card {
-	background: var(--wp--preset--color--surface);
-	border: 1px solid var(--wp--preset--color--border-color);
-	box-shadow: 0 4px 20px rgba(8, 26, 51, 0.06);
+	background-color: #D5E4ED !important;
+	border: 1px solid #c2d4e0 !important;
+	padding: 32px !important;
+	border-radius: 16px !important;
+	box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
 }
 
+/* Form text & label colors */
+html body .fegn-contact-form h2,
+html body .fegn-contact-form h3,
+html body .fegn-contact-form p,
+html body .fegn-contact-form label,
+html body .fegn-contact-form .form-label,
 .fegn-contact-form-card > h2 {
-	color: var(--wp--preset--color--ink);
+	color: #151B54 !important;
 	margin-bottom: 0.5rem;
 }
 
@@ -1423,23 +1536,28 @@ body {
 	display: block;
 	font-size: 0.875rem;
 	font-weight: 600;
-	color: var(--wp--preset--color--ink);
+	color: #151B54;
 	margin-bottom: 0.35rem;
 }
 
+/* Input fields — crisp white against #EAEEE9 */
+html body .fegn-contact-form input[type="text"],
+html body .fegn-contact-form input[type="email"],
+html body .fegn-contact-form input[type="tel"],
+html body .fegn-contact-form select,
+html body .fegn-contact-form textarea,
 .fegn-form-input {
 	display: block;
 	width: 100%;
 	padding: 12px 16px;
-	font-family: inherit;
-	font-size: 1rem;
-	color: var(--wp--preset--color--body-text);
-	background: var(--wp--preset--color--surface);
-	border: 1px solid #e2e8f0;
-	border-radius: 8px;
-	transition: border-color 180ms ease, box-shadow 180ms ease;
+	background-color: #ffffff !important;
+	color: #151B54 !important;
+	border: 1px solid #cbd5e1 !important;
+	border-radius: 8px !important;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
 	box-sizing: border-box;
 }
+
 .fegn-form-input:focus {
 	outline: none;
 	border-color: var(--wp--preset--color--brand);
@@ -1486,8 +1604,8 @@ body {
 /* Contact page responsive */
 @media (max-width: 781px) {
 	.fegn-contact-grid {
-		flex-direction: column;
-		gap: 2rem;
+		grid-template-columns: 1fr !important;
+		gap: 2rem !important;
 	}
 	.fegn-contact-grid > .wp-block-column {
 		flex-basis: 100% !important;
@@ -1517,6 +1635,80 @@ body {
 .fegn-hero-badge--light {
 	background: rgba(255, 255, 255, 0.12);
 	color: #7FB3F5;
+}
+
+/* About Us Hero Banner — solid color background, constrained layout */
+html body .about-hero-section {
+	background-color: #D1D7E0 !important;
+	background-image: none !important;
+}
+
+/* Force remove background, border, shadow, and full-width shape from WHO WE ARE badge and its containers */
+html body .about-hero-section > *:nth-child(1),
+html body .page-about-us .fegn-badge,
+html body .page-about-us .wp-block-button,
+html body .page-about-us .wp-block-button__link,
+html body .page-about-us .has-background,
+html body .page-about-us .wp-element-button {
+	background: none !important;
+	background-color: transparent !important;
+	border: none !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	margin-bottom: 12px !important;
+	width: auto !important;
+	display: inline-block !important;
+	color: #151B54 !important;
+	font-weight: 700 !important;
+	font-size: 14px !important;
+	letter-spacing: 1.5px !important;
+	text-transform: uppercase !important;
+	position: relative !important;
+	z-index: 2 !important;
+}
+
+/* Main Heading positioned directly UNDER badge */
+html body .about-hero-section h1 {
+	display: block !important;
+	color: #151B54 !important;
+	margin-top: 0 !important;
+	margin-bottom: 20px !important;
+	position: relative !important;
+	z-index: 1 !important;
+}
+
+/* Paragraph Description under Heading */
+html body .about-hero-section p {
+	display: block !important;
+	color: #151B54 !important;
+	margin-bottom: 0 !important;
+}
+
+/* Smooth Pulse Keyframe Animation */
+@keyframes fegnPulseHeading {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.02);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+/* Pulse Animation ONLY on Main Heading */
+html body .about-hero-section h1 {
+	display: inline-block !important;
+	animation: fegnPulseHeading 2.8s ease-in-out infinite !important;
+	will-change: transform;
+}
+
+/* Force pull up the Our Vision / Our Mission section */
+html body .fegn-vision-mission-section {
+	margin-top: 0px !important;
+	padding-top: 0px !important;
 }
 
 /* Company profile hero */
@@ -3331,13 +3523,11 @@ button.fegn-form-submit {
 
 /* Compact glassmorphism card (overrides the 2.5rem inline padding). */
 .fegn-contact-form-card {
-	padding: 24px 28px !important;
-	background: rgba(255, 255, 255, 0.85);
-	-webkit-backdrop-filter: blur(12px);
-	backdrop-filter: blur(12px);
-	border: 1px solid rgba(220, 230, 242, 0.8);
+	padding: 28px 32px !important;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
 	border-radius: 16px;
-	box-shadow: 0 10px 30px rgba(0, 50, 120, 0.06);
+	box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
 }
 
 /* Tighten vertical rhythm (overrides 1.25rem/1.5rem inline margins). */
@@ -3365,13 +3555,17 @@ button.fegn-form-submit {
 
 /* Compact inputs + brand-blue focus glow. */
 .fegn-form-input {
-	padding: 10px 14px;
+	padding: 12px 16px;
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	background: #ffffff;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .fegn-form-input:focus {
 	outline: none;
-	border-color: #0052cc;
-	box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.12);
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* Shorter message box to balance the Direct Contact column. */
@@ -3381,18 +3575,25 @@ button.fegn-form-submit {
 
 /* Wider submit with a smooth, tactile hover. */
 .fegn-contact-form-inner .fegn-form-submit {
-	min-width: 220px;
-	padding: 14px 44px;
+	width: 100%;
+	padding: 14px 32px;
+	background-color: #1d4ed8 !important;
+	color: #ffffff !important;
+	font-weight: 700;
+	cursor: pointer;
+	border: none;
+	border-radius: 8px;
 	transition:
-		background-color 220ms ease,
-		box-shadow 220ms ease,
-		transform 220ms ease;
+		background-color 0.2s ease,
+		box-shadow 0.2s ease,
+		transform 0.2s ease;
 }
 
 .fegn-contact-form-inner .fegn-form-submit:hover,
 .fegn-contact-form-inner .fegn-form-submit:focus-visible {
 	transform: translateY(-2px);
 	box-shadow: 0 8px 22px rgba(29, 78, 216, 0.4);
+	filter: brightness(1.1);
 }
 
 @media (max-width: 781px) {
@@ -4265,4 +4466,62 @@ html[data-theme="dark"] .has-white-background-color {
 	object-position: center !important;
 	border-radius: 16px 16px 0 0 !important;
 	display: block !important;
+}
+
+/* ==========================================================================
+   ABOUT US PAGE — FINAL SUPPORT RULES
+   ========================================================================== */
+
+/* Hero background (template sets layout:constrained — no full-bleed needed) */
+html body .about-hero-section {
+	background-color: #D1D7E0 !important;
+	background-image: none !important;
+}
+html body .about-hero-section .fegn-hero-badge {
+	display: inline-block !important;
+}
+html body .about-hero-section h1 {
+	color: #151B54 !important;
+}
+html body .about-hero-section p {
+	color: #151B54 !important;
+}
+
+/* CTA background (template sets #C5DCED inline — CSS reinforces) */
+html body .fegn-company-cta {
+	background-color: #C5DCED !important;
+	background-image: none !important;
+}
+html body .fegn-company-cta .fegn-company-cta-title {
+	color: #151B54 !important;
+}
+/* CTA button — dark text on light bg */
+html body .fegn-company-cta .wp-block-button__link {
+	background-color: #1d4ed8 !important;
+	color: #ffffff !important;
+}
+
+/* ==========================================================================
+   SERVICES PAGE — Hero Background & Spacing
+   ========================================================================== */
+/* Change Services Page Hero Background to #C5DCED & Set 40px Bottom Gap */
+html body .page-services .entry-content > .wp-block-group:first-child,
+html body .services .entry-content > .wp-block-group:first-child,
+html body .fegn-services-hero {
+	background-color: #C5DCED !important;
+	background-image: none !important;
+	padding-top: 50px !important;
+	padding-bottom: 40px !important;
+	margin-bottom: 0px !important;
+}
+/* Remove excessive top padding from the following Core Tech Services section */
+html body .page-services .entry-content > .wp-block-group:nth-child(2),
+html body .services .entry-content > .wp-block-group:nth-child(2) {
+	margin-top: 0px !important;
+	padding-top: 40px !important;
+}
+
+/* Pulse Animation for Services Hero Heading */
+html body .fegn-services-hero h1 {
+	animation: fegnPulseHeading 2.8s ease-in-out infinite !important;
 }
