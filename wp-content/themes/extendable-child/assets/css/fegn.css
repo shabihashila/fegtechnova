@@ -1736,6 +1736,18 @@ body.page-id-96 .fegn-wcu-cta {
 	padding-bottom: 44px !important;
 }
 
+/* Services Section 2 (6 pages) only: uniform 44px vertical padding.
+   Scoped by page ID so the site-wide .fegn-section class is untouched elsewhere. */
+body.page-id-112 .fegn-section,
+body.page-id-113 .fegn-section,
+body.page-id-114 .fegn-section,
+body.page-id-115 .fegn-section,
+body.page-id-116 .fegn-section,
+body.page-id-117 .fegn-section {
+	padding-top: 44px !important;
+	padding-bottom: 44px !important;
+}
+
 /* Company profile hero */
 .fegn-company-hero,
 .fegn-wcu-hero {
@@ -2024,7 +2036,7 @@ body.page-id-96 .fegn-wcu-cta .wp-block-button__link:hover {
 }
 
 .fegn-module-card {
-	background: #ffffff;
+	background-color: #C7D9FF !important;
 	border-radius: 16px;
 	border-top: 4px solid #2563eb;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -2038,12 +2050,13 @@ body.page-id-96 .fegn-wcu-cta .wp-block-button__link:hover {
 	}
 }
 .fegn-module-card h3 {
-	color: #0f172a;
+	color: #113252 !important;
 	font-weight: 700;
 	margin-bottom: 0.75rem;
+	animation: fegnBounceIn 0.8s ease forwards;
 }
 .fegn-module-card p {
-	color: var(--wp--preset--color--body-text);
+	color: #1e3a5f !important;
 	line-height: 1.6;
 }
 .fegn-module-icon {
@@ -2339,6 +2352,27 @@ body.page-id-96 .fegn-wcu-cta .wp-block-button__link:hover {
 .fegn-feature-card p {
 	color: var(--wp--preset--color--body-text);
 	line-height: 1.6;
+}
+
+/* Card title entrance (module + feature families share one definition). */
+@keyframes fegnBounceIn {
+	0% { opacity: 0; transform: scale(0.3); }
+	50% { opacity: 1; transform: scale(1.05); }
+	70% { transform: scale(0.9); }
+	100% { opacity: 1; transform: scale(1); }
+}
+
+/* Feature cards on the 5 lightweight pages only: Website tech-grid cards
+   (.fegn-tech-card) are excluded via :not(). Bare .fegn-feature-card rule untouched. */
+.fegn-feature-card:not(.fegn-tech-card) {
+	background-color: #C7D9FF !important;
+}
+.fegn-feature-card:not(.fegn-tech-card) h3 {
+	color: #113252 !important;
+	animation: fegnBounceIn 0.8s ease forwards;
+}
+.fegn-feature-card:not(.fegn-tech-card) p {
+	color: #1e3a5f !important;
 }
 
 /* Full-width CTA banner */
