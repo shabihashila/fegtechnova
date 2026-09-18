@@ -132,19 +132,15 @@ function fegn_enqueue_contact_form_script() {
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_contact_form_script' );
 
 /**
- * Preload the hero slider images needed later in the 12-second CSS
- * crossfade cycle (slots 2 and 3). Slot 1 is the hero's fallback
- * background, so it already loads with first paint and needs no
- * preload. Front page only — avoids wasted bytes elsewhere.
+ * Preload local homepage backgrounds before the CSS crossfade starts.
  */
 function fegn_hero_slider_preloads() {
 	if ( ! is_front_page() ) {
 		return;
 	}
-	$upload_dir = wp_get_upload_dir();
-	$base       = trailingslashit( $upload_dir['baseurl'] );
-	foreach ( array( 'hero-bg-1.jpg', 'hero-bg-4.jpg' ) as $file ) {
-		echo '<link rel="preload" as="image" href="' . esc_url( $base . 'feg-images/' . $file ) . '">' . "\n";
+	$base = get_stylesheet_directory_uri() . '/assets/images/';
+	foreach ( array( 'hero-development.webp', 'hero-cloud.webp', 'hero-data.webp' ) as $file ) {
+		echo '<link rel="preload" as="image" href="' . esc_url( $base . $file ) . '">' . "\n";
 	}
 }
 add_action( 'wp_head', 'fegn_hero_slider_preloads', 5 );

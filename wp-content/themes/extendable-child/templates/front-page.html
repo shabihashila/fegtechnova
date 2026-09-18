@@ -3,7 +3,7 @@
 <!-- wp:group {"tagName":"main","className":"fegn-main","layout":{"type":"default"}} -->
 <main id="fegn-main" class="wp-block-group fegn-main">
 
-	<!-- wp:group {"className":"fegn-hero fegn-hero--bg","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--20)","bottom":"var(--wp--preset--spacing--40)"}}},"layout":{"type":"constrained"}} -->
+	<!-- wp:group {"className":"fegn-hero fegn-hero--bg","style":{"color":{"background":"var(--wp--preset--color--soft-surface)"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--20)","bottom":"var(--wp--preset--spacing--40)"}}},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-group fegn-hero fegn-hero--bg has-background" style="background-color:var(--wp--preset--color--soft-surface);padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--40)">
 		<!-- wp:html -->
 		<div class="fegn-hero__bg-slider" aria-hidden="true"><div class="fegn-hero__bg-slide fegn-hero__bg-slide--1"></div><div class="fegn-hero__bg-slide fegn-hero__bg-slide--2"></div><div class="fegn-hero__bg-slide fegn-hero__bg-slide--3"></div></div>
@@ -67,11 +67,56 @@
 			<!-- /wp:column -->
 		</div>
 		<!-- /wp:columns -->
+		<!-- wp:html -->
+		<button class="fegn-hero__pause" type="button" hidden>Pause backgrounds</button>
+		<script>
+		(function () {
+		 'use strict';
+		 var hero = document.currentScript.closest('.fegn-hero--bg');
+		 if (!document.body.classList.contains('home') || !hero) return;
+		 var button = hero.querySelector('.fegn-hero__pause');
+		 var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		 var paused = false;
+		 var ready = false;
+		 function sync() {
+		  hero.classList.toggle('is-ready', ready && !motion.matches);
+		  hero.classList.toggle('is-paused', paused || document.hidden);
+		  button.hidden = !ready || motion.matches;
+		  button.textContent = paused ? 'Resume backgrounds' : 'Pause backgrounds';
+		 }
+		 button.addEventListener('click', function () { paused = !paused; sync(); });
+		 motion.addEventListener('change', sync);
+		 document.addEventListener('visibilitychange', sync);
+		 // Decode every layer before starting the shared CSS clock. On failure,
+		 // keep the static first background and hide the unnecessary control.
+		 Promise.all(Array.from(hero.querySelectorAll('.fegn-hero__bg-slide'), function (slide) {
+		  var source = getComputedStyle(slide).backgroundImage;
+		  var image = new Image();
+		  image.src = source.slice(5, -2);
+		  return image.decode();
+		 })).then(function () { ready = true; sync(); }).catch(function () {});
+		})();
+		</script>
+		<!-- /wp:html -->
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"fegn-section fegn-section--capabilities","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-section fegn-section--capabilities" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--80)">
+	<!-- wp:html -->
+	<nav class="fegn-home-overviews" aria-label="Explore FEG TechNova">
+		<div class="fegn-home-overviews-inner">
+			<p class="fegn-home-overviews-label">Explore FEG TechNova</p>
+			<ul class="fegn-home-overviews-links">
+				<li><a href="/about-us/"><span class="fegn-home-overviews-title">About Us <span aria-hidden="true">&#8599;</span></span><span class="fegn-home-overviews-description">Our story and approach</span></a></li>
+				<li><a href="/services/"><span class="fegn-home-overviews-title">Our Services <span aria-hidden="true">&#8599;</span></span><span class="fegn-home-overviews-description">Software, systems and AI</span></a></li>
+				<li><a href="/website/"><span class="fegn-home-overviews-title">Website Solutions <span aria-hidden="true">&#8599;</span></span><span class="fegn-home-overviews-description">Web design and development</span></a></li>
+				<li><a href="/marketing/"><span class="fegn-home-overviews-title">Digital Marketing <span aria-hidden="true">&#8599;</span></span><span class="fegn-home-overviews-description">Explore our marketing services</span></a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- /wp:html -->
+
+	<!-- wp:group {"className":"fegn-section fegn-section--capabilities fegn-home-capabilities","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--60)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section fegn-section--capabilities fegn-home-capabilities" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--80)">
 		<!-- wp:group {"className":"alignwide fegn-section-head","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
 		<div class="wp-block-group alignwide fegn-section-head">
 			<!-- wp:group -->
@@ -96,7 +141,7 @@
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
 				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
-				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-1.jpg" alt="Enterprise Software Development"/></figure>
+				<figure class="wp-block-image fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/themes/extendable-child/assets/images/home-card-enterprise.webp" alt="Enterprise Software Development"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:html -->
 				<div class="fegn-card-body">
@@ -119,7 +164,7 @@
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
 				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
-				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-2.jpg" alt="ERP Consulting &amp; Integration"/></figure>
+				<figure class="wp-block-image fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/themes/extendable-child/assets/images/home-card-erp.webp" alt="ERP Consulting &amp; Integration"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:html -->
 				<div class="fegn-card-body">
@@ -142,7 +187,7 @@
 			<!-- wp:column {"className":"fegn-card"} -->
 			<div class="wp-block-column fegn-card">
 				<!-- wp:image {"className":"fegn-card-image","style":{"border":{"radius":{"topLeft":"16px","topRight":"16px"}}}} -->
-				<figure class="wp-block-image has-fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/uploads/feg-images/img-3.jpg" alt="SaaS Product Engineering"/></figure>
+				<figure class="wp-block-image fegn-card-image has-border-radius" style="border-radius:16px 16px 0 0"><img src="/wp-content/themes/extendable-child/assets/images/home-card-saas.webp" alt="SaaS Product Engineering"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:html -->
 				<div class="fegn-card-body">
@@ -166,8 +211,8 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"fegn-section fegn-section--dark","style":{"color":{"background":"var(--wp--preset--color--ink)","text":"#FFFFFF"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-section fegn-section--dark has-background has-text-color" style="background-color:var(--wp--preset--color--ink);color:#FFFFFF;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+	<!-- wp:group {"className":"fegn-section fegn-section--dark fegn-home-process","style":{"color":{"background":"var(--wp--preset--color--ink)","text":"#FFFFFF"},"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section fegn-section--dark fegn-home-process has-background has-text-color" style="background-color:var(--wp--preset--color--ink);color:#FFFFFF;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
 		<!-- wp:group {"className":"alignwide","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group alignwide">
 			<!-- wp:paragraph {"className":"fegn-eyebrow fegn-eyebrow--light","fontSize":"small","style":{"typography":{"fontWeight":"600","letterSpacing":"0.08em"}}} -->
@@ -241,8 +286,8 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"className":"fegn-section","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group fegn-section" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+	<!-- wp:group {"className":"fegn-section fegn-home-work","style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--80)","bottom":"var(--wp--preset--spacing--80)"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group fegn-section fegn-home-work" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
 		<!-- wp:group {"className":"alignwide fegn-section-head","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
 		<div class="wp-block-group alignwide fegn-section-head">
 			<!-- wp:group -->

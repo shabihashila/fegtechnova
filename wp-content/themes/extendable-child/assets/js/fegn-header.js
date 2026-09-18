@@ -14,15 +14,12 @@
 	function init() {
 		/* -----------------------------------------------------------
 		 * Mega dropdowns (About Us / Services / Website / Marketing)
-		 * Desktop: hover + click floating card.
+		 * Desktop: click-to-toggle floating card.
 		 * Mobile (<=781px): smooth vertical accordion inside drawer.
 		 * --------------------------------------------------------- */
 		var megaEls = Array.prototype.slice.call(document.querySelectorAll('[data-fegn-mega]'));
 		var desktopMq = window.matchMedia('(min-width: 782px)');
 		var mobileMq = window.matchMedia('(max-width: 781px)');
-		var hoverMq = window.matchMedia('(hover: hover) and (pointer: fine)');
-		var HOVER_CLOSE_DELAY = 300;
-		var closeTimer = null;
 
 		function isMobile() {
 			return mobileMq.matches;
@@ -136,7 +133,6 @@
 		}
 
 		function openMega(root) {
-			window.clearTimeout(closeTimer);
 			closeAllMega(root);
 			root.classList.add('is-open');
 			megaTrigger(root).setAttribute('aria-expanded', 'true');
@@ -227,7 +223,7 @@
 				if (event.key === 'Tab' && isOpen(root) && !isMobile()) {
 					var items = focusables(root);
 					var index = items.indexOf(document.activeElement);
-					if (!event.shiftKey && (index === -1 || index === items.length - 1)) {
+					if (!event.shiftKey && (index >= 0 && index === items.length - 1)) {
 						closeMega(root, false);
 					} else if (event.shiftKey && index === 0 && document.activeElement !== trigger) {
 						closeMega(root, false);
@@ -237,17 +233,7 @@
 				}
 			});
 
-			root.addEventListener('mouseenter', function () {
-				if (desktopMq.matches && hoverMq.matches) { openMega(root); }
-			});
-			root.addEventListener('mouseleave', function () {
-				if (desktopMq.matches && hoverMq.matches && isOpen(root)) {
-					closeTimer = window.setTimeout(function () { closeMega(root, false); }, HOVER_CLOSE_DELAY);
-				}
-			});
-			root.addEventListener('focusin', function () {
-				window.clearTimeout(closeTimer);
-			});
+
 		});
 
 		document.addEventListener('click', function (event) {
@@ -325,7 +311,6 @@
 			}
 
 			function openDrawer() {
-				window.clearTimeout(closeTimer);
 				/* Fresh accordion state every time the drawer opens. */
 				closeAllMega(null);
 				drawer.classList.add('is-open');
@@ -387,7 +372,7 @@
 			scrim.addEventListener('click', function () { closeDrawer(false); });
 
 			/* Any real navigation link inside the drawer closes it.
-			 * Chevron triggers are <button>, so accordions stay open. */
+			 * Dropdown parents are buttons, so accordions stay open. */
 			drawer.addEventListener('click', function (event) {
 				var link = event.target.closest ? event.target.closest('a[href]') : null;
 				if (link && drawer.contains(link)) {
