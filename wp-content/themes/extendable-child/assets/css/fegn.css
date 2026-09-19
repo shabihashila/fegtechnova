@@ -5504,3 +5504,25 @@ body.page-id-18 .fegn-site-footer .fegn-footer-pre .wp-block-button__link {
 	html:not([data-theme="dark"]) body.page-id-18 .fegn-contact-card { transition: none !important; }
 	html:not([data-theme="dark"]) body.page-id-18 .fegn-contact-card:hover { transform: none !important; }
 }
+
+/* Homepage capability cards: top image via CSS so it also works when the
+   homepage content comes from the DB (no-title template) instead of
+   templates/front-page.html. Skipped wherever a real .fegn-card-image
+   figure already exists, so no duplicate images. */
+body.home .fegn-cards .fegn-card:not(:has(.fegn-card-image))::before {
+	content: "";
+	display: block;
+	aspect-ratio: 16 / 9;
+	background-size: cover;
+	background-position: center;
+	border-radius: 18px 18px 0 0;
+}
+body.home .fegn-cards .fegn-card:nth-child(1):not(:has(.fegn-card-image))::before {
+	background-image: url("../images/home-card-enterprise.webp");
+}
+body.home .fegn-cards .fegn-card:nth-child(2):not(:has(.fegn-card-image))::before {
+	background-image: url("../images/home-card-erp.webp");
+}
+body.home .fegn-cards .fegn-card:nth-child(3):not(:has(.fegn-card-image))::before {
+	background-image: url("../images/home-card-saas.webp");
+}
