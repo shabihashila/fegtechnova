@@ -5023,7 +5023,7 @@ body.page-id-7 .fegn-about p { color:var(--about-copy); font-size:1rem; line-hei
 body.page-id-7 .fegn-about .fegn-about-wrap { width:calc(100% - 64px); max-width:1200px; margin-inline:auto; }
 body.page-id-7 .fegn-about > section { margin-block:0; }
 body.page-id-7 .fegn-about .fegn-about-kicker { color:var(--about-blue); font-size:.72rem; font-weight:800; letter-spacing:.17em; line-height:1.5; margin-bottom:20px; }
-body.page-id-7 .fegn-about .fegn-about-hero { padding:86px 0 28px; background:#10263e url('../images/hero-development.webp') center 54% / cover no-repeat; position:relative; isolation:isolate; }
+body.page-id-7 .fegn-about .fegn-about-hero { padding:86px 0 28px; background:#10263e url('../images/about-hero-business.jpg') center 54% / cover no-repeat; position:relative; isolation:isolate; }
 body.page-id-7 .fegn-about .fegn-about-hero::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgba(6,22,40,.96) 0%,rgba(6,22,40,.88) 37%,rgba(6,22,40,.44) 68%,rgba(6,22,40,.12) 100%); }
 body.page-id-7 .fegn-about .fegn-about-hero-copy { max-width:690px; }
 body.page-id-7 .fegn-about .fegn-about-hero :is(h1,p) { color:#fff; }
@@ -5155,7 +5155,7 @@ html[data-theme="dark"] body.home .fegn-home-overviews-links a:focus-visible { o
 
 /* 1st section: natural bg-image + glass content (kept from before). */
 .fegn-wcu-hero {
-	background: #eef4fb url("../images/hero-development.webp") center / cover no-repeat !important;
+	background: #eef4fb url("../images/wcu-hero-team.jpg") center / cover no-repeat !important;
 	background-size: cover !important;
 	background-position: center !important;
 	background-blend-mode: normal !important;
@@ -5530,4 +5530,166 @@ body.home .fegn-cards .fegn-card:nth-child(2):not(:has(.fegn-card-image))::befor
 }
 body.home .fegn-cards .fegn-card:nth-child(3):not(:has(.fegn-card-image))::before {
 	background-image: url("../images/home-card-saas.webp");
+}
+
+/* Navigation finish: brand accents without changing header geometry. */
+.fegn-site-header {
+ --fegn-menu-accent: #175bc4;
+ --fegn-menu-tint: #edf4ff;
+ --fegn-menu-edge: rgba(34, 99, 190, .16);
+ --fegn-menu-card: linear-gradient(145deg, #ffffff 35%, #f2f7ff);
+}
+html[data-theme="dark"] .fegn-site-header {
+ --fegn-menu-accent: #a2c8ff;
+ --fegn-menu-tint: #1b304e;
+ --fegn-menu-edge: rgba(137, 181, 245, .23);
+ --fegn-menu-card: linear-gradient(145deg, #15243a, #101c2e);
+}
+.fegn-site-header .fegn-nav-link:focus-visible,
+.fegn-site-header .fegn-mega-trigger:focus-visible,
+.fegn-site-header .fegn-mega-list a:focus-visible {
+ outline: 2px solid var(--fegn-menu-accent);
+ outline-offset: 3px;
+}
+@media (min-width: 782px) {
+ .fegn-site-header .fegn-nav-link,
+ .fegn-site-header .fegn-mega-head,
+ .fegn-site-header .fegn-mega-toggle { border-radius: 12px; }
+ .fegn-site-header .fegn-nav-link:hover,
+ .fegn-site-header .fegn-mega-head:hover,
+ .fegn-site-header .fegn-mega-head:focus-within,
+ .fegn-site-header .fegn-mega.is-open .fegn-mega-head {
+  background: var(--fegn-menu-tint);
+  box-shadow: inset 0 0 0 1px var(--fegn-menu-edge);
+ }
+ .fegn-site-header .fegn-mega-toggle:hover,
+ .fegn-site-header .fegn-mega-toggle[aria-expanded="true"] { background: transparent; }
+ .fegn-site-header .fegn-mega.is-open .fegn-mega-link,
+ .fegn-site-header .fegn-mega-head:hover .fegn-mega-link,
+ .fegn-site-header .fegn-nav-link:hover { color: var(--fegn-menu-accent); }
+ .fegn-site-header .fegn-nav-link::after,
+ .fegn-site-header .fegn-mega-head::after {
+  background: linear-gradient(90deg, #2463dc, #22b4da);
+  height: 2px;
+ }
+ .fegn-site-header .fegn-mega-cols {
+  background: var(--fegn-menu-card);
+  border-color: var(--fegn-menu-edge);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(8, 30, 66, .18), 0 4px 12px rgba(8, 30, 66, .06);
+ }
+ .fegn-site-header .fegn-mega-col--accent {
+  background: var(--fegn-menu-tint);
+  border-color: var(--fegn-menu-edge);
+  border-left-color: var(--fegn-menu-accent);
+ }
+ .fegn-site-header .fegn-mega-col-title { color: var(--fegn-menu-accent); }
+ .fegn-site-header .fegn-mega-list a:hover,
+ .fegn-site-header .fegn-mega-list a:focus-visible {
+  background: var(--fegn-menu-tint);
+  color: var(--fegn-menu-accent);
+  box-shadow: inset 0 0 0 1px var(--fegn-menu-edge);
+ }
+ .fegn-site-header .fegn-nav-list > li:last-child > .fegn-nav-link {
+  color: #fff;
+  background: linear-gradient(120deg, #1755be, #167bbd);
+  box-shadow: 0 5px 14px rgba(23, 85, 190, .2);
+ }
+ .fegn-site-header .fegn-nav-list > li:last-child > .fegn-nav-link:hover {
+  background: linear-gradient(120deg, #12479f, #126aa5);
+  box-shadow: 0 7px 18px rgba(23, 85, 190, .3);
+ }
+ .fegn-site-header .fegn-nav-list > li:last-child > .fegn-nav-link::after { background: #fff; }
+}
+/* About Us expertise cards: scoped premium glass treatment. */
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-expertise-grid { grid-template-columns:1fr; gap:32px; }
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capabilities { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { display:grid; grid-template-columns:28px 48px 1fr; align-items:start; gap:14px; min-height:174px; padding:22px 20px; margin:0; border:1px solid rgba(255,255,255,.58); border-radius:18px; background:rgba(255,255,255,.48); box-shadow:0 10px 30px rgba(10,36,68,.07); backdrop-filter:blur(14px) saturate(130%); -webkit-backdrop-filter:blur(14px) saturate(130%); transition:transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability:hover { transform:translateY(-5px); border-color:rgba(24,99,220,.36); box-shadow:0 18px 38px rgba(10,36,68,.16); }
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-number { color:var(--about-blue); font-size:.75rem; font-weight:800; padding-top:7px; }
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-icon { box-sizing:border-box; width:48px; height:48px; padding:12px; border:1px solid rgba(24,99,220,.16); border-radius:14px; background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(221,236,255,.72)); filter:invert(31%) sepia(89%) saturate(1504%) hue-rotate(203deg) brightness(91%) contrast(95%); }
+html[data-theme="dark"] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { background:rgba(22,43,67,.7); border-color:rgba(154,194,255,.2); box-shadow:0 12px 32px rgba(0,0,0,.24); }
+html[data-theme="dark"] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability:hover { border-color:rgba(154,194,255,.54); box-shadow:0 20px 42px rgba(0,0,0,.32); }
+html[data-theme="dark"] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-icon { background:linear-gradient(135deg,rgba(52,88,129,.7),rgba(22,43,67,.92)); border-color:rgba(154,194,255,.28); filter:invert(80%) sepia(34%) saturate(607%) hue-rotate(181deg) brightness(105%) contrast(101%); }
+@media (max-width:700px) {
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capabilities { grid-template-columns:1fr; gap:12px; }
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { grid-template-columns:24px 44px 1fr; gap:13px; min-height:0; padding:19px 16px; }
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-icon { width:44px; height:44px; padding:11px; border-radius:12px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { transition:none; }
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability:hover { transform:none; }
+}
+/* Expertise photo and glass treatment, isolated to this section in both themes. */
+body.page-id-7 .fegn-about .fegn-about-expertise {
+ --about-ink:#f5f9ff;
+ --about-copy:#dce8f5;
+ --about-blue:#b5d6ff;
+ background:linear-gradient(110deg,rgba(7,25,49,.92),rgba(12,47,87,.78) 55%,rgba(16,63,108,.66)),url('../images/about-expertise-building.jpg') center / cover no-repeat #102d50;
+ border-block:1px solid #294c70;
+}
+body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-expertise-heading > p:last-child { max-width:560px; }
+html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability,
+html[data-theme] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability {
+ grid-template-columns:1fr 48px;
+ gap:22px 14px;
+ padding:28px;
+ border-color:rgba(194,221,255,.3);
+ background:linear-gradient(145deg,rgba(213,234,255,.16),rgba(103,161,223,.06));
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 16px 40px rgba(2,13,30,.22);
+ backdrop-filter:blur(18px) saturate(130%);
+ -webkit-backdrop-filter:blur(18px) saturate(130%);
+}
+html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-copy { grid-column:1 / -1; }
+html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability:hover,
+html[data-theme] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability:hover {
+ border-color:rgba(194,221,255,.6);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 22px 46px rgba(2,13,30,.32);
+}
+html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-icon,
+html[data-theme] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability-icon {
+ border-color:rgba(255,255,255,.28);
+ background:rgba(255,255,255,.09);
+ filter:brightness(0) invert(1);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+ html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability,
+ html[data-theme] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { background:rgba(20,49,81,.94); }
+}
+@media (max-width:900px) {
+ body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capabilities { grid-template-columns:1fr; gap:16px; }
+ html body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability,
+ html[data-theme] body.page-id-7 .fegn-about .fegn-about-expertise .fegn-about-capability { grid-template-columns:1fr 44px; gap:18px 13px; min-height:0; padding:24px; }
+}
+/* Why Choose Us hero: same tall, image-led composition as About Us. */
+body.page-id-8 .fegn-wcu-hero {
+ padding:86px 0 28px !important;
+ background:#10263e url("../images/wcu-hero-team.jpg") center 52% / cover no-repeat !important;
+ position:relative;
+ isolation:isolate;
+ text-align:left;
+}
+body.page-id-8 .fegn-wcu-hero::before {
+ content:"" !important;
+ position:absolute;
+ inset:0;
+ z-index:-1;
+ background:linear-gradient(90deg,rgba(6,22,40,.84) 0%,rgba(6,22,40,.66) 43%,rgba(6,22,40,.26) 100%);
+}
+body.page-id-8 .fegn-wcu-hero .alignwide {
+ max-width:690px;
+ margin-left:max(32px,calc((100vw - 1200px) / 2));
+ padding:36px 40px;
+ background:rgba(8,28,50,.52);
+ border:1px solid rgba(255,255,255,.28);
+ border-radius:20px;
+ box-shadow:0 18px 45px rgba(2,12,24,.26);
+ backdrop-filter:blur(16px) saturate(125%);
+ -webkit-backdrop-filter:blur(16px) saturate(125%);
+}
+body.page-id-8 .fegn-wcu-hero :is(.fegn-wcu-title,.fegn-lead,.fegn-hero-badge) { color:#fff !important; }
+body.page-id-8 .fegn-wcu-hero .fegn-hero-badge { background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.22); }
+@media (max-width:700px) {
+ body.page-id-8 .fegn-wcu-hero { padding:60px 0 25px !important; background-position:60% center !important; }
+ body.page-id-8 .fegn-wcu-hero .alignwide { width:calc(100% - 40px); margin-inline:auto; padding:26px 22px; }
 }
