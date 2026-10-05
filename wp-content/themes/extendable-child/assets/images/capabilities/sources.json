@@ -1,0 +1,44 @@
+[
+  {
+    "file": "erp.webp",
+    "source": "https://www.pexels.com/photo/4481259/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 99200
+  },
+  {
+    "file": "saas.webp",
+    "source": "https://www.pexels.com/photo/4974914/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 91810
+  },
+  {
+    "file": "web.webp",
+    "source": "https://www.pexels.com/photo/3861964/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 95552
+  },
+  {
+    "file": "mobile.webp",
+    "source": "https://www.pexels.com/photo/607812/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 29906
+  },
+  {
+    "file": "ai.webp",
+    "source": "https://www.pexels.com/photo/8386440/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 30464
+  },
+  {
+    "file": "marketing.webp",
+    "source": "https://www.pexels.com/photo/3184292/",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1200x750",
+    "bytes": 72826
+  }
+]
