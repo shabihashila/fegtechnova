@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register the six structured content types.
+ * Register the five structured content types.
  */
 function fegnt_register_post_types() {
 
@@ -64,30 +64,6 @@ function fegnt_register_post_types() {
 			'has_archive'  => false,
 			'show_in_rest' => true,
 			'description'  => __( 'Only publish industries where FEG TechNova has substantive, owner-verified delivery experience (requirements 12.3). Each page must discuss workflows, risks, integration needs, compliance, services, proof, and a tailored CTA — not just a swapped noun.', 'feg-technova-core' ),
-		)
-	);
-
-	// Case Study — public. Replaces/reframes Portfolio per requirements 8.3/12.4.
-	register_post_type(
-		'feg_case_study',
-		array(
-			'labels'       => array(
-				'name'          => __( 'Case Studies', 'feg-technova-core' ),
-				'singular_name' => __( 'Case Study', 'feg-technova-core' ),
-				'add_new_item'  => __( 'Add New Case Study', 'feg-technova-core' ),
-				'edit_item'     => __( 'Edit Case Study', 'feg-technova-core' ),
-			),
-			'public'       => true,
-			'menu_icon'    => 'dashicons-portfolio',
-			'menu_position' => 23,
-			'supports'     => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
-			'rewrite'      => array(
-				'slug'       => 'case-studies',
-				'with_front' => false,
-			),
-			'has_archive'  => true,
-			'show_in_rest' => true,
-			'description'  => __( 'Card contract: title, client or approved anonymous descriptor, industry term, service relation, excerpt max 40 words, hero image 16:10, up to two verified results with units, context, source, and last-verified date. Never publish results without an internal measurement source (requirements 6/12.5).', 'feg-technova-core' ),
 		)
 	);
 
@@ -155,33 +131,6 @@ function fegnt_register_post_types() {
 			'menu_position'       => 26,
 			'supports'            => array( 'title', 'editor', 'revisions' ),
 			'description'         => __( 'Title = question (one sentence), editor content = answer. Relate FAQs to specific Services so they render only on relevant pages and FAQ schema is emitted only where the Q&A exists.', 'feg-technova-core' ),
-		)
-	);
-}
-
-/**
- * Taxonomy: industry terms on case studies. Queryable so industry filter
- * URLs work without JavaScript once the index ships.
- */
-function fegnt_register_taxonomies() {
-	register_taxonomy(
-		'feg_cs_industry',
-		'feg_case_study',
-		array(
-			'labels'            => array(
-				'name'          => __( 'Case Study Industries', 'feg-technova-core' ),
-				'singular_name' => __( 'Case Study Industry', 'feg-technova-core' ),
-			),
-			'hierarchical'      => false,
-			'public'            => true,
-			'publicly_queryable'=> true,
-			'show_in_rest'      => true,
-			'show_admin_column' => true,
-			'rewrite'           => array(
-				'slug'       => 'case-study-industry',
-				'with_front' => false,
-			),
-			'description'       => __( 'The real industry a case study belongs to. Used by index filters; only add industries that also exist as verified Industries content or honest descriptors.', 'feg-technova-core' ),
 		)
 	);
 }

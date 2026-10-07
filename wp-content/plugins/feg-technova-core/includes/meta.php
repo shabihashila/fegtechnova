@@ -27,7 +27,6 @@ function fegnt_register_all_meta() {
 	fegnt_register_url_meta( 'feg_service', 'cta_link' );
 	fegnt_register_lines_meta( 'feg_service', 'capabilities' );   // one capability per line
 	fegnt_register_lines_meta( 'feg_service', 'process_steps' );  // "Title | description" per line
-	fegnt_register_relation_meta( 'feg_service', 'related_case_studies' );
 	fegnt_register_relation_meta( 'feg_service', 'related_faqs' );
 
 	// Industry.
@@ -36,20 +35,6 @@ function fegnt_register_all_meta() {
 	fegnt_register_lines_meta( 'feg_industry', 'challenges' );    // one challenge per line
 	fegnt_register_textarea_meta( 'feg_industry', 'compliance_notes' );
 	fegnt_register_relation_meta( 'feg_industry', 'applicable_services' );
-	fegnt_register_relation_meta( 'feg_industry', 'related_case_studies' );
-
-	// Case Study.
-	fegnt_register_text_meta( 'feg_case_study', 'client_display_name' );
-	fegnt_register_bool_meta( 'feg_case_study', 'anonymized' );
-	fegnt_register_text_meta( 'feg_case_study', 'descriptor' );   // approved anonymous label
-	fegnt_register_textarea_meta( 'feg_case_study', 'challenge' );
-	fegnt_register_textarea_meta( 'feg_case_study', 'constraints' );
-	fegnt_register_textarea_meta( 'feg_case_study', 'our_role' );
-	fegnt_register_textarea_meta( 'feg_case_study', 'solution' );
-	fegnt_register_lines_meta( 'feg_case_study', 'results' );     // "metric | unit/context | source | last-verified YYYY-MM-DD"
-	fegnt_register_lines_meta( 'feg_case_study', 'stack' );       // one technology per line
-	fegnt_register_relation_meta( 'feg_case_study', 'related_services' );
-	fegnt_register_single_relation_meta( 'feg_case_study', 'testimonial_id' );
 
 	// Team Member.
 	fegnt_register_text_meta( 'feg_team_member', 'role' );
@@ -76,7 +61,6 @@ function fegnt_register_all_meta() {
 			},
 		)
 	);
-	fegnt_register_single_relation_meta( 'feg_testimonial', 'related_case_study_id' );
 
 	// FAQ: title = question, editor = answer, plus related services.
 	fegnt_register_relation_meta( 'feg_faq', 'related_services' );
@@ -227,14 +211,6 @@ function fegnt_add_metaboxes() {
 		'high'
 	);
 	add_meta_box(
-		'fegnt_case_study_fields',
-		__( 'Case study details', 'feg-technova-core' ),
-		'fegnt_render_case_study_box',
-		'feg_case_study',
-		'normal',
-		'high'
-	);
-	add_meta_box(
 		'fegnt_team_fields',
 		__( 'Team member details', 'feg-technova-core' ),
 		'fegnt_render_team_box',
@@ -259,7 +235,7 @@ function fegnt_add_metaboxes() {
 		'high'
 	);
 
-	foreach ( array( 'feg_service', 'feg_industry', 'feg_case_study', 'feg_team_member', 'feg_testimonial', 'feg_faq' ) as $screen ) {
+	foreach ( array( 'feg_service', 'feg_industry', 'feg_team_member', 'feg_testimonial', 'feg_faq' ) as $screen ) {
 		add_meta_box(
 			'fegnt_guidance',
 			__( 'Editing guidance (content rules)', 'feg-technova-core' ),
@@ -375,7 +351,6 @@ function fegnt_nonce_field() {
  */
 function fegnt_render_service_box( $post ) {
 	fegnt_nonce_field();
-	fegnt_field_multiselect_posts( $post, 'related_case_studies', __( 'Related case studies', 'feg-technova-core' ), 'feg_case_study', __( 'Only verified case studies should be linked.', 'feg-technova-core' ) );
 	fegnt_field_multiselect_posts( $post, 'related_faqs', __( 'Related FAQs', 'feg-technova-core' ), 'feg_faq' );
 	fegnt_field_textarea( $post, 'capabilities', __( 'Capabilities / deliverables (one per line)', 'feg-technova-core' ) );
 	fegnt_field_textarea( $post, 'process_steps', __( 'Approach steps', 'feg-technova-core' ), __( 'One step per line in the format: Title | short description', 'feg-technova-core' ) );
@@ -386,32 +361,10 @@ function fegnt_render_service_box( $post ) {
 function fegnt_render_industry_box( $post ) {
 	fegnt_nonce_field();
 	fegnt_field_multiselect_posts( $post, 'applicable_services', __( 'Applicable services', 'feg-technova-core' ), 'feg_service' );
-	fegnt_field_multiselect_posts( $post, 'related_case_studies', __( 'Related case studies', 'feg-technova-core' ), 'feg_case_study' );
 	fegnt_field_textarea( $post, 'challenges', __( 'Industry challenges (one per line)', 'feg-technova-core' ) );
 	fegnt_field_textarea( $post, 'compliance_notes', __( 'Compliance / risk considerations', 'feg-technova-core' ) );
 	fegnt_field_text( $post, 'cta_text', __( 'CTA label', 'feg-technova-core' ) );
 	fegnt_field_text( $post, 'cta_link', __( 'CTA URL', 'feg-technova-core' ) );
-}
-
-function fegnt_render_case_study_box( $post ) {
-	fegnt_nonce_field();
-	fegnt_field_text( $post, 'client_display_name', __( 'Client display name', 'feg-technova-core' ), __( 'Required only when disclosure is approved; leave empty if anonymized.', 'feg-technova-core' ) );
-	fegnt_field_checkbox( $post, 'anonymized', __( 'Anonymize client', 'feg-technova-core' ), __( 'If checked, use an honest descriptor below instead of the client name.', 'feg-technova-core' ) );
-	fegnt_field_text( $post, 'descriptor', __( 'Anonymous descriptor', 'feg-technova-core' ), __( 'e.g. A Dhaka-based manufacturing group. Must not imply a false client relationship.', 'feg-technova-core' ) );
-	fegnt_field_textarea( $post, 'challenge', __( 'Challenge', 'feg-technova-core' ) );
-	fegnt_field_textarea( $post, 'constraints', __( 'Constraints & requirements', 'feg-technova-core' ) );
-	fegnt_field_textarea( $post, 'our_role', __( "FEG TechNova's role", 'feg-technova-core' ) );
-	fegnt_field_textarea( $post, 'solution', __( 'Solution / architecture summary', 'feg-technova-core' ), __( 'Never expose confidential architecture, personal data, or security details.', 'feg-technova-core' ) );
-	fegnt_field_textarea( $post, 'results', __( 'Verified results (max 2 shown publicly)', 'feg-technova-core' ), __( 'One per line: metric | unit and context | measurement source | last-verified date (YYYY-MM-DD). Results without a source must not be published.', 'feg-technova-core' ), 5 );
-	fegnt_field_textarea( $post, 'stack', __( 'Technology stack (one per line)', 'feg-technova-core' ), '', 3 );
-	fegnt_field_multiselect_posts( $post, 'related_services', __( 'Related services', 'feg-technova-core' ), 'feg_service' );
-	fegnt_field_select(
-		$post,
-		'testimonial_id',
-		__( 'Approved testimonial', 'feg-technova-core' ),
-		fegnt_testimonial_options(),
-		__( 'Only testimonials with permission status Granted will ever render.', 'feg-technova-core' )
-	);
 }
 
 function fegnt_render_team_box( $post ) {
@@ -437,12 +390,6 @@ function fegnt_render_testimonial_box( $post ) {
 		),
 		__( 'Rendering code must check this value; default Pending keeps new testimonials private.', 'feg-technova-core' )
 	);
-	fegnt_field_select(
-		$post,
-		'related_case_study_id',
-		__( 'Related case study', 'feg-technova-core' ),
-		fegnt_case_study_options()
-	);
 }
 
 function fegnt_render_faq_box( $post ) {
@@ -464,15 +411,6 @@ function fegnt_testimonial_options() {
 	return $options;
 }
 
-function fegnt_case_study_options() {
-	$options = array( '0' => __( '— none —', 'feg-technova-core' ) );
-	foreach ( get_posts( array( 'post_type' => 'feg_case_study', 'posts_per_page' => 200, 'post_status' => array( 'publish', 'draft' ) ) ) as $cs ) {
-		$options[ $cs->ID ] = get_the_title( $cs );
-	}
-
-	return $options;
-}
-
 /**
  * Guidance box: mirrors docs/content-model.md limits so editors see the
  * rules where they write.
@@ -487,11 +425,6 @@ function fegnt_render_guidance_box( $post ) {
 		'feg_industry'    => array(
 			__( 'Publish only industries with substantive verified experience.', 'feg-technova-core' ),
 			__( 'Cover workflows, risks, integration needs, compliance, services, proof, and CTA — not a swapped noun.', 'feg-technova-core' ),
-		),
-		'feg_case_study'  => array(
-			__( 'Excerpt max 40 words; hero image 16:10; up to two results shown publicly.', 'feg-technova-core' ),
-			__( 'Every result needs a unit, context, source, and last-verified date.', 'feg-technova-core' ),
-			__( 'If disclosure is restricted, anonymize honestly; never imply a false client relationship.', 'feg-technova-core' ),
 		),
 		'feg_team_member' => array(
 			__( 'Real, owner-approved people only. Portrait square, min 600px.', 'feg-technova-core' ),
@@ -532,23 +465,21 @@ function fegnt_save_meta( $post_id ) {
 		return;
 	}
 
-	$fegnt_types = array( 'feg_service', 'feg_industry', 'feg_case_study', 'feg_team_member', 'feg_testimonial', 'feg_faq' );
+	$fegnt_types = array( 'feg_service', 'feg_industry', 'feg_team_member', 'feg_testimonial', 'feg_faq' );
 	$post_type   = get_post_type( $post_id );
 	if ( ! in_array( $post_type, $fegnt_types, true ) ) {
 		return;
 	}
 
 	$text_keys     = array(
-		'feg_service'         => array( 'cta_text', 'cta_link', 'capabilities', 'process_steps', 'related_case_studies', 'related_faqs' ),
-		'feg_industry'        => array( 'cta_text', 'cta_link', 'challenges', 'compliance_notes', 'applicable_services', 'related_case_studies' ),
-		'feg_case_study'      => array( 'client_display_name', 'descriptor', 'challenge', 'constraints', 'our_role', 'solution', 'results', 'stack', 'related_services', 'testimonial_id', 'anonymized' ),
+		'feg_service'         => array( 'cta_text', 'cta_link', 'capabilities', 'process_steps', 'related_faqs' ),
+		'feg_industry'        => array( 'cta_text', 'cta_link', 'challenges', 'compliance_notes', 'applicable_services' ),
 		'feg_team_member'     => array( 'role', 'approved_links', 'sort_order' ),
-		'feg_testimonial'     => array( 'person_name', 'person_role', 'company', 'permission_status', 'related_case_study_id' ),
+		'feg_testimonial'     => array( 'person_name', 'person_role', 'company', 'permission_status' ),
 		'feg_faq'             => array( 'related_services' ),
 	);
 	$url_keys      = array( 'feg_service' => array( 'cta_link' ), 'feg_industry' => array( 'cta_link' ) );
 	$relation_keys = array(
-		'related_case_studies',
 		'related_faqs',
 		'applicable_services',
 		'related_services',
@@ -579,7 +510,7 @@ function fegnt_save_meta( $post_id ) {
 
 		$raw_value = wp_unslash( $_POST[ $meta_key ] );
 
-		if ( 'testimonial_id' === $key || 'related_case_study_id' === $key || 'sort_order' === $key ) {
+		if ( 'sort_order' === $key ) {
 			update_post_meta( $post_id, $meta_key, absint( $raw_value ) );
 		} elseif ( 'anonymized' === $key ) {
 			update_post_meta( $post_id, $meta_key, (bool) $raw_value );
@@ -592,10 +523,6 @@ function fegnt_save_meta( $post_id ) {
 		}
 	}
 
-	// Unchecked checkboxes never POST — handle them explicitly.
-	if ( 'feg_case_study' === $post_type && ! isset( $_POST[ FEGNT_META_PREFIX . 'anonymized' ] ) ) {
-		update_post_meta( $post_id, FEGNT_META_PREFIX . 'anonymized', false );
-	}
 }
 add_action( 'save_post', 'fegnt_save_meta' );
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: FEG TechNova Core
- * Description: Structured content types (Service, Industry, Case Study, Team Member, Testimonial, FAQ), their metadata, and editor guidance for the FEG TechNova redesign. Durable business content lives here, not in the theme.
+ * Description: Structured content types (Service, Industry, Team Member, Testimonial, FAQ), their metadata, and editor guidance for the FEG TechNova redesign. Durable business content lives here, not in the theme.
  * Version:     0.1.0
  * Author:      FEG TechNova redesign implementation agent
  * License:     GPL-2.0-or-later
@@ -28,7 +28,6 @@ require_once FEGNT_CORE_DIR . 'includes/contact-form.php';
  */
 function fegnt_core_init() {
 	fegnt_register_post_types();
-	fegnt_register_taxonomies();
 	fegnt_register_all_meta();
 }
 add_action( 'init', 'fegnt_core_init' );
@@ -38,7 +37,6 @@ add_action( 'init', 'fegnt_core_init' );
  */
 function fegnt_core_activate() {
 	fegnt_register_post_types();
-	fegnt_register_taxonomies();
 	flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'fegnt_core_activate' );

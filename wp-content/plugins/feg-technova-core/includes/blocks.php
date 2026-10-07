@@ -4,9 +4,8 @@
  * front end. All output is escaped and indexable; nothing depends on JS.
  *
  * Blocks:
- *  - fegnt/service-sections     (capabilities, process, FAQs, related work, CTA)
- *  - fegnt/case-study-sections  (client context, challenge→solution, results, stack, testimonial)
- *  - fegnt/industry-sections    (challenges, applicable services, compliance, related work, CTA)
+ *  - fegnt/service-sections     (capabilities, process, FAQs, CTA)
+ *  - fegnt/industry-sections    (challenges, applicable services, compliance, CTA)
  *
  * @package feg-technova-core
  */
@@ -28,14 +27,6 @@ function fegnt_register_blocks() {
 		array(
 			'api_version'     => 2,
 			'render_callback' => 'fegnt_render_service_sections',
-			'supports'        => array( 'inserter' => true ),
-		)
-	);
-	register_block_type(
-		'fegnt/case-study-sections',
-		array(
-			'api_version'     => 2,
-			'render_callback' => 'fegnt_render_case_study_sections',
 			'supports'        => array( 'inserter' => true ),
 		)
 	);
@@ -213,31 +204,6 @@ function fegnt_testimonial_figure( $testimonial_id ) {
 	);
 }
 
-/**
- * Verified results list. A result line is published only when it carries a
- * measurement source: "metric | unit/context | source | last-verified date".
- */
-function fegnt_case_study_results( $raw ) {
-	$lines = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) $raw ) ) );
-	if ( empty( $lines ) ) {
-		return '';
-	}
-	$out = '<ul class="fegn-results-list">';
-	foreach ( array_slice( $lines, 0, 2 ) as $line ) { // card contract: max 2 public results
-		$parts = array_map( 'trim', explode( '|', $line ) );
-		$metric = isset( $parts[0] ) ? $parts[0] : '';
-		$context = isset( $parts[1] ) ? $parts[1] : '';
-		$source  = isset( $parts[2] ) ? $parts[2] : '';
-		if ( '' === $metric || '' === $source ) {
-			continue; // no source → never publish the number
-		}
-		$out .= '<li><strong>' . esc_html( $metric ) . '</strong>' . ( '' !== $context ? ' <span class="fegn-results-context">(' . esc_html( $context ) . ')</span>' : '' ) . '</li>';
-	}
-	$published = substr_count( $out, '<li>' );
-
-	return $published > 0 ? $out . '</ul>' : '';
-}
-
 /* -------------------------------------------------------------------------
  * Block render callbacks
  * ---------------------------------------------------------------------- */
@@ -265,81 +231,10 @@ function fegnt_render_service_sections() {
 		$html .= '<h3 class="wp-block-heading">' . esc_html__( 'Common questions', 'feg-technova-core' ) . '</h3>' . $faqs;
 	}
 
-	$related = fegnt_related_posts_list(
-		get_post_meta( $post_id, FEGNT_META_PREFIX . 'related_case_studies', true ),
-		'feg_case_study'
-	);
-	if ( '' !== $related ) {
-		$html .= '<h3 class="wp-block-heading">' . esc_html__( 'Related work', 'feg-technova-core' ) . '</h3>' . $related;
-	}
-
 	$html .= fegnt_cta_button(
 		get_post_meta( $post_id, FEGNT_META_PREFIX . 'cta_text', true ),
 		get_post_meta( $post_id, FEGNT_META_PREFIX . 'cta_link', true )
 	);
-	$html .= fegnt_section_close();
-
-	return $html;
-}
-
-/**
- * Case study detail sections below the editor content.
- */
-function fegnt_render_case_study_sections() {
-	$post_id = get_the_ID();
-	if ( ! $post_id || 'feg_case_study' !== get_post_type( $post_id ) ) {
-		return '';
-	}
-
-	// Client context line (honest descriptor or approved name).
-	$client_line = '';
-	$name        = trim( get_post_meta( $post_id, FEGNT_META_PREFIX . 'client_display_name', true ) );
-	$anon        = (bool) get_post_meta( $post_id, FEGNT_META_PREFIX . 'anonymized', true );
-	$descriptor  = trim( get_post_meta( $post_id, FEGNT_META_PREFIX . 'descriptor', true ) );
-	if ( $anon && '' !== $descriptor ) {
-		$client_line = $descriptor;
-	} elseif ( ! $anon && '' !== $name ) {
-		$client_line = $name;
-	}
-
-	$html  = fegnt_section_open();
-	if ( '' !== $client_line ) {
-		$html .= '<p class="fegn-eyebrow has-small-font-size">' . esc_html( $client_line ) . '</p>';
-	}
-
-	foreach ( array(
-		'challenge'   => __( 'The challenge', 'feg-technova-core' ),
-		'constraints' => __( 'Constraints and requirements', 'feg-technova-core' ),
-		'our_role'    => __( "FEG TechNova's role", 'feg-technova-core' ),
-		'solution'    => __( 'The solution', 'feg-technova-core' ),
-	) as $key => $heading ) {
-		$value = trim( get_post_meta( $post_id, FEGNT_META_PREFIX . $key, true ) );
-		if ( '' === $value ) {
-			continue;
-		}
-		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html( $heading ) . '</h2>' . wp_kses_post( wpautop( $value ) );
-	}
-
-	$results = fegnt_case_study_results( get_post_meta( $post_id, FEGNT_META_PREFIX . 'results', true ) );
-	if ( '' !== $results ) {
-		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html__( 'Outcome', 'feg-technova-core' ) . '</h2>' . $results;
-	}
-
-	$stack = fegnt_lines_to_list( get_post_meta( $post_id, FEGNT_META_PREFIX . 'stack', true ) );
-	if ( '' !== $stack ) {
-		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html__( 'Technology stack', 'feg-technova-core' ) . '</h2>' . $stack;
-	}
-
-	$testimonial = fegnt_testimonial_figure( get_post_meta( $post_id, FEGNT_META_PREFIX . 'testimonial_id', true ) );
-	$html       .= $testimonial;
-
-	$services = fegnt_related_posts_list(
-		get_post_meta( $post_id, FEGNT_META_PREFIX . 'related_services', true ),
-		'feg_service'
-	);
-	if ( '' !== $services ) {
-		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html__( 'Related services', 'feg-technova-core' ) . '</h2>' . $services;
-	}
 	$html .= fegnt_section_close();
 
 	return $html;
@@ -369,11 +264,6 @@ function fegnt_render_industry_sections() {
 	$services = fegnt_related_posts_list( get_post_meta( $post_id, FEGNT_META_PREFIX . 'applicable_services', true ), 'feg_service' );
 	if ( '' !== $services ) {
 		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html__( 'Relevant services', 'feg-technova-core' ) . '</h2>' . $services;
-	}
-
-	$cases = fegnt_related_posts_list( get_post_meta( $post_id, FEGNT_META_PREFIX . 'related_case_studies', true ), 'feg_case_study' );
-	if ( '' !== $cases ) {
-		$html .= '<h2 class="wp-block-heading fegn-section-title">' . esc_html__( 'Related work', 'feg-technova-core' ) . '</h2>' . $cases;
 	}
 
 	$html .= fegnt_cta_button(
