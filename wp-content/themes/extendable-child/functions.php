@@ -30,6 +30,18 @@ function fegn_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_assets', 5 );
 
+/** Page-specific ERP landing-page assets; shared theme chrome is untouched. */
+function fegn_enqueue_erp_assets() {
+	if ( ! is_page( 'erp-development' ) ) {
+		return;
+	}
+	$css_path = get_stylesheet_directory() . '/assets/css/fegn-erp.css';
+	$js_path  = get_stylesheet_directory() . '/assets/js/fegn-erp.js';
+	wp_enqueue_style( 'fegn-erp', get_stylesheet_directory_uri() . '/assets/css/fegn-erp.css', array( 'fegn-style' ), (string) filemtime( $css_path ) );
+	wp_enqueue_script( 'fegn-erp', get_stylesheet_directory_uri() . '/assets/js/fegn-erp.js', array(), (string) filemtime( $js_path ), true );
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_erp_assets', 6 );
+
 /**
  * Header behavior script: Services mega menu keyboard/touch interactions.
  */

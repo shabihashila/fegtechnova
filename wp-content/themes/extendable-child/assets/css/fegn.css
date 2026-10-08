@@ -2463,6 +2463,12 @@ html body.page-id-95 .fegn-section {
 }
 
 /* Security & tech stack */
+.wp-block-group.fegn-section.fegn-erp-security {
+	padding-top: 40px !important;
+	padding-bottom: 40px !important;
+	margin-block: 0 !important;
+}
+
 .fegn-security-grid {
 	display: grid !important;
 	grid-template-columns: repeat(4, 1fr) !important;
@@ -4909,7 +4915,8 @@ body .fegn-about p { color:var(--about-copy); font-size:1rem; line-height:1.8; }
 body .fegn-about .fegn-about-wrap { box-sizing:border-box; width:calc(100% - 64px); max-width:1200px; margin-inline:auto; padding-block:35px 40px; }
 body .fegn-about > section { margin-block:0; }
 body .fegn-about .fegn-about-kicker { color:var(--about-blue); font-size:.72rem; font-weight:800; letter-spacing:.17em; line-height:1.5; margin-bottom:20px; }
-body .fegn-about .fegn-about-hero { padding:40px 0 28px; background:#10263e url('../images/about-hero-business.jpg') center 54% / cover no-repeat; position:relative; isolation:isolate; }
+body .fegn-about .fegn-about-hero { padding:40px 0 48px; background:#10263e url('../images/about-hero-business.jpg') center 54% / cover no-repeat; position:relative; isolation:isolate; }
+body .fegn-about .fegn-about-hero > .fegn-about-wrap { padding-bottom:0; }
 body .fegn-about .fegn-about-hero::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgba(6,22,40,.96) 0%,rgba(6,22,40,.88) 37%,rgba(6,22,40,.44) 68%,rgba(6,22,40,.12) 100%); }
 body .fegn-about .fegn-about-hero-copy { max-width:690px; }
 body .fegn-about .fegn-about-hero :is(h1,p) { color:#fff; }
@@ -4919,8 +4926,6 @@ body .fegn-about .fegn-about-actions { margin-top:30px; }
 body .fegn-about .fegn-about-button .wp-block-button__link { display:inline-flex; align-items:center; justify-content:center; gap:34px; min-height:52px; padding:14px 23px; border:1px solid transparent; border-radius:6px; background:#2164d7; color:#fff; font-size:.94rem; font-weight:700; text-decoration:none; box-shadow:none; transition:background .18s ease,transform .18s ease; }
 body .fegn-about .fegn-about-button .wp-block-button__link:hover { background:#154cac; transform:translateY(-2px); }
 body .fegn-about .fegn-about-button .wp-block-button__link:focus-visible { outline:3px solid #83b7ff; outline-offset:5px; }
-body .fegn-about .fegn-about-hero-index { display:flex; flex-wrap:wrap; gap:18px; border-top:1px solid #ffffff40; margin-top:62px; padding-top:23px; font-size:.65rem; font-weight:700; letter-spacing:.13em; color:#dbe9f9; }
-body .fegn-about .fegn-about-hero-index span { color:#8ba7c5; }
 body .fegn-about .fegn-about-story { padding:0; }
 body .fegn-about .fegn-about-story-grid { display:grid; grid-template-columns:1.05fr 1fr; align-items:center; gap:80px; padding-block:40px; }
 body .fegn-about .fegn-about-story-copy > p:not(.fegn-about-kicker) { margin-top:20px; }
@@ -4981,10 +4986,9 @@ html[data-theme="dark"] body .fegn-about { --about-ink:#eef5ff; --about-copy:#b9
  body .fegn-about .fegn-about-wrap { width:calc(100% - 40px); }
  body .fegn-about h1 { font-size:clamp(2.25rem,8.5vw,3.5rem); }
  body .fegn-about h2 { font-size:2rem; }
- body .fegn-about .fegn-about-hero { padding:24px 0 25px; background-position:64% center; }
+ body .fegn-about .fegn-about-hero { padding:24px 0 48px; background-position:64% center; }
  body .fegn-about .fegn-about-hero::before { background:linear-gradient(90deg,rgba(6,22,40,.93),rgba(6,22,40,.68)); }
  body .fegn-about .fegn-about-intro { font-size:1rem; }
- body .fegn-about .fegn-about-hero-index { gap:8px 12px; margin-top:40px; font-size:.58rem; }
  body .fegn-about .fegn-about-story-grid,
  body .fegn-about .fegn-about-purpose-grid,
  body .fegn-about .fegn-about-expertise-grid,
@@ -5072,7 +5076,7 @@ body.page-id-96 .fegn-wcu-hero {
  justify-content:center;
  min-height:clamp(420px,40vw,540px);
  padding:40px max(1.25rem,var(--wp--preset--spacing--40,2rem)) !important;
- background:linear-gradient(110deg,rgba(6,22,40,.76),rgba(10,36,65,.58)),url('../images/wcu-hero-team.jpg') center 52% / cover no-repeat #10263e !important;
+ background:#f1f5f9 url('../images/wcu-hero-team.jpg') center 52% / cover no-repeat !important;
  background-blend-mode:normal !important;
  filter:none !important;
  text-align:center;
@@ -5082,13 +5086,13 @@ body.page-id-96 .fegn-wcu-hero::after { content:none !important; }
 body.page-id-96 .fegn-wcu-hero > .alignwide {
  box-sizing:border-box;
  width:100%;
- max-width:760px;
+ max-width:1000px;
  margin-inline:auto !important;
  padding:clamp(28px,4vw,44px) !important;
- background:rgba(8,28,50,.55);
- border:1px solid rgba(218,234,255,.26);
- border-radius:16px;
- box-shadow:0 14px 36px rgba(2,12,24,.2),inset 0 1px 0 rgba(255,255,255,.08);
+ background:rgba(255,255,255,.72);
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:20px;
+ box-shadow:0 12px 32px rgba(17,50,82,.1),inset 0 1px 0 rgba(255,255,255,.45);
  backdrop-filter:blur(12px);
  -webkit-backdrop-filter:blur(12px);
 }
@@ -5099,7 +5103,7 @@ body.page-id-96 .fegn-wcu-hero .fegn-hero-badge {
  border:0;
  border-radius:0;
  background:transparent;
- color:#b9d7fc !important;
+ color:#235b85 !important;
  font-size:.72rem !important;
  font-weight:700;
  letter-spacing:.14em;
@@ -5107,10 +5111,10 @@ body.page-id-96 .fegn-wcu-hero .fegn-hero-badge {
  box-shadow:none;
 }
 body.page-id-96 .fegn-wcu-hero .fegn-wcu-title {
- max-width:22ch;
+ max-width:32ch;
  margin:0;
- color:#f5f9ff !important;
- font-size:clamp(2.1rem,3.7vw,3.4rem) !important;
+ color:#113252 !important;
+ font-size:clamp(2rem,3.3vw,3rem) !important;
  font-weight:700;
  line-height:1.12 !important;
  letter-spacing:-.04em;
@@ -5119,7 +5123,7 @@ body.page-id-96 .fegn-wcu-hero .fegn-wcu-title {
 body.page-id-96 .fegn-wcu-hero .fegn-lead {
  max-width:58ch;
  margin:20px 0 0;
- color:#dce8f5 !important;
+ color:#4b5968 !important;
  font-size:1.0625rem !important;
  line-height:1.75;
 }
@@ -5216,6 +5220,7 @@ body.page-id-96 .fegn-wcu-cta {
 }
 body.page-id-96 .fegn-wcu-cta > .alignwide {
  box-sizing:border-box;
+ text-align:left !important;
  padding:clamp(28px,4vw,44px) !important;
  border:1px solid var(--wcu-line);
  border-radius:16px;
@@ -5226,7 +5231,8 @@ body.page-id-96 .fegn-wcu-cta > .alignwide {
 }
 body.page-id-96 .fegn-wcu-cta-title {
  max-width:40ch;
- margin:0 auto;
+ margin:0 !important;
+ text-align:left !important;
  color:var(--wcu-ink) !important;
  font-size:clamp(1.5rem,2.6vw,2.1rem) !important;
  font-weight:700;
@@ -5234,7 +5240,12 @@ body.page-id-96 .fegn-wcu-cta-title {
  letter-spacing:-.035em;
  text-wrap:balance;
 }
-body.page-id-96 .fegn-wcu-cta .wp-block-buttons { margin:24px 0 0 !important; }
+body.page-id-96 .fegn-wcu-cta .wp-block-buttons {
+ margin:24px 0 0 !important;
+ justify-content:flex-start !important;
+ text-align:left !important;
+}
+body.page-id-96 .fegn-wcu-cta .wp-block-buttons > .wp-block-button { justify-content:flex-start !important; }
 body.page-id-96 .fegn-wcu-cta .wp-block-button__link {
  box-sizing:border-box;
  max-width:100%;
@@ -5269,13 +5280,13 @@ html[data-theme="dark"] body.page-id-96 {
 }
 html[data-theme="dark"] body.page-id-96 .fegn-wcu-grid .fegn-card-icon { color:#a8ceff !important; background:rgba(168,206,255,.08); }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
- body.page-id-96 .fegn-wcu-hero > .alignwide { background:rgba(8,28,50,.86); }
+ body.page-id-96 .fegn-wcu-hero > .alignwide { background:rgba(255,255,255,.97); }
  body.page-id-96 .fegn-wcu-cta > .alignwide { background:var(--wcu-card); }
 }
 @media (max-width:781px) {
  body.page-id-96 .fegn-wcu-hero { min-height:380px; padding:24px 20px !important; background-position:60% center !important; }
  body.page-id-96 .fegn-wcu-hero > .alignwide { padding:28px 24px !important; }
- body.page-id-96 .fegn-wcu-hero .fegn-wcu-title { font-size:clamp(1.75rem,5.5vw,2.4rem) !important; }
+ body.page-id-96 .fegn-wcu-hero .fegn-wcu-title { font-size:clamp(1.75rem,5.5vw,2.4rem) !important; text-wrap:wrap; }
  body.page-id-96 .fegn-wcu-hero .fegn-lead { font-size:1rem !important; }
  body.page-id-96 :is(.fegn-section--wcu-2nd,.fegn-wcu-promise,.fegn-wcu-cta) { padding:32px 20px !important; }
  body.page-id-96 :is(.fegn-wcu-grid,.fegn-promise-grid) { gap:16px !important; }
