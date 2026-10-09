@@ -1,0 +1,66 @@
+[
+  {
+    "file": "commerce.webp",
+    "source": "https://www.pexels.com/photo/e-commerce-shopping-on-laptop-and-smartphone-29502362/",
+    "photographer": "Julio Lopez",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1067",
+    "bytes": 61518
+  },
+  {
+    "file": "film.webp",
+    "source": "https://www.pexels.com/photo/video-camera-on-tripod-in-studio-7709678/",
+    "photographer": "Caleb Oquendo",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1067",
+    "bytes": 122262
+  },
+  {
+    "file": "motion.webp",
+    "source": "https://www.pexels.com/photo/abstract-3d-blue-minimalist-art-render-30004067/",
+    "photographer": "Steve A Johnson",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x900",
+    "bytes": 14508
+  },
+  {
+    "file": "conversation.webp",
+    "source": "https://www.pexels.com/photo/a-close-up-shot-of-a-woman-wearing-a-headset-7709199/",
+    "photographer": "MART PRODUCTION",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1067",
+    "bytes": 55730
+  },
+  {
+    "file": "messaging.webp",
+    "source": "https://www.pexels.com/photo/person-using-cellphone-in-front-of-a-laptop-4189445/",
+    "photographer": "Edwin Nava",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1067",
+    "bytes": 64500
+  },
+  {
+    "file": "design.webp",
+    "source": "https://www.pexels.com/photo/graphic-designer-home-office-studio-16284690/",
+    "photographer": "Jakub Zerdzicki",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x991",
+    "bytes": 45228
+  },
+  {
+    "file": "studio.webp",
+    "source": "https://www.pexels.com/photo/modern-home-office-setup-with-dual-monitors-36363138/",
+    "photographer": "Josh Sorenson",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1067",
+    "bytes": 120890
+  },
+  {
+    "file": "planning.webp",
+    "source": "https://www.pexels.com/photo/notebook-with-blank-pages-942872/",
+    "photographer": "MESSALA CIULLA",
+    "license": "https://www.pexels.com/license/",
+    "dimensions": "1600x1060",
+    "bytes": 145230
+  }
+]

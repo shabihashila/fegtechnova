@@ -42,15 +42,42 @@ function fegn_enqueue_erp_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_erp_assets', 6 );
 
+/** Assets for the seven Services templates. ERP remains entirely independent. */
+function fegn_enqueue_service_assets() {
+	if ( ! is_page( array( 'saas-development', 'web-application-development', 'mobile-app-development', 'crm', 'ui-ux-design', 'ai-automation', 'ai-chatbot' ) ) ) {
+		return;
+	}
+	$css_path = get_stylesheet_directory() . '/assets/css/fegn-services.css';
+	$js_path  = get_stylesheet_directory() . '/assets/js/fegn-services.js';
+	wp_enqueue_style( 'fegn-services', get_stylesheet_directory_uri() . '/assets/css/fegn-services.css', array( 'fegn-style' ), (string) filemtime( $css_path ) );
+	wp_enqueue_script( 'fegn-services', get_stylesheet_directory_uri() . '/assets/js/fegn-services.js', array(), (string) filemtime( $js_path ), true );
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_service_assets', 6 );
+
+/** Website, Marketing and Contact collection; never loaded on completed Services. */
+function fegn_enqueue_portfolio_assets() {
+	$pages = array( 'website', 'domain-hosting', 'web-design', 'ecommerce', 'shopify', 'whatsapp-marketing', 'email-marketing', 'sms-voice-marketing', 'seo', 'telemarketing', 'social-media-management', 'paid-advertising', '2d-3d-animation', 'business-profile', 'graphic-design', 'corporate-video', 'contact' );
+	if ( ! is_page( $pages ) ) { return; }
+	$directory = get_stylesheet_directory();
+	$uri = get_stylesheet_directory_uri();
+	wp_enqueue_style( 'fegn-services', $uri . '/assets/css/fegn-services.css', array( 'fegn-style' ), (string) filemtime( $directory . '/assets/css/fegn-services.css' ) );
+	wp_enqueue_script( 'fegn-services', $uri . '/assets/js/fegn-services.js', array(), (string) filemtime( $directory . '/assets/js/fegn-services.js' ), true );
+	wp_enqueue_style( 'fegn-portfolio', $uri . '/assets/css/fegn-portfolio.css', array( 'fegn-services' ), (string) filemtime( $directory . '/assets/css/fegn-portfolio.css' ) );
+	wp_enqueue_script( 'fegn-portfolio', $uri . '/assets/js/fegn-portfolio.js', array(), (string) filemtime( $directory . '/assets/js/fegn-portfolio.js' ), true );
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_portfolio_assets', 6 );
+
 /**
  * Header behavior script: Services mega menu keyboard/touch interactions.
  */
 function fegn_enqueue_header_script() {
-	$js_path = get_stylesheet_directory() . '/assets/js/fegn-header.js';
+	$js_path = get_stylesheet_directory() . '/assets/js/fegn-header-premium.js';
+	$css_path = get_stylesheet_directory() . '/assets/css/fegn-header-premium.css';
+	wp_enqueue_style( 'fegn-header-premium', get_stylesheet_directory_uri() . '/assets/css/fegn-header-premium.css', array( 'fegn-style' ), (string) filemtime( $css_path ) );
 
 	wp_enqueue_script(
 		'fegn-header',
-		get_stylesheet_directory_uri() . '/assets/js/fegn-header.js',
+		get_stylesheet_directory_uri() . '/assets/js/fegn-header-premium.js',
 		array(),
 		file_exists( $js_path ) ? (string) filemtime( $js_path ) : FEGN_VERSION,
 		true
@@ -111,6 +138,19 @@ function fegn_enqueue_reveal_script() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'fegn_enqueue_reveal_script' );
+
+/** Focused Homepage/Contact polish. Other pages retain their existing reveals. */
+function fegn_enqueue_experience_assets() {
+	if ( ! is_front_page() && ! is_page( 'contact' ) ) { return; }
+	$directory = get_stylesheet_directory();
+	$uri = get_stylesheet_directory_uri();
+	// The new one-time observer owns Homepage reveals; avoid duplicate animations.
+	if ( is_front_page() ) { wp_dequeue_script( 'fegn-reveal' ); }
+	$dependencies = is_page( 'contact' ) ? array( 'fegn-portfolio' ) : array( 'fegn-style' );
+	wp_enqueue_style( 'fegn-experience', $uri . '/assets/css/fegn-experience.css', $dependencies, (string) filemtime( $directory . '/assets/css/fegn-experience.css' ) );
+	wp_enqueue_script( 'fegn-experience', $uri . '/assets/js/fegn-experience.js', array(), (string) filemtime( $directory . '/assets/js/fegn-experience.js' ), true );
+}
+add_action( 'wp_enqueue_scripts', 'fegn_enqueue_experience_assets', 11 );
 
 /**
  * Project inquiry form: AJAX submission without page reload.

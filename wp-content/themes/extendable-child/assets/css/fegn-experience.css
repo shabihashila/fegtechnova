@@ -1,0 +1,81 @@
+/* Homepage and Contact only. Content, dimensions, QR and form contract stay intact. */
+body.home .fegn-hero.fegn-hero--bg .fegn-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.72rem;letter-spacing:.1em}
+body.home .fegn-hero.fegn-hero--bg .fegn-eyebrow:before{content:"";width:28px;height:2px;border-radius:4px;background:linear-gradient(90deg,#99c9ff,#cbe1fd);flex-shrink:0}
+body.home .fegn-hero.fegn-hero--bg .fegn-hero-panel{border-color:#cce5ff55;background:linear-gradient(135deg,#29466aa8,#102b48ae)!important;box-shadow:0 24px 65px #03142935,inset 0 1px 0 #ffffff16;transition:border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+body.home .fegn-hero.fegn-hero--bg .fegn-hero-panel:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#d7ebff80,transparent);pointer-events:none}
+body.home .fegn-hero.fegn-hero--bg .fegn-hero-list{list-style:none;padding:0;counter-reset:engage}
+body.home .fegn-hero.fegn-hero--bg .fegn-hero-list li{counter-increment:engage;position:relative;padding-left:40px;transition:color .2s}
+body.home .fegn-hero.fegn-hero--bg .fegn-hero-list li:before{content:counter(engage,decimal-leading-zero);position:absolute;left:0;top:1px;width:28px;height:28px;display:grid;place-items:center;border:1px solid #a5ccfc42;border-radius:9px;background:#bfdcff0d;color:#bfdcff;font-size:.6rem;font-weight:800;line-height:1}
+body.home .fegn-hero.fegn-hero--bg .wp-block-button__link,body.home .fegn-home-overviews-links a,body.home .fegn-capabilities__card,body.home .fegn-step,body.home .ft-selected-work__card{transition:transform .25s,box-shadow .25s,border-color .25s,background-color .25s}
+body.home .fegn-capabilities__card{border-color:#d6e4f2;box-shadow:0 7px 25px #143d7010}
+body.home .fegn-capabilities__image{overflow:hidden}
+body.home .fegn-capabilities__image img{transition:transform .65s cubic-bezier(.22,1,.36,1)}
+body.home .fegn-step{border:1px solid #ffffff20;box-shadow:inset 0 1px 0 #ffffff08}
+body.home .fegn-home-overviews-links a{position:relative}
+body.home .fegn-home-overviews-title>span{display:inline-block;transition:translate .2s}
+body.home .ft-selected-work__card{box-shadow:0 14px 35px #092b5318}
+
+/* Only transform/opacity move: existing slideshow timing and pause button remain. */
+@keyframes fegn-photo-drift{0%,100%{transform:scale(1.015) translate3d(0,0,0)}50%{transform:scale(1.055) translate3d(-.35%,.25%,0)}}
+@keyframes fegn-contact-photo-settle{from{transform:scale(1.045)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){
+ body.home .fegn-hero.fegn-hero--bg.is-ready .fegn-hero__bg-slide--1{animation:fegn-photo-drift 24s ease-in-out infinite}
+ body.home .fegn-hero.fegn-hero--bg.is-ready .fegn-hero__bg-slide--2{animation:fegn-home-hero-second 12s ease-in-out infinite,fegn-photo-drift 24s ease-in-out infinite}
+ body.home .fegn-hero.fegn-hero--bg.is-ready .fegn-hero__bg-slide--3{animation:fegn-home-hero-third 12s ease-in-out infinite,fegn-photo-drift 24s ease-in-out infinite}
+ body.home .fegn-hero.fegn-hero--bg:is(.is-paused,.fegn-motion-outside) .fegn-hero__bg-slide{animation-play-state:paused!important}
+ main.ft--contact[data-experience] .ft-hero>img{animation:fegn-contact-photo-settle 4.5s cubic-bezier(.22,1,.36,1) both}
+}
+
+/* Progressive reveal hooks. Nothing is hidden until an observer is installed. */
+main[data-experience] [data-xp-pending]{opacity:0;translate:0 16px}
+main[data-experience] [data-xp-seen]{opacity:1;translate:0 0}
+
+/* Contact: a bright inquiry desk, crisp controls and quiet visual feedback. */
+main.ft--contact .ft-hero-copy{background:linear-gradient(130deg,#112e50d9,#092647bd);border-color:#d5e8ff55;box-shadow:0 24px 65px #051a3540,inset 0 1px 0 #ffffff15}
+main.ft--contact .ft-form-card{position:relative;background:linear-gradient(135deg,#ffffffc9,#f0f6ff70),var(--svc-surface);border-color:#cddff4;box-shadow:0 20px 65px #17447a14,inset 0 1px 0 #fff9;backdrop-filter:blur(10px);transition:border-color .25s,box-shadow .25s}
+main.ft--contact .ft-form-card:focus-within{border-color:#6196dd;box-shadow:0 22px 65px #17447a1b,0 0 0 3px #2c73d50a}
+main.ft--contact .ft-form-heading>.ft-message-avatar{background:linear-gradient(140deg,#2a73ce,#1758a8);box-shadow:0 6px 18px #2468bc24}
+main.ft--contact .ft-field label{transition:color .2s}
+main.ft--contact .ft-field:focus-within label{color:#1c5caa}
+main.ft--contact .ft-field :is(input,select,textarea){background:#f4f8fee6;transition:border-color .2s,box-shadow .2s,background-color .2s}
+main.ft--contact .ft-field :is(input,select,textarea):focus{background:#fff;border-color:#3778cb;outline:2px solid #5a92df;box-shadow:0 0 0 5px #3f7ac90d}
+main.ft--contact .ft-interest button{transition:color .2s,padding .2s,background-color .2s}
+main.ft--contact .ft-contact-links>a{transition:color .2s,border-color .2s}
+main.ft--contact .ft-contact-links>a>b{transition:translate .2s}
+main.ft--contact .fegn-form-status{box-shadow:0 5px 15px #153f6d0c}
+main.ft--contact .ft-qr-card{background:linear-gradient(135deg,#ffffffbc,#f4f8fe70),var(--svc-surface);border-color:#ccdef2;box-shadow:0 18px 55px #143b7012,inset 0 1px 0 #ffffffa0;transition:border-color .25s,box-shadow .25s}
+/* Never animate QR pixels or their ancestors: focus/hover change the frame only. */
+main.ft--contact .ft-qr-card:focus-within{border-color:#5b90d5;box-shadow:0 18px 55px #143b701d}
+main.ft--contact .ft-qr-image,main.ft--contact .ft-qr-image img{transform:none!important;translate:none!important;rotate:none!important;scale:none!important;filter:none!important;opacity:1!important;animation:none!important;transition:none!important;background:#fff!important}
+
+/* A single soft sheen, triggered by intent rather than running continuously. */
+body.home main .fegn-hero-actions .wp-element-button,main.ft--contact .svc-button--primary{position:relative;overflow:hidden;isolation:isolate}
+body.home main .fegn-hero-actions .wp-element-button:before,main.ft--contact .svc-button--primary:before{content:"";position:absolute;inset:-25% auto -25% -15%;width:45%;background:linear-gradient(90deg,transparent,#ffffff20,transparent);transform:translateX(-160%) skewX(-18deg);pointer-events:none;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+
+@media(hover:hover){
+ body.home .fegn-hero.fegn-hero--bg .fegn-hero-panel:hover{border-color:#c8e4ff88;box-shadow:0 28px 70px #03142945,inset 0 1px 0 #ffffff25}
+ body.home .fegn-capabilities__card:hover{transform:translateY(-4px)!important;border-color:#a8c8ef;box-shadow:0 18px 45px #143d7020}
+ body.home .fegn-capabilities__card:hover img{transform:scale(1.035)}
+ body.home .fegn-home-overviews-links a:hover{border-color:#92b8ec;box-shadow:0 8px 24px #194f8f12}
+ body.home .fegn-home-overviews-links a:hover .fegn-home-overviews-title>span{translate:2px -2px}
+ body.home .fegn-step:hover{transform:translateY(-3px);border-color:#9bc4f552;box-shadow:0 12px 30px #03192c20,inset 0 1px 0 #ffffff10}
+ body.home .ft-selected-work__card:hover{transform:translateY(-4px);box-shadow:0 22px 48px #092b5326}
+ main.ft--contact .ft-field :is(input,select,textarea):hover{border-color:#9dbce5}
+ main.ft--contact .ft-contact-links>a:hover{color:var(--svc-blue);border-color:#90b6e8}
+ main.ft--contact .ft-contact-links>a:hover>b{translate:2px -2px}
+ main.ft--contact .ft-qr-card:hover{border-color:#9abbe7;box-shadow:0 22px 60px #143b701b}
+ body.home main .fegn-hero-actions .wp-element-button:hover:before,main.ft--contact .svc-button--primary:hover:before{transform:translateX(350%) skewX(-18deg)}
+}
+html[data-theme=dark] main.ft--contact .ft-form-card,html[data-theme=dark] main.ft--contact .ft-qr-card{background:linear-gradient(135deg,#a6caff0a,#ffffff02),var(--svc-surface);border-color:#385675;box-shadow:0 20px 60px #0002,inset 0 1px 0 #ffffff06}
+html[data-theme=dark] main.ft--contact .ft-form-card:focus-within{border-color:#7cabe9;box-shadow:0 20px 60px #0002,0 0 0 3px #8abaef09}
+html[data-theme=dark] main.ft--contact .ft-field :is(input,select,textarea){background:#142b44}
+html[data-theme=dark] main.ft--contact .ft-field :is(input,select,textarea):focus{background:#18324f;border-color:#85b4f1}
+html[data-theme=dark] main.ft--contact .ft-field:focus-within label{color:#abd0ff}
+html[data-theme=dark] body.home .fegn-capabilities__card{border-color:#344d6c;box-shadow:0 12px 35px #0002}
+
+@media(max-width:781px){body.home .fegn-hero.fegn-hero--bg .fegn-hero-list li{padding-left:37px}body.home .fegn-hero.fegn-hero--bg .fegn-hero-panel{box-shadow:0 18px 45px #03142930}main.ft--contact .ft-form-card{backdrop-filter:none}}
+@media(prefers-reduced-motion:reduce){
+ body.home main *,body.home main *:before,body.home main *:after,main.ft--contact *,main.ft--contact *:before,main.ft--contact *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ body.home .fegn-hero.fegn-hero--bg.is-ready .fegn-hero__bg-slide,main.ft--contact[data-experience] .ft-hero>img{animation:none!important;transform:none!important}
+ main[data-experience] [data-xp-pending]{opacity:1!important;translate:0 0!important}
+}
